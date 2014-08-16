@@ -1,0 +1,36 @@
+<style>
+    .form-inline .control-label { width: 120px; }
+</style>
+
+<h2><i class="fa fa-picture-o"></i>&nbsp; <%= @photo_album.title %></h2>
+<hr/>
+
+<%= simple_form_for([:admin, :cms, @photo_album], html: { class: 'form-inline' }) do |f| %>
+
+  <%= render 'admin/shared/error_messages', object: f.object %>
+
+  <%= f.input :title %>
+  <%= f.input :slug %>
+  <%= f.association :user %>
+  <%= f.input :public %>
+  <%= f.input :allow_upload %>
+  <%= f.input :voting_enabled %>
+  <%= f.input :description, input_html: { class: 'span6', rows: 5 } %>
+  
+  <div class="form-actions">
+  	<%= f.button :submit %>
+  </div>
+<% end %>
+
+
+
+<%= content_for :title do %>
+	Photo Albums: <%= @photo_album.title %>
+<% end %>
+
+
+<% content_for :breadcrumbs do %>
+	<li><a href="#">Web Content</a></li>
+	<li><%= link_to "Photo Albums", admin_cms_photo_albums_path %></li>
+	<li class="active"><%= @photo_album.title %></li>
+<% end %>

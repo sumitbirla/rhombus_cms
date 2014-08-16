@@ -1,0 +1,59 @@
+<style>
+tr.parent td { font-weight: bold; padding-top: 20px; }
+tr.child { font-size: 0.8em; }
+</style>
+
+<%= link_to "new menu", new_admin_cms_menu_path, class: 'btn btn-sm btn-default pull-right' %>
+<h2><i class="fa fa-list-ol"></i>&nbsp; Menus</h2>
+
+<table class="table table-condensed">
+	<tr>
+		<th>Key</th>
+		<th>Enbl</th>
+		<th>Title</th>
+		<th>Created</th>
+		<th>&nbsp;</th>
+	</tr>
+	<% @menus.each do |menu| %>
+	<tr class="parent">
+		<td><%= menu.key %></td>
+		<td></td>
+		<td><%= menu.title %></td>
+		<td><%= systime menu.created_at %></td>
+		<td>
+			<%= link_to "new item", new_admin_cms_menu_item_path(menu_id: menu.id) %> &nbsp;
+			<%= link_to "edit", edit_admin_cms_menu_path(menu) %> &nbsp; 
+			<%= link_to "delete", 
+						  { action: "destroy", id: menu.id }, 
+						  method: :delete, 
+						  data: { confirm: "Are you sure?" } %>
+		</td>
+	</tr>
+	<% menu.items.each do |item| %>
+	<tr class="child">
+		<td></td>
+		<td><%= raw tick(item.enabled) %></td>
+		<td>&nbsp; - &nbsp; <%= item.title %></td>
+		<td><%= systime item.created_at %></td>
+		<td>
+			<%= link_to "edit", edit_admin_cms_menu_item_path(item) %> &nbsp; 
+			<%= link_to "delete", 
+						  { controller: "menu_items", action: "destroy", id: item.id }, 
+						  method: :delete, 
+						  data: { confirm: "Are you sure?" } %>
+		</td>
+	</tr>
+	<% end %>
+	<% end %>
+</table>
+
+
+<% content_for :title do %>
+    Menus
+<% end %>
+
+
+<% content_for :breadcrumbs do %>
+	<li><a href="#">Web Content</a></li>
+	<li class="active">Menus</li>
+<% end %>

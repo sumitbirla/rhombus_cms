@@ -1,0 +1,22 @@
+<h2><%= @content_block.key %></h2>
+<hr/>	
+
+<%= simple_form_for [:admin, :cms, @content_block], html: { class: 'form-inline' } do |f| %>
+
+	<%= f.input :key %>
+	<%= f.input :content, input_html: { class: 'span8', rows: 10 }  %>
+	<%= f.button :submit %>
+
+<% end %>
+
+
+<%= content_for :title do %>
+	Content Blocks: <%= @content_block.key %>
+<% end %>
+
+
+<% content_for :breadcrumbs do %>
+	<li><a href="#">Web Content</a></li>
+	<li><%= link_to "Content Blocks", admin_cms_content_blocks_path %></li>
+	<li class="active"><%= @content_block.key %></li>
+<% end %>

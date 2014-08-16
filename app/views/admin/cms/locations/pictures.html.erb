@@ -1,0 +1,28 @@
+<h2><i class="fa fa-map-marker"></i>&nbsp; <%= @location.name %></h2>
+
+
+<ul class="nav nav-tabs">
+  <li><%= link_to "Summary", edit_admin_cms_location_path(@location) %></li>
+  <li class="active"><a href="#">Pictures</a></li>
+  <li><%= link_to "Categories", categories_admin_cms_location_path(@location) %></li>
+  <li><%= link_to "Attributes", attributes_admin_cms_location_path(@location) %></li>
+  <li><%= link_to "Sublocations", sublocations_admin_cms_location_path(@location) %></li>
+</ul>
+
+
+<%= render partial: 'admin/shared/image_list', locals: { object: @location } %>
+
+
+
+<% content_for :title do %>
+    Locations: <%= @location.name%>
+<% end %>
+
+
+
+<% content_for :breadcrumbs do %>
+	<li><a href="#">Web Content</a></li>
+	<li><%= link_to "Locations", admin_cms_locations_path %></li>
+	<li><%= link_to @location.name, admin_cms_location_path(@location)%> </li>
+	<li class="active">edit</li>
+<% end %>

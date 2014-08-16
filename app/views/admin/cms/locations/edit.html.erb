@@ -1,0 +1,58 @@
+<h2><i class="fa fa-map-marker"></i>&nbsp; <%= @location.name%></h2>
+
+<% unless @location.id.nil? %>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#">Summary</a></li>
+  <li><%= link_to "Pictures", pictures_admin_cms_location_path(@location) %></a></li>
+  <li><%= link_to "Categories", categories_admin_cms_location_path(@location) %></li>
+  <li><%= link_to "Attributes", attributes_admin_cms_location_path(@location) %></li>
+  <li><%= link_to "Sublocations", sublocations_admin_cms_location_path(@location) %></li>
+</ul>
+<% end %>
+
+<%= simple_form_for [:admin, :cms, @location], html: { class: 'form-inline' } do |f| %>
+
+	<%= render 'admin/shared/error_messages', object: f.object %>
+	
+	<%= f.input :name, input_html: { class: 'span6' } %>
+	<%= f.input :slug %>
+	<%= f.input :hidden %>
+	<%= f.association :region %>
+	<%= f.input :latitude %>
+	<%= f.input :longitude %>
+	<%= f.association :user %>
+	<%= f.association :affiliate %>
+	<%= f.input :contact_person %>
+	<%= f.input :street1 %>
+	<%= f.input :street2 %>
+	<%= f.input :city %>
+	<%= f.input :state %>
+	<%= f.input :zip %>
+	<%= f.input :country %>
+	<%= f.input :phone %>
+	<%= f.input :email %>
+	<%= f.input :fax %>
+	<%= f.input :website %>
+	<%= f.input :summary, as: :text, input_html: { class: 'span6', rows: 3 } %>
+	<%= f.input :description, as: :text, input_html: { class: 'span6', rows: 6 } %>
+	
+	<div class="form-actions">
+		<%= f.button :submit %>
+	</div>
+	
+<% end %>
+
+
+
+<% content_for :title do %>
+    Locations: <%= @location.name%>
+<% end %>
+
+
+
+<% content_for :breadcrumbs do %>
+	<li><a href="#">Web Content</a></li>
+	<li><%= link_to "Locations", admin_cms_locations_path %></li>
+	<li><%= link_to @location.name, admin_cms_location_path(@location) %></li>
+	<li class="active">edit</li>
+<% end %>

@@ -1,0 +1,83 @@
+<style>
+    .form-inline .control-label { width: 140px; }
+</style>
+<h2><i class="fa fa-picture-o"></i>&nbsp; <%= "Picture ##{@picture.id}" %></h2>
+
+<% unless @picture.id.nil? %>
+<div class="row well">
+	<div class="col-md-2">
+		<a href="<%= cdn_image_url @picture, 700, 600, 0 %>" class="fancybox thumbnail" rel="gallery">
+			<img class="img img-polaroid" src="<%= cdn_image_url @picture, 250, 120, 0 %>" alt="<%= @picture.caption %>"/>
+		</a>
+	</div>
+	<div class="col-md-10">
+		<br/>
+		<b>Type:</b> <%= @picture.mime_type %><br/><br/>
+		<b>File size:</b> <%= readable_file_size @picture.file_size, 1 %><br/><br/>
+		<b>Dimensions:</b> <%= @picture.width %> x <%= @picture.height %>
+	</div>
+</div>
+<% end %>
+
+
+<%= simple_form_for([:admin, :cms, @picture], html: { class: 'form-inline' }) do |f| %>
+
+  <%= render 'admin/shared/error_messages', object: f.object %>
+
+  <%= f.input :imageable_type, as: :hidden  %>
+  <%= f.input :imageable_id, as: :hidden %>
+  
+  <div class="form-group string optional password">
+	<label class="string control-label" for="file_path">File Path</label>
+	<input type="text" id="file_path" name="picture[file_path]" value="<%= @picture.file_path %>" class="string span6"/>
+	<input type="button" value="Browse Server" class="btn btn-primary" onclick="javascript:BrowseServer();">
+  </div>
+  
+  <%= f.association :user %>
+  <%= f.input :width %>
+  <%= f.input :height %>
+  <%= f.input :file_size %>
+  <%= f.input :mime_type %>
+  <%= f.input :caption, input_html: { class: 'span6' } %>
+  <%= f.input :description, input_html: { class: 'span6', rows: 5 } %>
+  <%= f.input :votes %>
+  <%= f.input :sort %>
+  
+  <div class="form-actions">
+  	<%= f.button :submit %>
+  </div>
+<% end %>
+
+
+
+<% content_for :title do %>
+    <%= @picture.caption %>
+<% end %>
+
+
+<% content_for :breadcrumbs do %>
+	<li><a href="#">Web Content</a></li>
+	<li><%= link_to 'Pictures', admin_cms_pictures_path(imageable_id: @picture.imageable_id, imageable_type: @picture.imageable_type) %></li>
+	<li class="active">edit</li>
+<% end %>
+
+
+<% content_for :head do %>
+	<script type="text/javascript" src="/ckfinder/ckfinder.js"></script>
+	<script>
+	function BrowseServer()
+	{
+		// You can use the "CKFinder" class to render CKFinder in a page:
+		var finder = new CKFinder( { connectorPath : '<%= Cache.setting('System', 'Static Files Url') %>/ckfinder/core/connector/php/connector.php' });
+		//finder.basePath = '../';	// The path for the installation of CKFinder (default = "/ckfinder/").
+		finder.selectActionFunction = SetFileField;
+		finder.popup();
+	}
+
+	// This is a sample function which is called when a file is selected in CKFinder.
+	function SetFileField( fileUrl )
+	{
+		document.getElementById('file_path').value = fileUrl.substring(<%= Cache.setting('System', 'Static Files Url').length %>);
+	}
+	</script>
+<% end %>

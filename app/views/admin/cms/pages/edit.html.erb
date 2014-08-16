@@ -1,0 +1,32 @@
+<style>
+    .form-inline .control-label { width: 120px; }
+</style>
+
+<h2><i class="icon-file-alt"></i> <%= @page.title %></h2>
+<hr/>
+
+
+<%= simple_form_for [:admin, :cms, @page], html: { class: 'form-inline' } do |f| %>
+	
+	
+	<%= f.input :title, input_html: { class: 'span6' } %>
+	<%= f.input :slug, input_html: { class: 'span6' } %>
+	<%= f.input :published %>
+	<%= f.input :header_content, input_html: { class: 'span10', rows: 4 }  %>
+	<%= f.input :body, input_html: { class: 'span10', rows: 20 }  %>
+    <%= f.button :submit, class: 'btn-primary' %>
+
+<% end %>
+
+
+<%= content_for :title do %>
+	Pages: <%= @page.title %>
+<% end %>
+
+
+
+<% content_for :breadcrumbs do %>
+	<li><a href="#">Web Content</a></li>
+	<li><%= link_to "Pages", admin_cms_pages_path %></li>
+	<li class="active"><%= @page.title %></li>
+<% end %>
