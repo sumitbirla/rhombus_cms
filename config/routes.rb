@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
   
+  get '/pages/:slug' => 'pages#show'
+  get '/categories/:slug' => 'categories#show'
+  
+  namespace :account do
+    resources :pictures
+    resources :locations do
+      member do
+        get 'primary' => 'locations#primary'
+      end
+    end
+  end
+  
   namespace :admin do
     
     namespace :cms do
