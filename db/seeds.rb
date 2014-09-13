@@ -1,3 +1,5 @@
+SearchPath.create(short_code: 'loc', url: '/admin/cms/locations', description: 'Search for a location by its name')
+
 Permission.create(section: 'cms', resource: 'admin', action: 'login')
 
 Permission.create(section: 'cms', resource: 'page', action: 'create')
