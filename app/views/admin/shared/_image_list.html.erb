@@ -65,7 +65,7 @@
 	// This is a sample function which is called when a file is selected in CKFinder.
 	function SetFileField( fileUrl )
 	{
-		document.getElementById( 'imageFile' ).value = fileUrl.substring(<%= Cache.setting(:system, 'Static Files Url').length %>);
+		document.getElementById( 'imageFile' ).value = fileUrl.substring(<%= Cache.setting(:system, 'Static Files Url').length +  5 %>);
 	}
 	</script>
 <% end %>

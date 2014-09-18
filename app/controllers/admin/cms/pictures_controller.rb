@@ -29,7 +29,7 @@ class Admin::Cms::PicturesController < Admin::BaseController
     pic = Picture.new(picture_params)
     
     # update dimensions and file size
-    url = Cache.setting('System', 'Static Files Url') + pic.file_path
+    url = 'http:' + Cache.setting('System', 'Static Files Url') + pic.file_path
     img = Magick::Image.read(url).first
 
 	  if img.nil?
@@ -65,7 +65,7 @@ class Admin::Cms::PicturesController < Admin::BaseController
     if @picture.update(picture_params)
       
       # update dimensions and file size
-      url = Cache.setting('System', 'Static Files Url') + @picture.file_path
+      url = 'http:' + Cache.setting('System', 'Static Files Url') + @picture.file_path
 	    img = Magick::Image.read(url).first
 
       if img.nil?
