@@ -42,7 +42,6 @@ Rails.application.routes.draw do
          get 'movedown' => 'pictures#movedown'
         end
       end
-      resources :categories
       resources :attributes
       resources :comments
       resources :votes
