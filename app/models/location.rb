@@ -45,11 +45,11 @@ class Location < ActiveRecord::Base
   
   def to_map
     address = street1
-    address = address + ', ' + street2 unless street2.nil?
-    address = address + ', ' + city unless city.nil?
-    address = address + ', ' + state unless state.nil?
-    address = address + ', ' + zip unless zip.nil?
-    address = address + ', ' + country unless country.nil?
+    address = address + ', ' + street2 unless street2.blank?
+    address = address + ', ' + city unless city.blank?
+    address = address + ', ' + state unless state.blank?
+    address = address + ', ' + zip unless zip.blank?
+    address = address + ', ' + country unless country.blank?
   end
   
   def to_text
