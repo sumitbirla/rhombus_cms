@@ -40,7 +40,7 @@ class Location < ActiveRecord::Base
   has_many :categories, through: :location_categories
   has_many :sublocations
   
-  validates_presence_of :name, :slug, :street1, :city, :state, :zip, :country
+  validates_presence_of :name, :slug
   validates_uniqueness_of :slug
   
   def to_map
