@@ -53,6 +53,10 @@
 <% content_for :breadcrumbs do %>
 	<li><a href="#">Web Content</a></li>
 	<li><%= link_to "Locations", admin_cms_locations_path %></li>
-	<li><%= link_to @location.name, admin_cms_location_path(@location) %></li>
-	<li class="active">edit</li>
+  <% if @location.persisted? %>
+	  <li><%= link_to @location.name, admin_cms_location_path(@location) %></li>
+	  <li class="active">edit</li>
+  <% else %>
+    <li><%= @location.name %>
+  <% end %>
 <% end %>
