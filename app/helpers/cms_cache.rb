@@ -16,9 +16,7 @@ module CmsCache
   
   def self.menu(key) 
     Rails.cache.fetch("menu:#{key}") do 
-      m = Menu.find_by(key: key)
-      m.items.load
-      m
+      Menu.includes(:items).find_by(key: key)
     end
   end
   
