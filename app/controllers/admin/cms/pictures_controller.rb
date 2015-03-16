@@ -1,6 +1,3 @@
-require 'RMagick'
-
-
 class Admin::Cms::PicturesController < Admin::BaseController
   
   def index
@@ -30,7 +27,7 @@ class Admin::Cms::PicturesController < Admin::BaseController
     
     # update dimensions and file size
     url = 'http:' + Cache.setting('System', 'Static Files Url') + pic.file_path
-    img = Magick::Image.read(url).first
+    #img = Magick::Image.read(url).first
 
 	  if img.nil?
       flash[:notice] = 'File does not appear to be a valid image'
@@ -66,7 +63,7 @@ class Admin::Cms::PicturesController < Admin::BaseController
       
       # update dimensions and file size
       url = 'http:' + Cache.setting('System', 'Static Files Url') + @picture.file_path
-	    img = Magick::Image.read(url).first
+	    #img = Magick::Image.read(url).first
 
       if img.nil?
       	flash[:notice] = 'File does not appear to be a valid image'
@@ -128,8 +125,7 @@ class Admin::Cms::PicturesController < Admin::BaseController
   private
   
     def picture_params
-      params.require(:picture).permit(:imageable_id, :imageable_type, :user_id, :sort, :votes, :file_path, :width, :height, 
-      :file_size, :mime_type, :caption, :description)
+      params.require(:picture).permit!
     end
   
   
