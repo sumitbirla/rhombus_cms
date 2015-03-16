@@ -1,7 +1,7 @@
 class Admin::Cms::ContentBlocksController < Admin::BaseController
   
   def index
-    @content_blocks = ContentBlock.order(:key).page(params[:page])
+    @content_blocks = ContentBlock.where(domain_id: cookies[:domain_id]).order(:key).page(params[:page])
   end
 
   def new
@@ -11,6 +11,7 @@ class Admin::Cms::ContentBlocksController < Admin::BaseController
 
   def create
     @content_block = ContentBlock.new(content_block_params)
+    @content_block.domain_id = cookies[:domain_id]
     
     if @content_block.save
       redirect_to action: 'index', notice: 'ContentBlock was successfully created.'

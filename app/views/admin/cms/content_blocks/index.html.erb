@@ -1,6 +1,6 @@
 <%= link_to "new block", new_admin_cms_content_block_path, class: 'btn btn-sm btn-default pull-right' %>
 
-<h2><i class="fa fa-columns"></i>&nbsp; Content Blocks</h2>
+<h2><i class="fa fa-columns"></i>&nbsp; <%= current_domain %> Content Blocks</h2>
 
 <%= will_paginate @content_blocks %>
 <table class="table table-striped table-condensed">

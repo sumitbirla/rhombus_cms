@@ -16,7 +16,7 @@ class Page < ActiveRecord::Base
   self.table_name = 'cms_pages'
   
   validates_presence_of :title, :slug, :published, :body
-  validates_uniqueness_of :slug
+  validates_uniqueness_of :slug, scope: :domain_id
   
   def cache_key
     "page:#{slug}"

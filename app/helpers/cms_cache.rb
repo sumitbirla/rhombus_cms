@@ -1,22 +1,22 @@
 module CmsCache
 
   def self.page(slug) 
-    Rails.cache.fetch("page:#{slug}") do 
-      p = Page.where(slug: slug, published: true).first
-      ContentBlock.all.each { |cb| p.body = p.body.gsub("\[\[#{cb.key}\]\]", cb.content) }
+    Rails.cache.fetch("page:#{Rails.configuration.domain_id}:#{slug}") do 
+      p = Page.where(domain_id: Rails.configuration.domain_id, slug: slug, published: true).first
+      ContentBlock.where(domain_id: Rails.configuration.domain_id).each { |cb| p.body = p.body.gsub("\[\[#{cb.key}\]\]", cb.content) }
       p
     end
   end
   
   def self.content_block(key) 
-    Rails.cache.fetch("content-block:#{key}") do 
-      ContentBlock.find_by(key: key)
+    Rails.cache.fetch("content-block:#{Rails.configuration.domain_id}:#{key}") do 
+      ContentBlock.find_by(domain_id: Rails.configuration.domain_id, key: key)
     end
   end
   
   def self.menu(key) 
-    Rails.cache.fetch("menu:#{key}") do 
-      Menu.includes(:items).find_by(key: key)
+    Rails.cache.fetch("menu:#{Rails.configuration.domain_id}:#{key}") do 
+      Menu.includes(:items).find_by(domain_id: Rails.configuration.domain_id, key: key)
     end
   end
   

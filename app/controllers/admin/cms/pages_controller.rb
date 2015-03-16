@@ -1,7 +1,7 @@
 class Admin::Cms::PagesController < Admin::BaseController
   
   def index
-    @pages = Page.page(params[:page]).order('title')
+    @pages = Page.where(domain_id: cookies[:domain_id]).page(params[:page]).order(:title)
   end
 
   def new
@@ -11,6 +11,7 @@ class Admin::Cms::PagesController < Admin::BaseController
 
   def create
     @page = Page.new(page_params)
+    @page.domain_id = cookies[:domain_id]
     
     if @page.save
       redirect_to action: 'index', notice: 'Page was successfully created.'

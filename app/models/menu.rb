@@ -15,7 +15,7 @@ class Menu < ActiveRecord::Base
   self.table_name = 'cms_menus'
   
   has_many :items, -> { order :sort }, class_name: 'MenuItem'
-  validates_uniqueness_of :key
+  validates_uniqueness_of :key, scope: :domain_id
   
   def cache_key
     "menu:#{key}"

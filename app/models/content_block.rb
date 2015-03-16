@@ -13,7 +13,7 @@ class ContentBlock < ActiveRecord::Base
   self.table_name = 'cms_content_blocks'
   
   validates_presence_of :key
-  validates_uniqueness_of :key
+  validates_uniqueness_of :key, scope: :domain_id
   
   def to_s
     content

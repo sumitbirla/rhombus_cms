@@ -1,7 +1,7 @@
 class Admin::Cms::MenusController < Admin::BaseController
   
   def index
-    @menus = Menu.all
+    @menus = Menu.where(domain_id: cookies[:domain_id]).all
   end
 
   def new
@@ -11,6 +11,7 @@ class Admin::Cms::MenusController < Admin::BaseController
 
   def create
     @menu = Menu.new(menu_params)
+    @menu.domain_id = cookies[:domain_id]
     
     if @menu.save
       redirect_to action: 'index', notice: 'Menu was successfully created.'
