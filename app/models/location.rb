@@ -45,20 +45,26 @@ class Location < ActiveRecord::Base
   
   def to_map
     address = street1
-    address = address + ', ' + street2 unless street2.blank?
-    address = address + ', ' + city unless city.blank?
-    address = address + ', ' + state unless state.blank?
-    address = address + ', ' + zip unless zip.blank?
-    address = address + ', ' + country unless country.blank?
+    address += ', ' + street2 unless street2.blank?
+    address += ', ' + city unless city.blank?
+    address += ', ' + state unless state.blank?
+    address += ', ' + zip unless zip.blank?
+    address += ', ' + country unless country.blank?
   end
   
-  def to_text
-    address = contact_person + "\n" + street1
-    address = address + "\n" + street2 unless street2.blank?
-    address = address + "\n" + city unless city.blank?
-    address = address + ', ' + state unless state.blank?
-    address = address + ', ' + zip unless zip.blank?
-    address = address + "\n" + country unless country.blank?
+  def to_text(opts = {})
+    newline = opts[:new_line] || "\n"
+    
+    address = street1
+    address += newline + street2 unless street2.blank?
+    address += newline + city unless city.blank?
+    address += ', ' + state unless state.blank?
+    address += ', ' + zip unless zip.blank?
+    unless opts[:skip_country]
+      address += newline + country unless country.blank?
+    end
+    
+    address
   end
   
   def cache_key

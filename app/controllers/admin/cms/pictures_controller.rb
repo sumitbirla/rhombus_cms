@@ -26,18 +26,18 @@ class Admin::Cms::PicturesController < Admin::BaseController
     pic = Picture.new(picture_params)
     
     # update dimensions and file size
-    url = 'http:' + Cache.setting('System', 'Static Files Url') + pic.file_path
+    url = 'http:' + Cache.setting(Rails.configuration.domain_id, :system, "Static Files Url") + pic.file_path
     #img = Magick::Image.read(url).first
 
-	  if img.nil?
-      flash[:notice] = 'File does not appear to be a valid image'
-      return redirect_to :back
-    end
+	  #if img.nil?
+    #  flash[:notice] = 'File does not appear to be a valid image'
+    #  return redirect_to :back
+    #end
 
-    pic.width = img.columns
-    pic.height = img.rows
-    pic.file_size = img.filesize
-    pic.mime_type = img.mime_type
+    #pic.width = img.columns
+    #pic.height = img.rows
+    #pic.file_size = img.filesize
+    #pic.mime_type = img.mime_type
     
     # determine sort 
     pic.sort = Picture.where(imageable_type: pic.imageable_type, imageable_id: pic.imageable_id).maximum(:sort)
@@ -62,15 +62,15 @@ class Admin::Cms::PicturesController < Admin::BaseController
     if @picture.update(picture_params)
       
       # update dimensions and file size
-      url = 'http:' + Cache.setting('System', 'Static Files Url') + @picture.file_path
+      url = 'http:' + Cache.setting(Rails.configuration.domain_id, :system, "Static Files Url") + @picture.file_path
 	    #img = Magick::Image.read(url).first
 
-      if img.nil?
-      	flash[:notice] = 'File does not appear to be a valid image'
-      	return redirect_to :back
-      end
+      #if img.nil?
+      #	flash[:notice] = 'File does not appear to be a valid image'
+      #	return redirect_to :back
+      #end
 
-      @picture.update(width: img.columns, height: img.rows, file_size: img.filesize, mime_type: img.mime_type)
+      #@picture.update(width: img.columns, height: img.rows, file_size: img.filesize, mime_type: img.mime_type)
 
       flash[:notice] = 'Picture was successfully updated.'
       redirect_to action: 'index', imageable_id: @picture.imageable_id, imageable_type: @picture.imageable_type
