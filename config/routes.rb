@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get '/faq/:slug' => 'faqs#category'
+  get '/faq' => 'faqs#index'
   get '/pages/:slug' => 'pages#show'
   get '/categories/:slug' => 'categories#show'
   

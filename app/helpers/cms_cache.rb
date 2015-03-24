@@ -26,5 +26,11 @@ module CmsCache
       Location.where(id: LocationCategory.select(:location_id).where(category_id: cat.id)).load
     end
   end
+  
+  def self.faqs
+    Rails.cache.fetch("faq:#{Rails.configuration.domain_id}") do
+      Faq.where(domain_id: Rails.configuration.domain_id).order(:sort)
+    end
+  end
 
 end
