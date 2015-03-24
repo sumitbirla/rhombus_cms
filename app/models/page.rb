@@ -19,6 +19,6 @@ class Page < ActiveRecord::Base
   validates_uniqueness_of :slug, scope: :domain_id
   
   def cache_key
-    "page:#{slug}"
+    "page:#{domain_id}:#{slug}"
   end
 end

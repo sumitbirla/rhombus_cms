@@ -20,6 +20,6 @@ class ContentBlock < ActiveRecord::Base
   end
   
   def cache_key
-    "content-block:#{key}"
+    "content-block:#{domain_id}:#{key}"
   end
 end

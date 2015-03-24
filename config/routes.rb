@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       resources :comments
       resources :votes
       resources :filemanager
+      resources :faqs
     end
     
   end

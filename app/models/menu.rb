@@ -18,6 +18,6 @@ class Menu < ActiveRecord::Base
   validates_uniqueness_of :key, scope: :domain_id
   
   def cache_key
-    "menu:#{key}"
+    "menu:#{domain_id}:#{key}"
   end
 end

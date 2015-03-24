@@ -51,7 +51,7 @@ class Admin::Cms::PagesController < Admin::BaseController
   private
   
     def page_params
-      params.require(:page).permit(:title, :slug, :published, :header_content, :body)
+      params.require(:page).permit!
     end
   
 end
