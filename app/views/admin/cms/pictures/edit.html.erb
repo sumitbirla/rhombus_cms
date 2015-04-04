@@ -6,8 +6,8 @@
 <% unless @picture.id.nil? %>
 <div class="row well">
 	<div class="col-md-2">
-		<a href="<%= cdn_image_url @picture, 700, 600, 0 %>" class="fancybox thumbnail" rel="gallery">
-			<img class="img img-polaroid" src="<%= cdn_image_url @picture, 250, 120, 0 %>" alt="<%= @picture.caption %>"/>
+		<a href="<%= cdn_image_url @picture, 700, 600, 0 %>" data-lightbox="image-1">
+			<img class="img-thumbnail" src="<%= cdn_image_url @picture, 250, 120, 0 %>" alt="<%= @picture.caption %>"/>
 		</a>
 	</div>
 	<div class="col-md-10">

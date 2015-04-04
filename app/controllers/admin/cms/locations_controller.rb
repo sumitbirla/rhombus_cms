@@ -111,9 +111,7 @@ class Admin::Cms::LocationsController < Admin::BaseController
   private
   
     def location_params
-      params.require(:location).permit(:name, :slug, :street1, :street2, :city, :state, :zip, :country, 
-      :latitude, :longitude, :hidden, :user_id, :affiliate_id, :region_id, :contact_person, :email, :phone, :fax, :website,
-      :summary, :description)
+      params.require(:location).permit!
     end
   
 end

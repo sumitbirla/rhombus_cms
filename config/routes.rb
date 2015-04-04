@@ -17,6 +17,13 @@ Rails.application.routes.draw do
   namespace :admin do
     
     namespace :cms do
+      resources :articles do
+        member do
+          get 'pictures' 
+          get 'categories' 
+          post 'categories' => 'articles#create_categories'
+        end
+      end
       resources :pages
       resources :content_blocks
       resources :menus
@@ -24,11 +31,11 @@ Rails.application.routes.draw do
       resources :regions
       resources :locations do
         member do
-          get 'pictures' => 'locations#pictures'
-          get 'categories' => 'locations#categories'
-          get 'attributes' => 'locations#attributes'
-          get 'sublocations' => 'locations#sublocations'
-          get 'formatted' => 'locations#formatted'
+          get 'pictures'
+          get 'categories'
+          get 'attributes'
+          get 'sublocations'
+          get 'formatted'
           post 'categories' => 'locations#create_categories'
           post 'attributes' => 'locations#create_attributes'
         end

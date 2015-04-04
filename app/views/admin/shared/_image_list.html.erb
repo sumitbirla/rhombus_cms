@@ -31,8 +31,8 @@
 		i = i+1%>
 	<tr>
 		<td>
-			<a href="<%= cdn_image_url pic, 700, 600, 0 %>" class="fancybox">
-				<img class="img-polaroid" src="<%= cdn_image_url pic, 90, 90, 0 %>"/>
+			<a href="<%= cdn_image_url pic, 700, 600, 0 %>"  data-lightbox="image-1">
+				<img class="img-thumbnail" src="<%= cdn_image_url pic, 90, 90, 0 %>"/>
 			</a>
 		</td>
 		<td><%= pic.sort %>: <%= pic.caption %></td>
