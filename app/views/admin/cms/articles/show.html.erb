@@ -1,0 +1,105 @@
+<div class="pull-right">
+  <a href="/articles/<%= @article.slug %>" class="btn btn-sm btn-default">view</a>
+  <%= link_to "edit", edit_admin_cms_article_path(@article), class: "btn btn-sm btn-default" %>
+</div>
+
+
+<h2><i class="fa fa-edit"></i>&nbsp; <%= @article.title %></h2>
+<hr>
+
+<div class="row-fluid">
+  <div class="col-md-8" style="padding-bottom: 30px;">
+
+    <h4>Excerpt</h4>
+    <blockquote><%= @article.excerpt %></blockquote>
+
+    <h4>Body</h4>
+    <%= @article.body.gsub("\n", "<br/>").html_safe %>
+
+  </div>
+
+
+  <div class="col-md-4">
+    <table class="table summary table-condensed">
+      <tr>
+        <td>Status</td>
+        <td><%= article_status(@article)%></td>
+      </tr>
+      <% unless @article.published_at.nil? %>
+      <tr>
+        <td>Published</td>
+        <td><%= sysdate @article.published_at %></td>
+      </tr>
+      <% end %>
+      <tr>
+        <td>Author</td>
+        <td><%= @article.author %></td>
+      </tr>
+      <tr>
+        <td>Allow Comments</td>
+        <td><%= @article.allow_comments ? "yes" : "no" %></td>
+      </tr>
+      <tr>
+        <td>Allow Pings</td>
+        <td><%= @article.allow_pings ? "yes" : "no" %></td>
+      </tr>
+      <% unless @article.keywords.blank? %>
+      <tr>
+        <td>Keywords</td>
+        <td><%= @article.keywords %></td>
+      </tr>
+      <% end %>
+      <% unless @article.tags.length == 0 %>
+      <tr>
+        <td>Tags</td>
+        <td>
+          <% @article.tags.each do |tag| %>
+            <span class="label label-default"><%= tag.name %></span> 
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+      
+  	<h4>Pictures</h4>
+    <% if @article.pictures.length > 0 %>
+      <a href="<%= cdn_image_url @article.pictures[0], 800, 700, 0 %>" data-lightbox="image-1">
+        <img src="<%= cdn_image_url @article.pictures[0], 400, 300, 2 %>" class="img-responsive" title="<%= @article.pictures[0].caption %>"/>
+      </a>
+    <% end %>
+    
+    <% if @article.pictures.length > 1 %>
+      <br/>
+      <% @article.pictures[1..-1].each do |pic| %>
+        <a href="<%= cdn_image_url pic, 700, 600, 0 %>"  data-lightbox="image-1">
+          <img src="<%= cdn_image_url pic, 60, 60, 2 %>" class="img-thumbnail" style="margin: 4px" title="<%= pic.caption %>"/>
+        </a>
+      <% end %>
+    <% end %>
+    
+  	<hr/>
+	
+  	<h4>Categories</h4>
+  	<ul>
+  		<% @article.categories.each do |cat| %>
+  		<li><%= cat.name %></li>
+  		<% end %>
+  	</ul>
+  	<hr/>
+
+  </div>
+
+</div> <!-- row-fluid -->
+
+
+
+<% content_for :title do %>
+    Articles: <%= @article.title %>
+<% end %>
+
+
+<% content_for :breadcrumbs do %>
+	<li><a href="#">Web Content</a></li>
+	<li><%= link_to "Articles", admin_cms_articles_path %></li>
+	<li class="active"><%= @article.title %></li>
+<% end %>

@@ -8,6 +8,12 @@ module CmsCache
     end
   end
   
+  def self.article(slug) 
+    Rails.cache.fetch("article:#{Rails.configuration.domain_id}:#{slug}") do 
+      Article.includes(:pictures, :categories).find_by(slug: slug)
+    end
+  end
+  
   def self.content_block(key) 
     Rails.cache.fetch("content-block:#{Rails.configuration.domain_id}:#{key}") do 
       ContentBlock.find_by(domain_id: Rails.configuration.domain_id, key: key)

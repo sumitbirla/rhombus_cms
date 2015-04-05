@@ -8,7 +8,7 @@ module StaticContentHelper
       path = pic.file_path
     end
     
-    Cache.setting(:system, 'Static Files Url') + "/cache/#{width}x#{height}-#{mode}" + path
+    Cache.setting(Rails.configuration.domain_id, :system, 'Static Files Url') + "/cache/#{width}x#{height}-#{mode}" + path
   end
   
 end

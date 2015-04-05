@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   
-  get '/faq/:slug' => 'faqs#category'
-  get '/faq' => 'faqs#index'
-  get '/pages/:slug' => 'pages#show'
-  get '/categories/:slug' => 'categories#show'
+  get 'articles/show'
+
+  get 'faq/:slug' => 'faqs#category'
+  get 'faq' => 'faqs#index'
+  get 'pages/:slug' => 'pages#show'
+  get 'categories/:slug' => 'categories#show'
+  get 'articles/:slug' => 'articles#show'
   
   namespace :account do
     resources :pictures

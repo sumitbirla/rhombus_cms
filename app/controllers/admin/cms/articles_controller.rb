@@ -1,19 +1,21 @@
 class Admin::Cms::ArticlesController < Admin::BaseController
   
   def index
-    @articles = Article.page(params[:page]).order(published_at: :desc)
+    @articles = Article.where(domain_id: cookies[:domain_id]).page(params[:page]).order(published_at: :desc)
     @articles = @articles.where("title LIKE '%#{params[:q]}%'") unless params[:q].nil?
   end
 
   def new
-    @article = Article.new name: 'New article'
+    @article = Article.new title: 'New article', status: "draft"
     render 'edit'
   end
 
   def create
     @article = Article.new(article_params)
+    @article.domain_id = cookies[:domain_id]
     
     if @article.save
+      @article.save_tags(params[:tags].split(",").map { |x| x.strip.downcase })
       redirect_to action: 'show', id: @article.id, notice: 'Article was successfully created.'
     else
       render 'edit'
@@ -32,6 +34,9 @@ class Admin::Cms::ArticlesController < Admin::BaseController
     @article = Article.find(params[:id])
     
     if @article.update(article_params)
+      @article.save_tags(params[:tags].split(",").map { |x| x.strip.downcase })
+      
+      Rails.cache.delete @article
       redirect_to action: 'show', id: @article.id, notice: 'Article was successfully updated.'
     else
       render 'edit'
@@ -41,12 +46,15 @@ class Admin::Cms::ArticlesController < Admin::BaseController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
+    
+    Rails.cache.delete @article
     redirect_to action: 'index', notice: 'Article has been deleted.'
   end
   
   
   def pictures
     @article = Article.find(params[:id])
+    Rails.cache.delete @article
   end
   
   def categories
@@ -61,6 +69,7 @@ class Admin::Cms::ArticlesController < Admin::BaseController
       ArticleCategory.create article_id: params[:id], category_id: id
     end
     
+    Rails.cache.delete @article
     redirect_to action: 'show', id: params[:id], notice: 'Article was successfully updated.'
   end
   

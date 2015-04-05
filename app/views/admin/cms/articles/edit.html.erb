@@ -1,0 +1,78 @@
+<style>
+    .form-inline .control-label { width: 80px; }
+</style>
+<h2><i class="fa fa-edit"></i>&nbsp; <%= @article.title %></h2>
+
+<% if @article.persisted? %>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#">Summary</a></li>
+  <li><%= link_to "Pictures", pictures_admin_cms_article_path(@article) %></a></li>
+  <li><%= link_to "Categories", categories_admin_cms_article_path(@article) %></li>
+</ul>
+<% end %>
+
+<%= simple_form_for [:admin, :cms, @article], html: { class: 'form-inline' } do |f| %>
+
+	<%= render 'admin/shared/error_messages', object: f.object %>
+	
+  <div class="row">
+    <div class="col-md-8">
+      <%= f.input :slug %>
+    	<%= f.input :author %>
+    	<%= f.association :user %>
+      <%= f.input :keywords %>
+      <div class="form-group string optional">
+        <label class="string optional control-label">Tags</label>
+        <input class="string optional form-control" type="text" value="<%= @article.tags.collect { |x| x.name }.join(", ") %>" name="tags" data-role="tagsinput">
+      </div>
+    </div>
+    <div class="col-md-4 well">
+      <b>Status: </b> &nbsp;
+      <%= f.input_field :status, collection: ["draft", "pending", "published", "removed"] %><br><br>
+      
+      <b>Publish date:</b><br>
+      <div class="input-group date date-field">
+        <%= f.input_field :published_at, as: :string, class: "form-control" %>
+        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+      </div><br><br>
+    	<%= f.input_field :allow_comments %> Allow comments <br>
+      <%= f.input_field :allow_pings %> Allow pings <br><br>
+    </div>
+  </div>
+  <hr/>
+  <b>Title:</b>
+  <%= f.input_field :title, as: :text, rows: 2 %>
+  
+  <b>Excerpt:</b>
+	<%= f.input_field :excerpt, as: :text, rows: 4 %>
+	
+  <b>Body:</b>
+  <%= f.input_field :body, as: :text, rows: 10 %>
+	
+	<%= f.button :submit %>
+
+<% end %>
+
+
+
+<% content_for :title do %>
+    Articles: <%= @article.title %>
+<% end %>
+
+<% content_for :head do %>
+  <link rel="stylesheet" href="/rhombus_core/bootstrap-tagsinput/bootstrap-tagsinput.css">
+  <script src="/rhombus_core/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+<% end %>
+
+
+
+<% content_for :breadcrumbs do %>
+	<li><a href="#">Web Content</a></li>
+	<li><%= link_to "Articles", admin_cms_articles_path %></li>
+  <% if @article.persisted? %>
+	  <li><%= link_to @article.title, admin_cms_article_path(@article) %></li>
+	  <li class="active">edit</li>
+  <% else %>
+    <li><%= @article.title %>
+  <% end %>
+<% end %>

@@ -1,0 +1,53 @@
+<style>
+form ul { list-style-type: none;}
+form li { margin: 10px; padding-top: 5px; }
+form li input { position:relative; top: -4px; }
+</style>
+
+<h2><i class="fa fa-edit"></i>&nbsp; <%= @article.title %></h2>
+
+
+<ul class="nav nav-tabs">
+  <li><%= link_to "Summary", edit_admin_cms_article_path(@article) %></li>
+  <li><%= link_to "Pictures", pictures_admin_cms_article_path(@article) %></a></li>
+  <li class="active"><a href="#">Categories</a></li>
+</ul>
+
+<br/>
+
+<form action="/admin/cms/locations/<%= params[:id] %>/categories" method="post" class="categories">
+	<%= token_tag %>
+	<input type="hidden" name="id" value="<%= params[:id] %>">
+<% 	categories = Category.where(entity_type: :article).load
+	pcats = @article.categories
+	top_levels = categories.select { |c| c.parent_id == nil } %>
+	<ul>
+	<% top_levels.each do |cat| 
+		children = categories.select { |c| c.parent_id == cat.id } %>
+		<li><input type="checkbox" name="category_ids[]" value="<%= cat.id %>" <%= "checked='checked'" if pcats.include?(cat) %>/> &nbsp; <%= cat.name %>
+		<ul>
+		<% children.each do |child| %>
+			<li><input type="checkbox" name="category_ids[]" value="<%= child.id %>" <%= "checked='checked'" if pcats.include?(child) %>/> &nbsp; <%= child.name %></li>
+		<% end %>
+		</ul>
+		</li>
+	<% end %>
+</ul>
+<div class="form-actions">
+	<button class="btn btn-primary">Update</button>
+</div>
+</form>
+
+
+
+<% content_for :title do %>
+    Articles: <%= @article.title %>
+<% end %>
+
+
+<% content_for :breadcrumbs do %>
+	<li><a href="#">Web Content</a></li>
+	<li><%= link_to "Articles", admin_cms_articles_path %></li>
+	<li><%= link_to @article.title, admin_cms_article_path(@article)%> </li>
+	<li class="active">edit</li>
+<% end %>
