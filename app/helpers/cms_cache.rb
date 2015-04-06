@@ -10,7 +10,7 @@ module CmsCache
   
   def self.article(slug) 
     Rails.cache.fetch("article:#{Rails.configuration.domain_id}:#{slug}") do 
-      Article.includes(:pictures, :categories).find_by(slug: slug)
+      Article.includes(:pictures, :categories).find_by(slug: slug, status: "published")
     end
   end
   
