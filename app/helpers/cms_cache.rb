@@ -14,6 +14,12 @@ module CmsCache
     end
   end
   
+  def self.article_list
+    Rails.cache.fetch("article-list") do 
+      Article.includes(:pictures).where(status: "published").order(published_at: :desc)
+    end
+  end
+  
   def self.content_block(key) 
     Rails.cache.fetch("content-block:#{Rails.configuration.domain_id}:#{key}") do 
       ContentBlock.find_by(domain_id: Rails.configuration.domain_id, key: key)

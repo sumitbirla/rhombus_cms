@@ -1,5 +1,10 @@
 class ArticlesController < ApplicationController
   
+  def index
+    @articles = CmsCache.article_list
+  end
+  
+  
   def show
     @article = CmsCache.article(params[:slug])
     if @article.nil?
