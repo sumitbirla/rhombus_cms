@@ -29,7 +29,7 @@
 		</td>
 		<td><%= systime pic.created_at %></td>
 		<td><%= pic.width %> x <%= pic.height %></td>
-		<td><%= readable_file_size(pic.file_size, 1) unless pic.file_size.nil? %></td>
+		<td><%= number_to_human_size(pic.file_size) unless pic.file_size.nil? %></td>
 		<td><%= pic.votes || '-'%></td>
 		<td>
 			<%= link_to "edit", edit_admin_cms_picture_path(pic) %> &nbsp;
