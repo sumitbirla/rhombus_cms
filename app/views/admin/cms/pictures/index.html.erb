@@ -7,10 +7,11 @@
 	<tr>
 		<th>Picture</th>
 		<th>Owner</th>
-		<th>Uploaded</th>
-		<th>Dimensions</th>
+    <th>Dimensions</th>
+		<th>Format</th>
 		<th>Size</th>
 		<th>Votes</th>
+    <th>Uploaded</th>
 		<th>&nbsp;</th>
 	</tr>
 	<% @pictures.each do |pic| %>
@@ -27,10 +28,15 @@
 			 <%= pic.imageable_type %>
 			<% end %>
 		</td>
-		<td><%= systime pic.created_at %></td>
-		<td><%= pic.width %> x <%= pic.height %></td>
+    <td><%= pic.width %>x<%= pic.height %></td>
+		<td>
+      <%= pic.format %> 
+      <%= "#{pic.bits_per_pixel}bpp" unless pic.bits_per_pixel.blank? %>
+      <%= pic.compression_mode unless pic.compression_mode.blank? %>
+    </td>
 		<td><%= number_to_human_size(pic.file_size) unless pic.file_size.nil? %></td>
-		<td><%= pic.votes || '-'%></td>
+		<td><%= pic.votes || '-' %></td>
+    <td><%= systime pic.created_at %></td>
 		<td>
 			<%= link_to "edit", edit_admin_cms_picture_path(pic) %> &nbsp;
 			<%= link_to "delete", 

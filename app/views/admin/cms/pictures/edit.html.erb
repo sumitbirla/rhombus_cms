@@ -1,26 +1,23 @@
-<style>
-    .form-inline .control-label { width: 140px; }
-</style>
 <h2><i class="fa fa-picture-o"></i>&nbsp; <%= "Picture ##{@picture.id}" %></h2>
 
 <% unless @picture.id.nil? %>
 <div class="row well">
-	<div class="col-md-2">
+	<div class="col-md-3">
 		<a href="<%= cdn_image_url @picture, 700, 600, 0 %>" data-lightbox="image-1">
-			<img class="img-thumbnail" src="<%= cdn_image_url @picture, 250, 120, 0 %>" alt="<%= @picture.caption %>"/>
+			<img class="img-thumbnail" style="width: 100%" src="<%= cdn_image_url @picture, 350, 350, 0 %>" alt="<%= @picture.caption %>"/>
 		</a>
 	</div>
-	<div class="col-md-10">
+	<div class="col-md-9">
 		<br/>
-		<b>Type:</b> <%= @picture.mime_type %><br/><br/>
-		<b>File size:</b> <%= number_to_human_size @picture.file_size %><br/><br/>
+		<b>Type:</b> <%= @picture.format %> <%= @picture.compression_mode %><br/>
+		<b>File size:</b> <%= number_to_human_size @picture.file_size %><br/>
 		<b>Dimensions:</b> <%= @picture.width %> x <%= @picture.height %>
 	</div>
 </div>
 <% end %>
 
 
-<%= simple_form_for([:admin, :cms, @picture], html: { class: 'form-inline' }) do |f| %>
+<%= simple_form_for [:admin, :cms, @picture], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
 
   <%= render 'admin/shared/error_messages', object: f.object %>
 
@@ -28,20 +25,21 @@
   <%= f.input :imageable_id, as: :hidden %>
   
   <div class="form-group string optional password">
-	<label class="string control-label" for="file_path">File Path</label>
-	<input type="text" id="file_path" name="picture[file_path]" value="<%= @picture.file_path %>" class="string span6"/>
-	<input type="button" value="Browse Server" class="btn btn-primary" onclick="javascript:BrowseServer();">
+  	<label class="string control-label col-sm-3" for="file_path">File Path</label>
+  	<div class="col-sm-9">
+      <input type="text" id="file_path" name="picture[file_path]" value="<%= @picture.file_path %>" class="string form-control"/>
+  	  <input type="button" value="Browse Server" class="btn btn-default btn-sm" onclick="javascript:BrowseServer();">
+    </div>
   </div>
   
   <%= f.association :user %>
-  <%= f.input :caption, input_html: { class: 'span6' } %>
-  <%= f.input :description, input_html: { class: 'span6', rows: 5 } %>
+  <%= f.input :caption %>
+  <%= f.input :description, input_html: { rows: 5 } %>
   <%= f.input :votes %>
   <%= f.input :sort %>
   
-  <div class="form-actions">
-  	<%= f.button :submit %>
-  </div>
+  <%= f.button :submit %>
+  
 <% end %>
 
 
