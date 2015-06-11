@@ -32,4 +32,14 @@ class Picture < ActiveRecord::Base
   def cache_key
     "picture:#{id}"
   end
+  
+  def set_picture_properties(base_path)
+    return false if self.file_path.nil? || self.file_path == ''
+    
+    output = `mediainfo --Inform="Image;%Format%|%Width%|%Height%|%BitDepth%|%ChromaSubsampling%|%Compression_Mode%\n" "#{base_path + self.file_path}"` ;  result=$?.success?
+    format, with, height, bits_per_pixel, chroma_subsampling, compression_mode = output.split('|') if result
+    
+    result
+  end
+  
 end
