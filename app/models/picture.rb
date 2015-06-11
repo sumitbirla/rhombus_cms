@@ -38,6 +38,7 @@ class Picture < ActiveRecord::Base
     
     output = `mediainfo --Inform="Image;%Format%|%Width%|%Height%|%BitDepth%|%ChromaSubsampling%|%Compression_Mode%\n" "#{base_path + self.file_path}"` ;  result=$?.success?
     self.format, self.width, self.height, self.bits_per_pixel, self.chroma_subsampling, self.compression_mode = output.split('|') if result
+    self.file_size = File.new(base_path + self.file_path).size
     
     result
   end
