@@ -37,7 +37,7 @@ class Picture < ActiveRecord::Base
     return false if self.file_path.nil? || self.file_path == ''
     
     output = `mediainfo --Inform="Image;%Format%|%Width%|%Height%|%BitDepth%|%ChromaSubsampling%|%Compression_Mode%\n" "#{base_path + self.file_path}"` ;  result=$?.success?
-    self.format, self.with, self.height, self.bits_per_pixel, self.chroma_subsampling, self.compression_mode = output.split('|') if result
+    self.format, self.width, self.height, self.bits_per_pixel, self.chroma_subsampling, self.compression_mode = output.split('|') if result
     
     result
   end
