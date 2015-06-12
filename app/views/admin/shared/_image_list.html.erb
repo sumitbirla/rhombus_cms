@@ -37,12 +37,12 @@
 		</td>
 		<td><%= pic.sort %>: <%= pic.caption %></td>
 		<td>
-			<% unless i == 1%>
-			<%= link_to raw('<i class="icon-circle-arrow-up"></i>'), moveup_admin_cms_picture_path(pic) %>
-			<% end %>
-			<% unless i == pictures.length %>
-			<%= link_to raw('<i class="icon-circle-arrow-down"></i>'), movedown_admin_cms_picture_path(pic) %>
-			<% end %>
+		<% unless i == 1 %>
+		  <%= link_to raw('<i class="fa fa-chevron-up"></i>'), moveup_admin_cms_picture_path(pic) %>
+		<% end %>
+		<% unless i == pictures.length %>
+		  <%= link_to raw('<i class="fa fa-chevron-down"></i>'), movedown_admin_cms_picture_path(pic) %>
+		<% end %>
 		</td>
 		<td><%= link_to "delete", { action: "destroy", controller: "cms/pictures", id: pic.id }, method: :delete %></td>
 	<% end %>
