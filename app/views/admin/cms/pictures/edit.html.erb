@@ -1,23 +1,45 @@
 <h2><i class="fa fa-picture-o"></i>&nbsp; <%= "Picture ##{@picture.id}" %></h2>
 
 <% unless @picture.id.nil? %>
-<div class="row well">
-	<div class="col-md-3">
+<div class="row">
+	<div class="col-md-6">
 		<a href="<%= cdn_image_url @picture, 700, 600, 0 %>" data-lightbox="image-1">
 			<img class="img-thumbnail" style="width: 100%" src="<%= cdn_image_url @picture, 350, 350, 0 %>" alt="<%= @picture.caption %>"/>
 		</a>
 	</div>
-	<div class="col-md-9">
-		<br/>
-		<b>Type:</b> <%= @picture.format %> <%= @picture.compression_mode %><br/>
-		<b>File size:</b> <%= number_to_human_size @picture.file_size %><br/>
-		<b>Dimensions:</b> <%= @picture.width %> x <%= @picture.height %>
+	<div class="col-md-6">
+		<table class="table table-bordered summary"> 
+      <tr>
+        <td>File size</td>
+        <td><%= number_to_human_size @picture.file_size %></td>
+      </tr>
+      <tr>
+        <td>Dimensions</td>
+        <td><%= @picture.width %> pixels x <%= @picture.height %> pixels</td>
+      </tr>
+      <tr>
+        <td>Type</td>
+        <td><%= @picture.format %> <%= @picture.compression_mode %></td>
+      </tr>
+      <tr>
+        <td>Bits per pixel</td>
+        <td><%= @picture.bits_per_pixel || "- unknown -" %></td>
+      </tr>
+      <tr>
+        <td>Chroma Subsampling</td>
+        <td><%= @picture.chroma_subsampling.blank? ? "- n/a -" : @picture.chroma_subsampling %></td>
+      </tr>
+      <tr>
+        <td>Uploaded</td>
+        <td><%= systime @picture.created_at %></td>
+      </tr>
+    </table>
 	</div>
 </div>
 <% end %>
 
 
-<%= simple_form_for [:admin, :cms, @picture], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+<%= simple_form_for [:admin, :cms, @picture], html: { class: 'form-horizontal', style: "margin-top: 20px;" }, wrapper: :horizontal_form do |f| %>
 
   <%= render 'admin/shared/error_messages', object: f.object %>
 

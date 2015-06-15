@@ -47,7 +47,7 @@ class Admin::Cms::PhotoAlbumsController < Admin::BaseController
   private
   
     def photo_album_params
-      params.require(:photo_album).permit(:title, :slug, :user_id, :public, :allow_upload, :voting_enabled, :description)
+      params.require(:photo_album).permit!
     end
   
 end
