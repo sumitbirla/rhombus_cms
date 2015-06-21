@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'categories/:slug' => 'categories#show'
   get 'articles/:slug' => 'articles#show'
   get 'articles' => 'articles#index'
+  get 'photo_albums/:slug' => 'photo_albums#show'
+  get 'photo_albums' => 'photo_albums#index'
   
   namespace :account do
     resources :pictures
