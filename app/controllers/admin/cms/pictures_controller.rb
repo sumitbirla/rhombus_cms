@@ -16,8 +16,7 @@ class Admin::Cms::PicturesController < Admin::BaseController
   end
   
   def new
-    @picture = Picture.new imageable_type: params[:imageable_type], imageable_id: params[:imageable_id], caption: 'New picture'
-    puts @picture.inspect
+    @picture = Picture.new imageable_type: params[:imageable_type], imageable_id: params[:imageable_id], user_id: session[:user_id], caption: 'New picture'
     render 'edit'
   end
   

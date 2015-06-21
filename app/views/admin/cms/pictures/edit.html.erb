@@ -80,12 +80,13 @@
 
 
 <% content_for :head do %>
+  <% static_url = Cache.setting(Rails.configuration.domain_id, :system, "Static Files Url") %>
 	<script type="text/javascript" src="/ckfinder/ckfinder.js"></script>
 	<script>
 	function BrowseServer()
 	{
 		// You can use the "CKFinder" class to render CKFinder in a page:
-		var finder = new CKFinder( { connectorPath : '<%= Cache.setting('System', 'Static Files Url') %>/ckfinder/core/connector/php/connector.php' });
+		var finder = new CKFinder( { connectorPath : '<%= static_url %>/ckfinder/core/connector/php/connector.php' });
 		//finder.basePath = '../';	// The path for the installation of CKFinder (default = "/ckfinder/").
 		finder.selectActionFunction = SetFileField;
 		finder.popup();
@@ -94,7 +95,7 @@
 	// This is a sample function which is called when a file is selected in CKFinder.
 	function SetFileField( fileUrl )
 	{
-		document.getElementById('file_path').value = fileUrl.substring(<%= Cache.setting('System', 'Static Files Url').length %>);
+		document.getElementById('file_path').value = fileUrl.substring(<%= static_url.length + 6 %>);
 	}
 	</script>
 <% end %>
