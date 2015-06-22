@@ -27,7 +27,7 @@ class Account::PicturesController < Account::BaseController
     ext = uploaded_io.original_filename.split('.').last
   
     unless uploaded_io.nil? || ['jpg', 'gif'].include?(ext) == false
-      file_path = user_dir + SecureRandom.hex(6) + '.' + ext
+      file_path = user_dir + '/' + SecureRandom.hex(6) + '.' + ext
    
       File.open(file_path, 'wb') do |file|
         file.write(uploaded_io.read)
