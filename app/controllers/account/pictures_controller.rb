@@ -3,6 +3,7 @@ class Account::PicturesController < Account::BaseController
   
   def index
     @pictures = Picture.where(user_id: session[:user_id]).order(created_at: :desc).page(params[:page])
+    @picture = Picture.new(imageable_type: "photoalbum")
   end
   
   
@@ -11,9 +12,15 @@ class Account::PicturesController < Account::BaseController
     @picture.user_id = session[:user_id]
     base_dir = Cache.setting(Rails.configuration.domain_id, :system, "Static Files Path")
     @picture.set_picture_properties(base_dir)
-    @picture.save
     
-    redirect_to :back
+    if @picture.save
+      flash[:success] = "Photo was successfully uploaded."
+    else
+      flash[:error] = @picture.errors.full_messages.join(". ")
+    end
+    
+    @pictures = Picture.where(user_id: session[:user_id]).order(created_at: :desc).page(params[:page])
+    render "index"
   end
   
   def destroy
