@@ -7,7 +7,7 @@ class VotesController < ApplicationController
     vote.cookie = session.id
     
     if vote.save
-      flash[:popup] = "You vote has been registered."
+      flash[:popup] = "Your vote has been registered."
       if vote.votable_type == "picture"
         Picture.increment_counter(:votes, vote.votable_id)
       end

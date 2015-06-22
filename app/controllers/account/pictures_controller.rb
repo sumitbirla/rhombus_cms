@@ -16,11 +16,17 @@ class Account::PicturesController < Account::BaseController
     redirect_to :back
   end
   
+  def destroy
+    Picture.find_by(id: params[:id], user_id: session[:user_id]).destroy
+    redirect_to :back
+  end
+  
   
   # called from DropZone.js
   def upload
     static_files_path = Cache.setting(Rails.configuration.domain_id, :system, "Static Files Path")
     user_dir =  static_files_path + "/userfiles/uploads/#{session[:user_id]}"
+    #user_dir = "/tmp"
     Dir.mkdir(user_dir) unless File.exists?(user_dir)
 
     uploaded_io = params[:file]
