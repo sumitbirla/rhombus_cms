@@ -5,20 +5,70 @@ class Admin::Cms::CommentsController < Admin::BaseController
   end
 
   def new
+    @comment = Menu.new
+    render 'edit'
   end
 
   def create
+    @comment = Comment.new(comment_params)
+    @comment.assign_attributes(
+      ip_address: request.ip,
+      user_agent: request.user_agent,
+      author: current_user.name,
+      email: current_user.email,
+      user_id: current_user.id)
+    
+    # check whether this is spam
+    Akismet.api_key =  Cache.setting(Rails.configuration.domain_id, :cms, "Akismet API Key")
+    Akismet.app_url = Cache.setting(Rails.configuration.domain_id, :system, "Website URL")
+    
+    params = {
+      type: 'comment',
+      text: @comment.content,
+      created_at: DateTime.now,
+      author: @comment.author,
+      author_email: @comment.email,
+      post_url: request.url,
+      referrer: request.referrer
+    }
+    
+    @comment.spam = Akismet.spam?(request.ip, request.user_agent, params)
+    if @comment.spam
+      flash[:notice] = "Your comment will be posted after it is approved."
+      @comment.approved = false
+    end
+    
+    @comment.save
+    redirect_to action: "index"
   end
 
-  def show
-  end
 
   def edit
+    @comment = Comment.find(params[:id])
   end
 
   def update
+    @comment = Comment.find(params[:id])
+    
+    if @comment.update(comment_params)
+      redirect_to action: 'index'
+    else
+      render 'edit'
+    end
   end
 
   def destroy
+    @comment = Menu.find(params[:id])
+    @comment.destroy
+    
+    redirect_to :back, notice: 'Comment has been deleted.'
   end
+  
+  
+  private
+  
+    def comment_params
+      params.require(:comment).permit!
+    end
+    
 end

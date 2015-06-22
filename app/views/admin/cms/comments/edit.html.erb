@@ -1,2 +1,54 @@
-<h2>Admin::Comments#edit</h2>
-<p>Find me in app/views/admin/comments/edit.html.erb</p>
+<style>
+    .form-horizontal .control-label { width: 120px; }
+</style>
+
+<h2>Comment</h2>
+
+<table class="table table-condensed table-bordered summary">
+  <% unless @comment.user_id.nil? %>
+  <tr>
+    <td>User</td>
+    <td><%= link_to @comment.user.name, admin_system_user_path(@comment.user) %></td>
+  </tr>
+  <% end %>
+  <tr>
+    <td>Submitted</td>
+    <td><%= systime @comment.created_at %></td>
+  </tr>
+  <tr>
+    <td>IP Address</td>
+    <td><%= @comment.ip_address %></td>
+  </tr>
+  <tr>
+    <td>User Agent</td>
+    <td><%= @comment.user_agent %></td>
+  </tr>
+</table>
+  
+<hr>
+
+<%= simple_form_for [:admin, :cms, @comment], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+
+  <%= f.association :user %>
+	<%= f.input :author %>
+  <%= f.input :email %>
+  <%= f.input :url %>
+  <%= f.input :rating %>
+  <%= f.input :content, input_html: { rows: 5 } %>
+  <%= f.input :spam %>
+  <%= f.input :approved %>
+	<%= f.button :submit %>
+
+<% end %>
+
+
+<% content_for :title do %>
+	Comment
+<% end %>
+
+
+<% content_for :breadcrumbs do %>
+	<li><a href="#">Web Content</a></li>
+	<li><%= link_to "Comments", admin_cms_comments_path %></li>
+	<li class="active">edit</li>
+<% end %>

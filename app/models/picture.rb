@@ -24,7 +24,7 @@ class Picture < ActiveRecord::Base
   
   belongs_to :imageable, polymorphic: true
   belongs_to :user
-  has_many :comments, as: :commentable
+  has_many :comments, -> { order(:created_at) }, as: :commentable 
   #has_many :votes, as: :votable
   
   validates_presence_of :imageable_id, :imageable_type, :file_path

@@ -22,7 +22,7 @@ class CreateCmsTables < ActiveRecord::Migration
       t.string   "email"
       t.string   "url"
       t.text     "content",          null: false
-      t.integer  "rating"
+      t.integer  "rating",           null: false, default: 0
       t.boolean  "approved",         null: false
       t.boolean  "spam",             null: false
       t.string   "ip_address",       null: false

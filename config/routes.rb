@@ -12,7 +12,12 @@ Rails.application.routes.draw do
   get 'photo_albums/:slug' => 'photo_albums#show'
   get 'photo_albums' => 'photo_albums#index'
   
+  resources :comments
+  resources :pictures
+  resources :votes
+  
   namespace :account do
+    post 'pictures/upload'
     resources :pictures
     resources :locations do
       member do

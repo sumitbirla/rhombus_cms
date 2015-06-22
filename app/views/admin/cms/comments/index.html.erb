@@ -20,19 +20,13 @@
               <%= link_to c.author, admin_system_user_path(c.user_id) %>
           <% end %>
         </td>
-        <td>
-        <% if c.commentable_type == "agent" %>
-            <%= link_to Agent.find(c.commentable_id), admin_agents_agent_path(c.commentable_id) %>
-        <% elsif c.commentable_type == "product" %>
-            <%= link_to Product.find(c.commentable_id), admin_store_product_path(c.commentable_id) %>
-        <% end %>
-        </td>
+        <td><%= c.commentable_type %> <%= c.commentable_id%></td>
         <td>
           <% c.rating.times do  %>
               &#9733;
           <% end %>
         </td>
-        <td><%= c.content %></td>
+        <td><%= truncate(c.content, length: 40) %></td>
         <td><%= tick c.approved %></td>
         <td><%= tick c.spam %></td>
         <td>
