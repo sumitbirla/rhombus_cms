@@ -8,6 +8,7 @@ class Account::PicturesController < Account::BaseController
   
   def create
     @picture = Picture.new(picture_params)
+    @picture.user_id = session[:user_id]
     base_dir = Cache.setting(Rails.configuration.domain_id, :system, "Static Files Path")
     @picture.set_picture_properties(base_dir)
     @picture.save
@@ -42,7 +43,7 @@ class Account::PicturesController < Account::BaseController
   private
   
   def picture_params
-    params.require(:picture).permit(:caption, :file_path, :data1, :data2, :approved)
+    params.require(:picture).permit(:caption, :file_path, :data1, :data2, :approved, :imageable_type, :imageable_id)
   end
   
 end
