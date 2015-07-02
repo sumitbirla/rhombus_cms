@@ -1,16 +1,16 @@
 <h2><%= @content_block.key %></h2>
 <hr/>	
 
-<%= simple_form_for [:admin, :cms, @content_block], html: { class: 'form-inline' } do |f| %>
+<%= simple_form_for [:admin, :cms, @content_block] do |f| %>
 
 	<%= f.input :key %>
-	<%= f.input :content, input_html: { class: 'span8', rows: 10 }  %>
+	<%= f.input :content, input_html: { rows: 10 }  %>
 	<%= f.button :submit %>
 
 <% end %>
 
 
-<%= content_for :title do %>
+<% content_for :title do %>
 	Content Blocks: <%= @content_block.key %>
 <% end %>
 
