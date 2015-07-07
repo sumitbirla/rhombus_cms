@@ -1,7 +1,11 @@
+<style>
+  .form-horizontal .control-label { width: 120px; }
+</style>
+
 <h2><i class="fa fa-map-marker"></i>&nbsp; <%= @location.name%></h2>
 
 <% unless @location.id.nil? %>
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs" style="margin-bottom: 20px;">
   <li class="active"><a href="#">Summary</a></li>
   <li><%= link_to "Pictures", pictures_admin_cms_location_path(@location) %></a></li>
   <li><%= link_to "Categories", categories_admin_cms_location_path(@location) %></li>
@@ -10,7 +14,7 @@
 </ul>
 <% end %>
 
-<%= simple_form_for [:admin, :cms, @location], html: { class: 'form-inline' } do |f| %>
+<%= simple_form_for [:admin, :cms, @location], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
 
 	<%= render 'admin/shared/error_messages', object: f.object %>
 	
@@ -33,12 +37,10 @@
 	<%= f.input :email %>
 	<%= f.input :fax %>
 	<%= f.input :website %>
-	<%= f.input :summary, as: :text, input_html: { class: 'span6', rows: 3 } %>
-	<%= f.input :description, as: :text, input_html: { class: 'span6', rows: 6 } %>
+	<%= f.input :summary, as: :text, input_html: { rows: 3 } %>
+	<%= f.input :description, as: :text, input_html: { rows: 10 } %>
 	
-	<div class="form-actions">
-		<%= f.button :submit %>
-	</div>
+	<%= f.button :submit %>
 	
 <% end %>
 

@@ -1,8 +1,12 @@
+<style>
+    .form-horizontal .control-label { width: 120px; }
+</style>
+
 <h2><%= @region.name %></h2>
 <hr/>
 
 
-<%= simple_form_for [:admin, :cms, @region], html: { class: 'form-inline' } do |f| %>
+<%= simple_form_for [:admin, :cms, @region], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
 	
 	<%= render 'admin/shared/error_messages', object: f.object %>
 	
