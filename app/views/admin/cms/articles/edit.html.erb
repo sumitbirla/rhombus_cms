@@ -4,14 +4,14 @@
 <h2><i class="fa fa-edit"></i>&nbsp; <%= @article.title %></h2>
 
 <% if @article.persisted? %>
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs" style="margin-bottom: 20px;">
   <li class="active"><a href="#">Summary</a></li>
   <li><%= link_to "Pictures", pictures_admin_cms_article_path(@article) %></a></li>
   <li><%= link_to "Categories", categories_admin_cms_article_path(@article) %></li>
 </ul>
 <% end %>
 
-<%= simple_form_for [:admin, :cms, @article], html: { class: 'form-inline' } do |f| %>
+<%= simple_form_for [:admin, :cms, @article], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
 
 	<%= render 'admin/shared/error_messages', object: f.object %>
 	
@@ -31,23 +31,23 @@
       <%= f.input_field :status, collection: ["draft", "pending", "published", "removed"] %><br><br>
       
       <b>Publish date:</b><br>
-      <div class="input-group date date-field">
-        <%= f.input_field :published_at, as: :string, class: "form-control" %>
-        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-      </div><br><br>
+      <%= f.input_field :published_at, as: :string, class: "form-control date-field" %>
+        <br><br>
     	<%= f.input_field :allow_comments %> Allow comments <br>
       <%= f.input_field :allow_pings %> Allow pings <br><br>
     </div>
   </div>
   <hr/>
   <b>Title:</b>
-  <%= f.input_field :title, as: :text, rows: 2 %>
+  <%= f.input_field :title, as: :text, rows: 2, class: "form-control" %>
+  <br>
   
   <b>Excerpt:</b>
-	<%= f.input_field :excerpt, as: :text, rows: 4 %>
-	
+	<%= f.input_field :excerpt, as: :text, rows: 4, class: "form-control" %>
+	<br>
+  
   <b>Body:</b>
-  <%= f.input_field :body, as: :text, rows: 10 %>
+  <%= f.input_field :body, as: :text, rows: 20, class: "form-control" %>
 	
 	<%= f.button :submit %>
 

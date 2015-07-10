@@ -1,12 +1,12 @@
 <h2>FAQ</h2>
 <hr/>	
 
-<%= simple_form_for [:admin, :cms, @faq], html: { class: 'form-inline' } do |f| %>
+<%= simple_form_for [:admin, :cms, @faq], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
 
   <%= f.association :category %>
 	<%= f.input :sort %>
-	<%= f.input :question, input_html: { style: 'width: 80%', rows: 2 }  %>
-  <%= f.input :answer, input_html: { style: 'width: 80%', rows: 10 }  %>
+	<%= f.input :question, input_html: { rows: 2 }  %>
+  <%= f.input :answer, input_html: { rows: 10 }  %>
 	<%= f.button :submit %>
 
 <% end %>
