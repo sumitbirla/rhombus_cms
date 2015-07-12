@@ -1,7 +1,7 @@
 <h2><i class="fa fa-picture-o"></i>&nbsp; <%= @photo_album.title %></h2>
 <hr/>
 
-<%= simple_form_for([:admin, :cms, @photo_album], html: { class: 'form-inline' }) do |f| %>
+<%= simple_form_for [:admin, :cms, @photo_album], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
 
   <%= render 'admin/shared/error_messages', object: f.object %>
 
@@ -11,16 +11,15 @@
   <%= f.input :public %>
   <%= f.input :allow_upload %>
   <%= f.input :voting_enabled %>
-  <%= f.input :description, input_html: { class: 'span6', rows: 5 } %>
+  <%= f.input :description, input_html: { rows: 5 } %>
   
-  <div class="form-actions">
-  	<%= f.button :submit %>
-  </div>
+  <%= f.button :submit %>
+
 <% end %>
 
 
 
-<%= content_for :title do %>
+<% content_for :title do %>
 	Photo Albums: <%= @photo_album.title %>
 <% end %>
 
