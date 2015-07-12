@@ -27,7 +27,7 @@
   
 <hr>
 
-<%= simple_form_for [:admin, :cms, @comment], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+<%= simple_form_for [:admin, :cms, @comment] do |f| %>
 
   <%= f.association :user %>
 	<%= f.input :author %>

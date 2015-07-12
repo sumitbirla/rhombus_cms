@@ -2,7 +2,7 @@
 <hr/>
 
 
-<%= simple_form_for [:admin, :cms, @region], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+<%= simple_form_for [:admin, :cms, @region] do |f| %>
 	
 	<%= render 'admin/shared/error_messages', object: f.object %>
 	

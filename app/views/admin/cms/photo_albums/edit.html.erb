@@ -1,7 +1,7 @@
 <h2><i class="fa fa-picture-o"></i>&nbsp; <%= @photo_album.title %></h2>
 <hr/>
 
-<%= simple_form_for [:admin, :cms, @photo_album], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+<%= simple_form_for [:admin, :cms, @photo_album] do |f| %>
 
   <%= render 'admin/shared/error_messages', object: f.object %>
 

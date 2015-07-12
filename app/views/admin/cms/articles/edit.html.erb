@@ -11,7 +11,7 @@
 </ul>
 <% end %>
 
-<%= simple_form_for [:admin, :cms, @article], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+<%= simple_form_for [:admin, :cms, @article] do |f| %>
 
 	<%= render 'admin/shared/error_messages', object: f.object %>
 	
