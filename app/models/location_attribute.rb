@@ -1,11 +1,11 @@
 # == Schema Information
 #
-# Table name: location_attributes
+# Table name: cms_location_attributes
 #
 #  id           :integer          not null, primary key
 #  location_id  :integer          not null
 #  attribute_id :integer          not null
-#  value        :text
+#  value        :text(65535)
 #  created_at   :datetime
 #  updated_at   :datetime
 #

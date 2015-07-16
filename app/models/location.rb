@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: locations
+# Table name: cms_locations
 #
 #  id             :integer          not null, primary key
 #  name           :string(255)      not null
@@ -15,8 +15,7 @@
 #  longitude      :decimal(10, 7)
 #  hidden         :boolean          not null
 #  user_id        :integer
-#  created_at     :datetime
-#  updated_at     :datetime
+#  default        :boolean          default(FALSE), not null
 #  region_id      :integer
 #  affiliate_id   :integer
 #  contact_person :string(255)
@@ -24,8 +23,10 @@
 #  fax            :string(255)
 #  email          :string(255)
 #  website        :string(255)
-#  summary        :text
-#  description    :text
+#  summary        :text(65535)
+#  description    :text(65535)
+#  created_at     :datetime
+#  updated_at     :datetime
 #
 
 class Location < ActiveRecord::Base

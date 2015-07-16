@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: votes
+# Table name: cms_votes
 #
 #  id           :integer          not null, primary key
 #  votable_id   :integer          not null

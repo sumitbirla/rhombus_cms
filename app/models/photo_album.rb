@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: photo_albums
+# Table name: cms_photo_albums
 #
 #  id             :integer          not null, primary key
 #  slug           :string(255)      not null
@@ -9,7 +9,7 @@
 #  allow_upload   :boolean          not null
 #  voting_enabled :boolean          not null
 #  title          :string(255)      not null
-#  description    :text
+#  description    :text(65535)
 #  created_at     :datetime
 #  updated_at     :datetime
 #

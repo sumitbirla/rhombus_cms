@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: comments
+# Table name: cms_comments
 #
 #  id               :integer          not null, primary key
 #  commentable_id   :integer          not null
@@ -10,8 +10,8 @@
 #  author           :string(255)
 #  email            :string(255)
 #  url              :string(255)
-#  rating           :integer
-#  content          :text             not null
+#  content          :text(65535)      not null
+#  rating           :integer          default(0), not null
 #  approved         :boolean          not null
 #  spam             :boolean          not null
 #  ip_address       :string(255)      not null

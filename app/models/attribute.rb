@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: attributes
+# Table name: cms_attributes
 #
 #  id          :integer          not null, primary key
 #  name        :string(255)      not null

@@ -1,14 +1,15 @@
 # == Schema Information
 #
-# Table name: menus
+# Table name: cms_menus
 #
 #  id         :integer          not null, primary key
+#  domain_id  :integer          not null
 #  key        :string(255)      not null
 #  title      :string(255)      not null
 #  css_class  :string(255)
 #  created_at :datetime
 #  updated_at :datetime
-#  notes      :text
+#  notes      :text(65535)
 #
 
 class Menu < ActiveRecord::Base

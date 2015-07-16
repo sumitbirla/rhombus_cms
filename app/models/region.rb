@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: regions
+# Table name: cms_regions
 #
 #  id          :integer          not null, primary key
 #  name        :string(255)
@@ -8,7 +8,7 @@
 #  default     :boolean
 #  enabled     :boolean
 #  hidden      :boolean
-#  description :text
+#  description :text(65535)
 #  created_at  :datetime
 #  updated_at  :datetime
 #

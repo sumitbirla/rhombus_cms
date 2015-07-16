@@ -1,10 +1,11 @@
 # == Schema Information
 #
-# Table name: content_blocks
+# Table name: cms_content_blocks
 #
 #  id         :integer          not null, primary key
+#  domain_id  :integer          not null
 #  key        :string(255)      not null
-#  content    :text             not null
+#  content    :text(65535)      not null
 #  created_at :datetime
 #  updated_at :datetime
 #

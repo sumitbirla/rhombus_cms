@@ -1,22 +1,28 @@
 # == Schema Information
 #
-# Table name: pictures
+# Table name: cms_pictures
 #
-#  id             :integer          not null, primary key
-#  imageable_id   :integer
-#  imageable_type :string(255)
-#  user_id        :integer
-#  sort           :integer
-#  votes          :integer
-#  file_path      :string(255)
-#  width          :integer
-#  height         :integer
-#  file_size      :integer
-#  mime_type      :string(255)
-#  caption        :text
-#  description    :text
-#  created_at     :datetime
-#  updated_at     :datetime
+#  id                 :integer          not null, primary key
+#  imageable_id       :integer
+#  imageable_type     :string(255)
+#  user_id            :integer
+#  sort               :integer
+#  votes              :integer
+#  file_path          :string(255)
+#  width              :integer
+#  height             :integer
+#  file_size          :integer
+#  format             :string(255)
+#  bits_per_pixel     :integer
+#  chroma_subsampling :string(255)
+#  compression_mode   :string(255)
+#  caption            :text(65535)
+#  description        :text(65535)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  approved           :boolean          default(TRUE), not null
+#  data1              :string(255)
+#  data2              :string(255)
 #
 
 class Picture < ActiveRecord::Base

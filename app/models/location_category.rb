@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: location_categories
+# Table name: cms_location_categories
 #
 #  id          :integer          not null, primary key
 #  location_id :integer          not null

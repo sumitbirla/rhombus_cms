@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: menu_items
+# Table name: cms_menu_items
 #
 #  id         :integer          not null, primary key
 #  menu_id    :integer          not null

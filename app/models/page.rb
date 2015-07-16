@@ -1,13 +1,14 @@
 # == Schema Information
 #
-# Table name: pages
+# Table name: cms_pages
 #
 #  id             :integer          not null, primary key
+#  domain_id      :integer          not null
 #  title          :string(255)      not null
 #  slug           :string(255)      not null
 #  published      :boolean          not null
-#  header_content :text
-#  body           :text             not null
+#  header_content :text(65535)
+#  body           :text(65535)      not null
 #  created_at     :datetime
 #  updated_at     :datetime
 #
