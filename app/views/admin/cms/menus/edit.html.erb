@@ -1,7 +1,7 @@
 <h2><%= @menu.title%></h2>
 <hr/>
 
-<%= simple_form_for [:admin, :cms, @menu], html: { class: 'form-inline' } do |f| %>
+<%= simple_form_for [:admin, :cms, @menu] do |f| %>
 
 	<%= render 'admin/shared/error_messages', object: f.object %>
 	

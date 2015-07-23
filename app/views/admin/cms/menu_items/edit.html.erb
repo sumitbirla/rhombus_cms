@@ -1,7 +1,7 @@
 <h2><%= @menu_item.menu.title%></h2>
 <hr/>
 
-<%= simple_form_for [:admin, :cms, @menu_item], html: { class: 'form-inline' } do |f| %>
+<%= simple_form_for [:admin, :cms, @menu_item] do |f| %>
 
 	<%= render 'admin/shared/error_messages', object: f.object %>
 	
@@ -12,9 +12,7 @@
 	<%= f.input :enabled %>
 	<%= f.input :link_url %>
 
-	<div class="form-actions">
-		<%= f.button :submit %>
-	</div>
+	<%= f.button :submit %>
 
 <% end %>
 
