@@ -63,7 +63,6 @@ Rails.application.routes.draw do
          get 'movedown' => 'pictures#movedown'
         end
       end
-      resources :attributes
       resources :comments
       resources :votes
       resources :filemanager

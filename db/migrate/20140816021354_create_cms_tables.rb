@@ -1,18 +1,6 @@
 class CreateCmsTables < ActiveRecord::Migration
   def change
-    
-    create_table "cms_attributes", force: true do |t|
-      t.string   "name",                        null: false
-      t.string   "entity_type", default: "",    null: false
-      t.string   "notes"
-      t.boolean  "hidden",      default: false, null: false
-      t.string   "metadata"
-      t.string   "data_type",                   null: false
-      t.integer  "sort",                        null: false
-      t.datetime "created_at"
-      t.datetime "updated_at"
-    end
-    
+
     create_table "cms_comments", force: true do |t|
       t.integer  "commentable_id",   null: false
       t.string   "commentable_type", null: false
