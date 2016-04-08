@@ -13,14 +13,24 @@
 
 <table class="table table-striped table-condensed">
 	<tr>
-		<th>Name</th>
-		<th>Description</th>
-        <th></th>
+    <th>Designation</th>
+		<th>Zone</th>
+    <th>Aisle</th>
+    <th>Bay</th>
+    <th>Level</th>
+    <th>Section</th>
+    <th>Notes</th>
+    <th></th>
 	</tr>
 	<% @location.sublocations.each do |sub| %>
 	<tr>
-		<td><%= link_to sub.name, edit_admin_inventory_sublocation_path(sub) %></td>
-		<td><%= sub.description %></td>
+    <td><%= sub %></td>
+		<td><%= sub.zone %></td>
+    <td><%= sub.aisle %></td>
+    <td><%= sub.bay %></td>
+    <td><%= sub.level %></td>
+    <td><%= sub.section %></td>
+		<td><%= sub.notes %></td>
         <td>
             <%= link_to "edit", edit_admin_inventory_sublocation_path(sub) %> &nbsp;
             <%= link_to "delete",
