@@ -31,42 +31,6 @@
 		<td>Slug</td>
 		<td><%= @location.slug %></td>
 	</tr>
-	<% unless @location.street1.blank? %>
-	<tr>
-		<td>Street 1</td>
-		<td><%= @location.street1 %></td>
-	</tr>
-	<% end %>
-	<% unless @location.street2.blank? %>
-	<tr>
-		<td>Street 2</td>
-		<td><%= @location.street2 %></td>
-	</tr>
-	<% end %>
-	<% unless @location.city.blank? %>
-	<tr>
-		<td>City</td>
-		<td><%= @location.city %></td>
-	</tr>
-	<% end %>
-	<% unless @location.state.blank? %>
-	<tr>
-		<td>State</td>
-		<td><%= @location.state %></td>
-	</tr>
-	<% end %>
-	<% unless @location.zip.blank? %>
-	<tr>
-		<td>Zip</td>
-		<td><%= @location.zip %></td>
-	</tr>
-	<% end %>
-	<% unless @location.country.blank? %>
-	<tr>
-		<td>Country</td>
-		<td><%= @location.country %></td>
-	</tr>
-	<% end %>
 	<% unless @location.contact_person.blank? %>
 	<tr>
 		<td>Contact Person</td>
@@ -97,6 +61,10 @@
 		<td><%= link_to @location.website, @location.website %></td>
 	</tr>
 	<% end %>
+	<tr>
+		<td>Address</td>
+		<td><%= @location.to_text(new_line: '<br>') %></td>
+	</tr>
 </table>
 
 
@@ -112,7 +80,7 @@
 <table class="table table-condensed table-bordered summary">
 	<% @location.location_attributes.each do |lattr| %>
 	<tr>
-		<td><%= lattr.attribute.name %></td>
+		<td><%= lattr.core_attribute.name %></td>
 		<td><%= lattr.value %></td>
 	</tr>
 	<% end %>
@@ -156,7 +124,7 @@
 	<h4>Sublocations</h4>
 	<ul>
 		<% @location.sublocations.each do |sub| %>
-		<li><%= sub.name %></li>
+		<li><%= sub %></li>
 		<% end %>
 	</ul>
 	<% end %>

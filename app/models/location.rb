@@ -62,10 +62,10 @@ class Location < ActiveRecord::Base
     address += ', ' + state unless state.blank?
     address += ', ' + zip unless zip.blank?
     unless opts[:skip_country]
-      address += newline + country unless country.blank?
+      address += newline + Country[country].to_s unless country.blank?
     end
     
-    address
+    address.html_safe
   end
   
   def cache_key

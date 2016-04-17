@@ -37,18 +37,6 @@ class CreateCmsTables < ActiveRecord::Migration
     add_index "cms_articles", ["domain_id"], name: "index_cms_articles_on_domain_id", using: :btree
     add_index "cms_articles", ["user_id"], name: "index_cms_articles_on_user_id", using: :btree
 
-    create_table "cms_attributes", force: :cascade do |t|
-      t.string   "name",        limit: 255,                 null: false
-      t.string   "entity_type", limit: 255, default: "",    null: false
-      t.string   "notes",       limit: 255
-      t.boolean  "hidden",                  default: false, null: false
-      t.string   "metadata",    limit: 255
-      t.string   "data_type",   limit: 255,                 null: false
-      t.integer  "sort",        limit: 4,                   null: false
-      t.datetime "created_at"
-      t.datetime "updated_at"
-    end
-
     create_table "cms_comments", force: :cascade do |t|
       t.integer  "commentable_id",   limit: 4,                     null: false
       t.string   "commentable_type", limit: 255,                   null: false

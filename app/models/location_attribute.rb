@@ -14,5 +14,9 @@ class LocationAttribute < ActiveRecord::Base
   self.table_name = 'cms_location_attributes'
   
   belongs_to :location
-  belongs_to :cms_attribute
+  belongs_to :core_attribute, class_name: "Attribute", foreign_key: 'attribute_id'
+  
+  def to_s
+    value
+  end
 end
