@@ -37,6 +37,7 @@ class Location < ActiveRecord::Base
   belongs_to :region
   has_many :pictures, as: :imageable
   has_many :location_attributes
+  has_many :extra_properties
   has_many :location_categories
   has_many :categories, through: :location_categories
   has_many :sublocations
