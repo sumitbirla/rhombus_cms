@@ -20,7 +20,7 @@
 #  description        :text(65535)
 #  created_at         :datetime
 #  updated_at         :datetime
-#  approved           :boolean          default(TRUE), not null
+#  approved           :boolean          default("1"), not null
 #  data1              :string(255)
 #  data2              :string(255)
 #

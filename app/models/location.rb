@@ -15,7 +15,7 @@
 #  longitude      :decimal(10, 7)
 #  hidden         :boolean          not null
 #  user_id        :integer
-#  default        :boolean          default(FALSE), not null
+#  default        :boolean          default("0"), not null
 #  region_id      :integer
 #  affiliate_id   :integer
 #  contact_person :string(255)
@@ -34,9 +34,7 @@ class Location < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :affiliate
-  belongs_to :region
   has_many :pictures, as: :imageable
-  has_many :location_attributes
   has_many :extra_properties
   has_many :location_categories
   has_many :categories, through: :location_categories

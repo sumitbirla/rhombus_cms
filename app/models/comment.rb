@@ -11,7 +11,7 @@
 #  email            :string(255)
 #  url              :string(255)
 #  content          :text(65535)      not null
-#  rating           :integer          default(0), not null
+#  rating           :integer          default("0"), not null
 #  approved         :boolean          not null
 #  spam             :boolean          not null
 #  ip_address       :string(255)      not null

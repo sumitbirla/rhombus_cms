@@ -2,7 +2,6 @@
   <select id="selAction" class="form-control">
     <option> - - Select Action - - </option>
 	  <option method="get" value="<%= new_admin_cms_location_path(c: params[:c]) %>">New Location</option>
-    <option method="get" value="<%= admin_system_attributes_path(type: :location) %>">Setup Attributes</option>
     <option method="get" value="<%= admin_system_categories_path(type: :location) %>">Setup Categories</option>
     <optgroup label="Show location in category: ">
       <option method="get" value="<%= admin_cms_locations_path %>">All categories</option>

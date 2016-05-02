@@ -8,8 +8,8 @@
 #  status         :string(255)      not null
 #  slug           :string(255)      not null
 #  published_at   :date
-#  allow_pings    :boolean          default(FALSE), not null
-#  allow_comments :boolean          default(FALSE), not null
+#  allow_pings    :boolean          default("0"), not null
+#  allow_comments :boolean          default("0"), not null
 #  title          :string(255)      not null
 #  author         :string(255)      not null
 #  body           :text(65535)      not null

@@ -5,34 +5,41 @@
   <li class="active"><a href="#">Summary</a></li>
   <li><%= link_to "Pictures", pictures_admin_cms_location_path(@location) %></a></li>
   <li><%= link_to "Categories", categories_admin_cms_location_path(@location) %></li>
-  <li><%= link_to "Attributes", attributes_admin_cms_location_path(@location) %></li>
+  <li><%= link_to "Extra", extra_properties_admin_cms_location_path(@location) %></li>
   <li><%= link_to "Sublocations", sublocations_admin_cms_location_path(@location) %></li>
 </ul>
 <% end %>
 
-<%= simple_form_for [:admin, :cms, @location] do |f| %>
+<%= simple_form_for [:admin, :cms, @location], class: "my-form" do |f| %>
 
 	<%= render 'admin/shared/error_messages', object: f.object %>
 	
-	<%= f.input :name, input_html: { class: 'span6' } %>
-	<%= f.input :slug %>
-	<%= f.input :hidden %>
-	<%= f.association :region %>
-	<%= f.input :latitude %>
-	<%= f.input :longitude %>
-	<%= f.association :user %>
-	<%= f.association :affiliate %>
-	<%= f.input :contact_person %>
-	<%= f.input :street1 %>
-	<%= f.input :street2 %>
-	<%= f.input :city %>
-	<%= f.input :state %>
-	<%= f.input :zip %>
-	<%= f.input :country %>
-	<%= f.input :phone %>
-	<%= f.input :email %>
-	<%= f.input :fax %>
-	<%= f.input :website %>
+	<%= f.input :name%>
+  
+  <div class="row">
+    <div class="col-md-6">
+    	<%= f.input :contact_person %>
+    	<%= f.input :street1 %>
+    	<%= f.input :street2 %>
+    	<%= f.input :city %>
+    	<%= f.input :state %>
+    	<%= f.input :zip %>
+    	<%= f.input :country %>
+    	<%= f.input :phone %>	
+    	<%= f.input :fax %>
+    </div>
+    <div class="col-md-6">
+    	<%= f.association :user %>
+    	<%= f.association :affiliate %>
+      <%= f.input :email %>
+      <%= f.input :website %>
+    	<%= f.input :slug %>
+    	<%= f.input :hidden %>
+    	<%= f.input :latitude %>
+    	<%= f.input :longitude %>
+    </div>
+  </div>
+	
 	<%= f.input :summary, as: :text, input_html: { rows: 3 } %>
 	<%= f.input :description, as: :text, input_html: { rows: 10 } %>
 	

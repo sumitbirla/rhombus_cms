@@ -69,43 +69,13 @@ class Admin::Cms::LocationsController < Admin::BaseController
     redirect_to action: 'show', id: params[:id], notice: 'Location was successfully updated.'
   end
   
-  def attributes
+  def extra_properties
     @location = Location.find(params[:id])
   end
   
   def sublocations
     @location = Location.find(params[:id])
   end
-  
-  def create_attributes
-    
-    @location = Location.find(params[:id])
-    attr_list = Attribute.where(entity_type: :location)
-    
-    attr_list.each do |attr|
-      
-      loc_attr = @location.location_attributes.find { |a| a.attribute_id == attr.id }
-      attr_id = "attr-#{attr.id}"
-      
-      # DELETE
-      if params[attr_id].blank?  
-        loc_attr.destroy if loc_attr
-        next
-      end
-      
-      #ADD
-      unless loc_attr
-        loc_attr = LocationAttribute.new location_id: @location.id, attribute_id: attr.id
-      end
-      
-      loc_attr.value = params[attr_id]
-      loc_attr.save
-      
-    end
-    
-    redirect_to action: 'show', id: params[:id], notice: 'Location was successfully updated.'
-  end
-  
   
   def formatted
     @location = Location.find(params[:id])

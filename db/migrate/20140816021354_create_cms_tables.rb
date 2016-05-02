@@ -103,12 +103,11 @@ class CreateCmsTables < ActiveRecord::Migration
       t.string   "state",          limit: 255
       t.string   "zip",            limit: 255
       t.string   "country",        limit: 255
-      t.decimal  "latitude",                     precision: 10, scale: 7
-      t.decimal  "longitude",                    precision: 10, scale: 7
-      t.boolean  "hidden",                                                default: false
+      t.decimal  "latitude",       precision: 10, scale: 7
+      t.decimal  "longitude",      precision: 10, scale: 7
+      t.boolean  "hidden",         default: false
       t.integer  "user_id",        limit: 4
-      t.boolean  "default",                                               default: false, null: false
-      t.integer  "region_id",      limit: 4
+      t.boolean  "default",        default: false, null: false
       t.integer  "affiliate_id",   limit: 4
       t.string   "contact_person", limit: 255
       t.string   "phone",          limit: 255
@@ -193,17 +192,6 @@ class CreateCmsTables < ActiveRecord::Migration
     end
 
     add_index "cms_pictures", ["user_id"], name: "index_pictures_on_user_id", using: :btree
-
-    create_table "cms_regions", force: :cascade do |t|
-      t.string   "name",        limit: 255
-      t.string   "slug",        limit: 255
-      t.boolean  "default"
-      t.boolean  "enabled"
-      t.boolean  "hidden"
-      t.text     "description", limit: 65535
-      t.datetime "created_at"
-      t.datetime "updated_at"
-    end
 
     create_table "cms_sublocations", force: :cascade do |t|
       t.integer  "location_id", limit: 4

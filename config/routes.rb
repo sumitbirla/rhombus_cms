@@ -45,11 +45,10 @@ Rails.application.routes.draw do
         member do
           get 'pictures'
           get 'categories'
-          get 'attributes'
+          get 'extra_properties'
           get 'sublocations'
           get 'formatted'
           post 'categories' => 'locations#create_categories'
-          post 'attributes' => 'locations#create_attributes'
         end
       end
       resources :photo_albums do
