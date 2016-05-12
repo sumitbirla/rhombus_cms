@@ -21,12 +21,6 @@
 		<td><%= link_to @location.affiliate, admin_system_affiliate_path(@location.affiliate) %></td>
 	</tr>
 	<% end %>
-	<% unless @location.region_id.nil? %>
-	<tr>
-		<td>Region</td>
-		<td><%= link_to @location.region, edit_admin_cms_region_path(@location.region) %></td>
-	</tr>
-	<% end %>
 	<tr>
 		<td>Slug</td>
 		<td><%= @location.slug %></td>
@@ -75,13 +69,13 @@
 
 <hr/>
 
-<% if @location.location_attributes.length > 0 %>
-<h4>Attributes</h4>
+<% if @location.extra_properties.length > 0 %>
+<h4>Extra Properties</h4>
 <table class="table table-condensed table-bordered summary">
-	<% @location.location_attributes.each do |lattr| %>
+	<% @location.extra_properties.each do |ep| %>
 	<tr>
-		<td><%= lattr.core_attribute.name %></td>
-		<td><%= lattr.value %></td>
+		<td><%= ep.name %></td>
+		<td><%= ep.value %></td>
 	</tr>
 	<% end %>
 </table>

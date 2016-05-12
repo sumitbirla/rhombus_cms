@@ -71,6 +71,7 @@ class Admin::Cms::LocationsController < Admin::BaseController
   
   def extra_properties
     @location = Location.find(params[:id])
+    5.times { @location.extra_properties.build }
   end
   
   def sublocations

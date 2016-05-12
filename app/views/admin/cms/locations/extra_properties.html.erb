@@ -4,44 +4,12 @@
   <li><%= link_to "Summary", edit_admin_cms_location_path(@location) %></li>
   <li><%= link_to "Pictures", pictures_admin_cms_location_path(@location) %></a></li>
   <li><%= link_to "Categories", categories_admin_cms_location_path(@location) %></li>
-  <li class="active"><a href="#">Attributes</a></li>
   <li><%= link_to "Sublocations", sublocations_admin_cms_location_path(@location) %></li>
+  <li class="active"><a href="#">Extra Properties</a></li>
 </ul>
 
 
-<form action="/admin/cms/locations/<%= params[:id] %>/attributes" method="post" class="form-inline simple_form">
-	<%= token_tag %>
-	<input type="hidden" name="id" value="<%= params[:id] %>">
-
-	<% all_attributes = Attribute.where(entity_type: :location).order(:sort) %>
-	<% all_attributes.each do |attr| 
-		loc_attr = @location.location_attributes.find { |pa| pa.attribute_id == attr.id } 
-		loc_attr = LocationAttribute.new if loc_attr.nil? %>
-	<div class="control-group">
-		<label class="control-label" for="<%= attr.name %>"><%= attr.name %></label>
-		<div class="controls">
-			<% if attr.data_type == 'text' %>
-			<textarea class="col-md-5 text" rows="4" name="attr-<%= attr.id %>"><%= loc_attr %></textarea>
-			<% elsif attr.data_type == 'numeric' %>
-			<input type="number" class="col-md-2 string" name="attr-<%= attr.id %>" value="<%= loc_attr %>" />
-			<% elsif attr.data_type == 'boolean' %>
-			<input type="checkbox" class="check" name="attr-<%= attr.id %>" value="on" <%= 'checked' if loc_attr.value == 'on' %> />
-			<% elsif attr.data_type == 'selection' %>
-			<select name="attr-<%= attr.id %>">
-				<% attr.metadata.split('|').each do |opt| %>
-				<option <%= 'selected' if opt == loc_attr.value %>><%= opt %></option>
-				<% end %>
-			</select>
-			<% end %>
-			 &nbsp; <i>(<%= attr.notes %>)</i>
-		</div>
-	</div>
-	<%end%>
-
-	<div class="form-actions">
-		<button class="btn btn-primary">Update</button>
-	</div>
-</form>
+<%= render 'admin/shared/extra_properties_list', object: @location, redirect: admin_cms_location_path(@location) %>
 
 
 

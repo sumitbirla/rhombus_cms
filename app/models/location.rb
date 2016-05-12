@@ -35,7 +35,7 @@ class Location < ActiveRecord::Base
   belongs_to :user
   belongs_to :affiliate
   has_many :pictures, as: :imageable
-  has_many :extra_properties
+  has_many :extra_properties, -> { order "sort, name" }, as: :extra_property
   has_many :location_categories
   has_many :categories, through: :location_categories
   has_many :sublocations
