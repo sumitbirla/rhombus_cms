@@ -33,7 +33,7 @@ class Picture < ActiveRecord::Base
   has_many :comments, -> { order(:created_at) }, as: :commentable 
   #has_many :votes, as: :votable
   
-  validates_presence_of :imageable_id, :imageable_type, :file_path
+  validates_presence_of :file_path
   
   def cache_key
     "picture:#{id}"
