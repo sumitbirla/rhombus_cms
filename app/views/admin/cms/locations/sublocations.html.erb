@@ -13,24 +13,29 @@
 
 <table class="table table-striped table-condensed">
 	<tr>
-    <th>Designation</th>
-		<th>Zone</th>
-    <th>Aisle</th>
-    <th>Bay</th>
-    <th>Level</th>
-    <th>Section</th>
-    <th>Notes</th>
+    <th>Row</th>
+		<th>Shelf</th>
+    <th>Segment</th>
+    <th>Depth</th>
+    <th>Height</th>
+    <th>Width</th>
+    <th>Large Box</th>
+    <th>Heavy Box</th>
+    <th>Holding Area</th>
+
     <th></th>
 	</tr>
 	<% @location.sublocations.each do |sub| %>
 	<tr>
-    <td><%= sub %></td>
-		<td><%= sub.zone %></td>
-    <td><%= sub.aisle %></td>
-    <td><%= sub.bay %></td>
-    <td><%= sub.level %></td>
-    <td><%= sub.section %></td>
-		<td><%= sub.notes %></td>
+    <td><%= sub.row %></td>
+		<td><%= sub.shelf %></td>
+    <td><%= sub.segment %></td>
+    <td><%= sub.depth %>"</td>
+    <td><%= sub.height %>"</td>
+    <td><%= sub.width %>"</td>
+    <td><%= tick sub.large_box %></td>
+    <td><%= tick sub.heavy_box %></td>
+    <td><%= tick sub.holding_area %></td>
         <td>
             <%= link_to "edit", edit_admin_inventory_sublocation_path(sub) %> &nbsp;
             <%= link_to "delete",

@@ -62,12 +62,16 @@
 </table>
 
 
-<% if @location.hidden %>
-<h4>Flags</h4>
-<span class="label label-warning">hidden</span> &nbsp; 
+<% if @location.sublocations.length > 0 %>
+	<h4>Sublocations</h4>
+	<ul>
+		<% @location.sublocations.each do |sub| %>
+		<li style="float: left; width: 25%"><%= sub %></li>
+		<% end %>
+	</ul>
+  <div style="clear: left;"></div>
+  <hr>
 <% end %>
-
-<hr/>
 
 <% if @location.extra_properties.length > 0 %>
 <h4>Extra Properties</h4>
@@ -113,15 +117,15 @@
 		<% end %>
 	</ul>
 	<hr/>
-	
-	<% if @location.sublocations.length > 0 %>
-	<h4>Sublocations</h4>
-	<ul>
-		<% @location.sublocations.each do |sub| %>
-		<li><%= sub %></li>
-		<% end %>
-	</ul>
-	<% end %>
+  
+
+  
+  <h4>Flags</h4>
+  <% if @location.hidden %>
+    <span class="label label-warning">hidden</span> &nbsp; 
+  <% else %>
+    <span class="label label-success">visible</span> &nbsp; 
+  <% end %>
 
 </div>
 
