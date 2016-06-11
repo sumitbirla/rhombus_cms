@@ -3,7 +3,7 @@
 
 <%= simple_form_for [:admin, :cms, @faq] do |f| %>
 
-  <%= f.association :category %>
+  <%= f.input :category_id, collection: Category.where(entity_type: :faq).order(:sort) %>
 	<%= f.input :sort %>
 	<%= f.input :question, input_html: { rows: 2 }  %>
   <%= f.input :answer, input_html: { rows: 10 }  %>

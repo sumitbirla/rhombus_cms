@@ -1,6 +1,10 @@
 <div class="pull-right">
-  <%= link_to "setup categories", admin_system_categories_path(type: :faq), class: 'btn btn-sm btn-default' %>
-  <%= link_to "new faq", new_admin_cms_faq_path, class: 'btn btn-sm btn-default' %>
+  <%= link_to new_admin_cms_faq_path, class: 'btn btn-sm btn-default' do %>
+    <i class="fa fa-plus"></i> New FAQ
+  <% end %>
+  <%= link_to admin_system_categories_path(type: :faq), class: 'btn btn-sm btn-default' do %>
+    <i class="fa fa-list-ul"></i> Setup categories
+  <% end %>
 </div>
 <h2>
   <i class="fa fa-question"></i>&nbsp; FAQ
@@ -11,16 +15,18 @@
 <%= will_paginate @faqs %>
 <table class="table table-striped table-condensed">
 	<tr>
-		<th>Sort</th>
+    <th>ID</th>
 		<th>Category</th>
 		<th>Question</th>
+    <th>Sort</th>
 		<th>&nbsp;</th>
 	</tr>
 	<% @faqs.each do |faq| %>
 	<tr>
-		<td><%= faq.sort %></td>
+    <td><%= faq.id %></td>
 		<td><%= faq.category %></td>
 		<td><%= faq.question %></td>
+    <td><%= faq.sort %></td>
 		<td>
 			<%= link_to "edit", edit_admin_cms_faq_path(faq) %> &nbsp;
 			<%= link_to "delete", 
