@@ -26,6 +26,8 @@
 #
 
 class Picture < ActiveRecord::Base
+  include Exportable
+  
   self.table_name = 'cms_pictures'
   
   belongs_to :imageable, polymorphic: true

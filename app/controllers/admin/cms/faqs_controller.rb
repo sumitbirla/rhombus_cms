@@ -1,7 +1,12 @@
 class Admin::Cms::FaqsController < Admin::BaseController
   
   def index
-    @faqs = Faq.where(domain_id: cookies[:domain_id]).page(params[:page]).order(:sort)
+    @faqs = Faq.where(domain_id: cookies[:domain_id]).order(:sort)
+    
+    respond_to do |format|
+      format.html  { @faqs = @faqs.page(params[:page]) }
+      format.csv { send_data Faq.to_csv(@faqs) }
+    end
   end
 
   def new

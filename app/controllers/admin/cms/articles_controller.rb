@@ -1,8 +1,13 @@
 class Admin::Cms::ArticlesController < Admin::BaseController
   
   def index
-    @articles = Article.where(domain_id: cookies[:domain_id]).page(params[:page]).order(published_at: :desc)
+    @articles = Article.where(domain_id: cookies[:domain_id]).order(published_at: :desc)
     @articles = @articles.where("title LIKE '%#{params[:q]}%'") unless params[:q].nil?
+    
+    respond_to do |format|
+      format.html  { @articles = @articles.page(params[:page]) }
+      format.csv { send_data Article.to_csv(@articles) }
+    end
   end
 
   def new

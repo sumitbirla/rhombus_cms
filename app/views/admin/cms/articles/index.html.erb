@@ -39,12 +39,14 @@
 	<% end %>
 </table>
 
+<%= render 'admin/shared/table_summary', data: @articles %>
+
+
 
 
 <% content_for :title do %>
     Articles
 <% end %>
-
 
 
 <% content_for :breadcrumbs do %>

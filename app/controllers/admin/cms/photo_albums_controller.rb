@@ -1,7 +1,12 @@
 class Admin::Cms::PhotoAlbumsController < Admin::BaseController
   
   def index
-    @photo_albums = PhotoAlbum.page(params[:page]).order('title')
+    @photo_albums = PhotoAlbum.order(:title)
+    
+    respond_to do |format|
+      format.html  { @photo_albums = @photo_albums.page(params[:page]) }
+      format.csv { send_data PhotoAlbum.to_csv(@photo_albums) }
+    end
   end
 
   def new

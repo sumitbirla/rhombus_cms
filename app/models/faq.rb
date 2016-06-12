@@ -13,6 +13,7 @@
 #
 
 class Faq < ActiveRecord::Base
+  include Exportable
   self.table_name = "cms_faqs"
   belongs_to :category
   belongs_to :domain

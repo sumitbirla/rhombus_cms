@@ -38,8 +38,10 @@
 	<% end %>
 </table>
 
+<%= render 'admin/shared/table_summary', data: @pages %>
 
-<%= content_for :title do %>
+
+<% content_for :title do %>
 	Pages
 <% end %>
 

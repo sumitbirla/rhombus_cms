@@ -20,6 +20,8 @@
 #
 
 class Article < ActiveRecord::Base
+  include Exportable
+  
   self.table_name = "cms_articles"
   
   belongs_to :user

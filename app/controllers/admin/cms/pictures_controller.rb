@@ -1,8 +1,7 @@
 class Admin::Cms::PicturesController < Admin::BaseController
   
   def index
-    
-    @pictures = Picture.page(params[:page]).order('created_at DESC')
+    @pictures = Picture.order('created_at DESC')
     
     if params[:imageable_type] && params[:imageable_id]  
       case params[:imageable_type]
@@ -11,6 +10,11 @@ class Admin::Cms::PicturesController < Admin::BaseController
       end
       
       @pictures = @pictures.where(imageable_id: params[:imageable_id], imageable_type: params[:imageable_type])         
+    end
+    
+    respond_to do |format|
+      format.html  { @pictures = @pictures.page(params[:page]) }
+      format.csv { send_data Picture.to_csv(@pictures) }
     end
     
   end

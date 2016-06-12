@@ -1,7 +1,12 @@
 class Admin::Cms::CommentsController < Admin::BaseController
 
   def index
-    @comments = Comment.order("created_at DESC").page(params[:page])
+    @comments = Comment.order("created_at DESC")
+    
+    respond_to do |format|
+      format.html  { @comments = @comments.page(params[:page]) }
+      format.csv { send_data Comment.to_csv(@comments) }
+    end
   end
 
   def new

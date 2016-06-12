@@ -1,7 +1,12 @@
 class Admin::Cms::ContentBlocksController < Admin::BaseController
   
   def index
-    @content_blocks = ContentBlock.where(domain_id: cookies[:domain_id]).order(:key).page(params[:page])
+    @content_blocks = ContentBlock.where(domain_id: cookies[:domain_id]).order(:key)
+    
+    respond_to do |format|
+      format.html  { @content_blocks = @content_blocks.page(params[:page]) }
+      format.csv { send_data ContentBlock.to_csv(@content_blocks) }
+    end
   end
 
   def new

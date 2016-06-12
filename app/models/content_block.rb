@@ -11,6 +11,7 @@
 #
 
 class ContentBlock < ActiveRecord::Base
+  include Exportable
   self.table_name = 'cms_content_blocks'
   
   validates_presence_of :key

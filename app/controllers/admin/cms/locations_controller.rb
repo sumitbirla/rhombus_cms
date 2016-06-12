@@ -1,13 +1,18 @@
 class Admin::Cms::LocationsController < Admin::BaseController
   
   def index
-    @locations = Location.page(params[:page]).order('name')
+    @locations = Location.order('name')
     @locations = @locations.where("name LIKE '%#{params[:q]}%'") unless params[:q].nil?
     
     unless params[:c].blank?
       @category = Category.find_by(slug: params[:c], entity_type: :location)
       @locations = @locations.joins(:location_categories).where("cms_location_categories.category_id = ?", @category.id)
-    end 
+    end
+    
+    respond_to do |format|
+      format.html  { @locations = @locations.page(params[:page]) }
+      format.csv { send_data Location.to_csv(@locations) }
+    end
   end
 
   def new

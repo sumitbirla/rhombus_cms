@@ -42,9 +42,11 @@
 	<% end %>
 </table>
 
+<%= render 'admin/shared/table_summary', data: @photo_albums %>
 
 
-<%= content_for :title do %>
+
+<% content_for :title do %>
 	Photo Albums
 <% end %>
 

@@ -1,7 +1,12 @@
 class Admin::Cms::PagesController < Admin::BaseController
   
   def index
-    @pages = Page.where(domain_id: cookies[:domain_id]).page(params[:page]).order(:title)
+    @pages = Page.where(domain_id: cookies[:domain_id]).order(:title)
+    
+    respond_to do |format|
+      format.html  { @pages = @pages.page(params[:page]) }
+      format.csv { send_data Page.to_csv(@pages) }
+    end
   end
 
   def new

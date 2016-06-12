@@ -21,6 +21,7 @@
 #
 
 class Comment < ActiveRecord::Base
+  include Exportable
   self.table_name = 'cms_comments'
   
   belongs_to :commentable, polymorphic: true

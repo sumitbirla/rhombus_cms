@@ -13,6 +13,8 @@
 #
 
 class Vote < ActiveRecord::Base
+  include Exportable
+  
   self.table_name = 'cms_votes'
   belongs_to :votable, polymorphic: true
   belongs_to :user

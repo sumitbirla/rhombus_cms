@@ -30,6 +30,7 @@
 #
 
 class Location < ActiveRecord::Base
+  include Exportable
   self.table_name = 'cms_locations'
   
   belongs_to :user

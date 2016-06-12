@@ -15,6 +15,8 @@
 #
 
 class PhotoAlbum < ActiveRecord::Base
+  include Exportable
+  
   self.table_name = 'cms_photo_albums'
   
   has_many :pictures, as: :imageable

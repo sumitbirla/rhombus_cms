@@ -14,6 +14,7 @@
 #
 
 class Page < ActiveRecord::Base
+  include Exportable
   self.table_name = 'cms_pages'
   
   validates_presence_of :title, :slug, :published, :body
