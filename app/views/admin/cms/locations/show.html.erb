@@ -61,18 +61,6 @@
 	</tr>
 </table>
 
-
-<% if @location.sublocations.length > 0 %>
-	<h4>Sublocations</h4>
-	<ul>
-		<% @location.sublocations.each do |sub| %>
-		<li style="float: left; width: 25%"><%= sub %></li>
-		<% end %>
-	</ul>
-  <div style="clear: left;"></div>
-  <hr>
-<% end %>
-
 <% if @location.extra_properties.length > 0 %>
 <h4>Extra Properties</h4>
 <table class="table table-condensed table-bordered summary">

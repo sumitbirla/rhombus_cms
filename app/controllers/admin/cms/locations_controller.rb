@@ -79,10 +79,6 @@ class Admin::Cms::LocationsController < Admin::BaseController
     5.times { @location.extra_properties.build }
   end
   
-  def sublocations
-    @location = Location.find(params[:id])
-  end
-  
   def formatted
     @location = Location.find(params[:id])
     render text: @location.to_text

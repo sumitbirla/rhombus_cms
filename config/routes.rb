@@ -46,7 +46,6 @@ Rails.application.routes.draw do
           get 'pictures'
           get 'categories'
           get 'extra_properties'
-          get 'sublocations'
           get 'formatted'
           post 'categories' => 'locations#create_categories'
         end

@@ -39,7 +39,6 @@ class Location < ActiveRecord::Base
   has_many :extra_properties, -> { order "sort, name" }, as: :extra_property
   has_many :location_categories
   has_many :categories, through: :location_categories
-  has_many :sublocations, -> { order("row, shelf, segment") }
   
   validates_presence_of :name, :slug
   validates_uniqueness_of :slug

@@ -7,7 +7,7 @@
 	<%= f.input :sort %>
 	<%= f.input :question, input_html: { rows: 2 }  %>
   <%= f.input :answer, input_html: { rows: 10 }  %>
-	<%= f.button :submit %>
+	<%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
 
 <% end %>
 
