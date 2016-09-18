@@ -9,81 +9,29 @@
 
 <h4>Summary</h4>
 <table class="table table-condensed table-bordered summary">
-	<% unless @location.user_id.nil? %>
-	<tr>
-		<td>User</td>
-		<td><i class="icon-user"></i> <%= link_to @location.user, admin_system_user_path(@location.user) %></td>
-	</tr>
-	<% end %>
-	<% unless @location.affiliate_id.nil? %>
-	<tr>
-		<td>Affiliate</td>
-		<td><%= link_to @location.affiliate, admin_system_affiliate_path(@location.affiliate) %></td>
-	</tr>
-	<% end %>
-	<tr>
-		<td>Slug</td>
-		<td><%= @location.slug %></td>
-	</tr>
-	<% unless @location.contact_person.blank? %>
-	<tr>
-		<td>Contact Person</td>
-		<td><%= @location.contact_person %></td>
-	</tr>
-	<% end %>
-	<% unless @location.email.blank? %>
-	<tr>
-		<td>Email</td>
-		<td><%= mail_to @location.email %></td>
-	</tr>
-	<% end %>
-	<% unless @location.phone.blank? %>
-	<tr>
-		<td>Phone</td>
-		<td><a href="tel:<%= @location.phone %>"><%= @location.phone %></a></td>
-	</tr>
-	<% end %>
-	<% unless @location.fax.blank? %>
-	<tr>
-		<td>Fax</td>
-		<td><%= @location.fax %></td>
-	</tr>
-	<% end %>
-	<% unless @location.website.blank? %>
-	<tr>
-		<td>Website</td>
-		<td><%= link_to @location.website, @location.website %></td>
-	</tr>
-	<% end %>
-	<tr>
-		<td>Address</td>
-		<td><%= @location.to_text(new_line: '<br>') %></td>
-	</tr>
+  <%= obj_property(@location, :user) { |x| link_to x.name, admin_system_user_path(x)} %>
+  <%= obj_property(@location, :affiliate) { |x| link_to x.name, admin_system_affiliate_path(x)} %>
+	<%= obj_property @location, :slug %>
+	<%= obj_property @location, :contact_person %>
+	<%= obj_property @location, :email %>
+	<%= obj_property @location, :phone %>
+	<%= obj_property @location, :fax %>
+	<%= obj_property @location, :website %>
+  <%= obj_property(@location, :to_text, label: "Address") { |x| x.gsub("\n", "<br>") } %>
 </table>
 
-<% if @location.extra_properties.length > 0 %>
-<h4>Extra Properties</h4>
-<table class="table table-condensed table-bordered summary">
-	<% @location.extra_properties.each do |ep| %>
-	<tr>
-		<td><%= ep.name %></td>
-		<td><%= ep.value %></td>
-	</tr>
-	<% end %>
-</table>
-<hr/>
-<% end %>
+<%= render partial: 'admin/shared/extra_properties', locals: { object: @location }%>
 
 
 <% unless @location.summary.blank? %>
-<h4>Summary</h4>
-<%= @location.summary %>
-<hr/>
+  <h4>Summary</h4>
+  <%= @location.summary %>
+  <hr/>
 <% end %>
 
 <% unless @location.description.blank? %>
-<h4>Description</h4>
-<%= @location.description.gsub("\n", "<br/>").html_safe %>
+  <h4>Description</h4>
+  <%= @location.description.gsub("\n", "<br/>").html_safe %>
 <% end %>
 
 </div>
