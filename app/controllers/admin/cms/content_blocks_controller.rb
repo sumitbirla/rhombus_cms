@@ -4,7 +4,7 @@ class Admin::Cms::ContentBlocksController < Admin::BaseController
     @content_blocks = ContentBlock.where(domain_id: cookies[:domain_id]).order(:key)
     
     respond_to do |format|
-      format.html  { @content_blocks = @content_blocks.page(params[:page]) }
+      format.html  { @content_blocks = @content_blocks.paginate(page: params[:page], per_page: @per_page) }
       format.csv { send_data ContentBlock.to_csv(@content_blocks) }
     end
   end

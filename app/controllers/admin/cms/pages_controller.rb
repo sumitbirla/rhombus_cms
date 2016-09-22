@@ -4,7 +4,7 @@ class Admin::Cms::PagesController < Admin::BaseController
     @pages = Page.where(domain_id: cookies[:domain_id]).order(:title)
     
     respond_to do |format|
-      format.html  { @pages = @pages.page(params[:page]) }
+      format.html  { @pages = @pages.paginate(page: params[:page], per_page: @per_page) }
       format.csv { send_data Page.to_csv(@pages) }
     end
   end

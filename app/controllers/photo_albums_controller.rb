@@ -6,7 +6,7 @@ class PhotoAlbumsController < ApplicationController
   
   def show
     @photo_album = PhotoAlbum.find_by(slug: params[:slug], public: true)
-    @pictures = @photo_album.pictures.where(approved: true).order(created_at: :desc).page(params[:page])
+    @pictures = @photo_album.pictures.where(approved: true).order(created_at: :desc).paginate(page: params[:page], per_page: @per_page)
   end
   
 end

@@ -10,7 +10,7 @@ class Admin::Cms::LocationsController < Admin::BaseController
     end
     
     respond_to do |format|
-      format.html  { @locations = @locations.page(params[:page]) }
+      format.html  { @locations = @locations.paginate(page: params[:page], per_page: @per_page) }
       format.csv { send_data Location.to_csv(@locations) }
     end
   end

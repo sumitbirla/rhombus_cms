@@ -13,7 +13,7 @@ class Admin::Cms::PicturesController < Admin::BaseController
     end
     
     respond_to do |format|
-      format.html  { @pictures = @pictures.page(params[:page]) }
+      format.html  { @pictures = @pictures.paginate(page: params[:page], per_page: @per_page) }
       format.csv { send_data Picture.to_csv(@pictures) }
     end
     

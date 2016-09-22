@@ -4,7 +4,7 @@ class Admin::Cms::CommentsController < Admin::BaseController
     @comments = Comment.order("created_at DESC")
     
     respond_to do |format|
-      format.html  { @comments = @comments.page(params[:page]) }
+      format.html  { @comments = @comments.paginate(page: params[:page], per_page: @per_page) }
       format.csv { send_data Comment.to_csv(@comments) }
     end
   end

@@ -5,7 +5,7 @@ class Admin::Cms::ArticlesController < Admin::BaseController
     @articles = @articles.where("title LIKE '%#{params[:q]}%'") unless params[:q].nil?
     
     respond_to do |format|
-      format.html  { @articles = @articles.page(params[:page]) }
+      format.html  { @articles = @articles.paginate(page: params[:page], per_page: @per_page) }
       format.csv { send_data Article.to_csv(@articles) }
     end
   end

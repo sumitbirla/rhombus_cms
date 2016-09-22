@@ -2,7 +2,7 @@ class Account::PicturesController < Account::BaseController
   skip_before_filter :verify_authenticity_token, only: :upload
   
   def index
-    @pictures = Picture.where(user_id: session[:user_id]).order(created_at: :desc).page(params[:page])
+    @pictures = Picture.where(user_id: session[:user_id]).order(created_at: :desc).paginate(page: params[:page], per_page: @per_page)
     @picture = Picture.new(imageable_type: "photoalbum")
   end
   
@@ -19,7 +19,7 @@ class Account::PicturesController < Account::BaseController
       flash[:error] = @picture.errors.full_messages.join(". ")
     end
     
-    @pictures = Picture.where(user_id: session[:user_id]).order(created_at: :desc).page(params[:page])
+    @pictures = Picture.where(user_id: session[:user_id]).order(created_at: :desc).paginate(page: params[:page], per_page: @per_page)
     render "index"
   end
   
