@@ -1,16 +1,17 @@
 class Admin::Cms::MenusController < Admin::BaseController
   
   def index
+    authorize Menu
     @menus = Menu.where(domain_id: cookies[:domain_id]).all
   end
 
   def new
-    @menu = Menu.new title: 'New menu'
+    @menu = authorize Menu.new(title: 'New menu')
     render 'edit'
   end
 
   def create
-    @menu = Menu.new(menu_params)
+    @menu = authorize Menu.new(menu_params)
     @menu.domain_id = cookies[:domain_id]
     
     if @menu.save
@@ -21,15 +22,15 @@ class Admin::Cms::MenusController < Admin::BaseController
   end
 
   def show
-    @menu = Menu.find(params[:id])
+    @menu = authorize Menu.find(params[:id])
   end
 
   def edit
-    @menu = Menu.find(params[:id])
+    @menu = authorize Menu.find(params[:id])
   end
 
   def update
-    @menu = Menu.find(params[:id])
+    @menu = authorize Menu.find(params[:id])
     
     if @menu.update(menu_params)
       Rails.cache.delete @menu
@@ -40,7 +41,7 @@ class Admin::Cms::MenusController < Admin::BaseController
   end
 
   def destroy
-    @menu = Menu.find(params[:id])
+    @menu = authorize Menu.find(params[:id])
     @menu.destroy
     
     Rails.cache.delete @menu

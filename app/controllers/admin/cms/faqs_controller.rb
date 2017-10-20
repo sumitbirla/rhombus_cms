@@ -1,6 +1,7 @@
 class Admin::Cms::FaqsController < Admin::BaseController
   
   def index
+    authorize Faq
     @faqs = Faq.where(domain_id: cookies[:domain_id]).order(:sort)
     
     respond_to do |format|
@@ -10,12 +11,12 @@ class Admin::Cms::FaqsController < Admin::BaseController
   end
 
   def new
-    @faq = Faq.new
+    @faq = authorize Faq.new
     render 'edit'
   end
 
   def create
-    @faq = Faq.new(faq_params)
+    @faq = authorize Faq.new(faq_params)
     @faq.domain_id = cookies[:domain_id]
     
     if @faq.save
@@ -26,11 +27,11 @@ class Admin::Cms::FaqsController < Admin::BaseController
   end
 
   def edit
-    @faq = Faq.find(params[:id])
+    @faq = authorize Faq.find(params[:id])
   end
 
   def update
-    @faq = Faq.find(params[:id])
+    @faq = authorize Faq.find(params[:id])
     
     if @faq.update(faq_params)
       Rails.cache.delete @faq
@@ -41,7 +42,7 @@ class Admin::Cms::FaqsController < Admin::BaseController
   end
 
   def destroy
-    @faq = Faq.find(params[:id])
+    @faq = authorize Faq.find(params[:id])
     @faq.destroy
     
     Rails.cache.delete @faq

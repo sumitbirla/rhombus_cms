@@ -1,7 +1,8 @@
 class Admin::Cms::PicturesController < Admin::BaseController
   
   def index
-    @pictures = Picture.order('created_at DESC')
+    authorize Picture
+    @pictures = Picture.order(created_at: :desc)
     
     if params[:imageable_type] && params[:imageable_id]  
       case params[:imageable_type]
@@ -20,13 +21,13 @@ class Admin::Cms::PicturesController < Admin::BaseController
   end
   
   def new
-    @picture = Picture.new imageable_type: params[:imageable_type], imageable_id: params[:imageable_id], user_id: session[:user_id], caption: 'New picture'
+    @picture = authorize Picture.new(imageable_type: params[:imageable_type], imageable_id: params[:imageable_id], user_id: session[:user_id])
     render 'edit'
   end
   
  
   def create
-    pic = Picture.new(picture_params)
+    pic = authorize Picture.new(picture_params)
     
     base_dir = Cache.setting(Rails.configuration.domain_id, :system, "Static Files Path")
     pic.set_picture_properties(base_dir)
@@ -44,13 +45,13 @@ class Admin::Cms::PicturesController < Admin::BaseController
   
   
   def edit
-    @picture = Picture.find(params[:id])
+    @picture = authorize Picture.find(params[:id])
   end
   
 
   def update
     base_dir = Cache.setting(Rails.configuration.domain_id, :system, "Static Files Path")
-    @picture = Picture.find(params[:id])
+    @picture = authorize Picture.find(params[:id])
     @picture.set_picture_properties(base_dir)
     
     if @picture.width.blank?
@@ -68,7 +69,8 @@ class Admin::Cms::PicturesController < Admin::BaseController
   
 
   def destroy
-    Picture.delete(params[:id])
+    @picture = authorize Picture.find(params[:id])
+    @picture.destroy
     redirect_to :back
   end
   

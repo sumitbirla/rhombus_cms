@@ -51,4 +51,8 @@ class Picture < ActiveRecord::Base
     result
   end
   
+  # PUNDIT
+  def self.policy_class
+    ApplicationPolicy
+  end
 end

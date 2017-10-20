@@ -1,6 +1,7 @@
 class Admin::Cms::PhotoAlbumsController < Admin::BaseController
   
   def index
+    authorize PhotoAlbum
     @photo_albums = PhotoAlbum.order(:title)
     
     respond_to do |format|
@@ -10,12 +11,12 @@ class Admin::Cms::PhotoAlbumsController < Admin::BaseController
   end
 
   def new
-    @photo_album = PhotoAlbum.new title: 'New photo album'
+    @photo_album = authorize PhotoAlbum.new(title: 'New photo album')
     render 'edit'
   end
 
   def create
-    @photo_album = PhotoAlbum.new(photo_album_params)
+    @photo_album = authorize PhotoAlbum.new(photo_album_params)
     
     if @photo_album.save
       redirect_to action: 'index', notice: 'Photo Album was successfully created.'
@@ -25,15 +26,15 @@ class Admin::Cms::PhotoAlbumsController < Admin::BaseController
   end
 
   def show
-    @photo_album = PhotoAlbum.find(params[:id])
+    @photo_album = authorize PhotoAlbum.find(params[:id])
   end
 
   def edit
-    @photo_album = PhotoAlbum.find(params[:id])
+    @photo_album = authorize PhotoAlbum.find(params[:id])
   end
 
   def update
-    @photo_album = PhotoAlbum.find(params[:id])
+    @photo_album = authorize PhotoAlbum.find(params[:id])
     
     if @photo_album.update(photo_album_params)
       redirect_to action: 'index', notice: 'Photo Album was successfully updated.'
@@ -43,7 +44,7 @@ class Admin::Cms::PhotoAlbumsController < Admin::BaseController
   end
 
   def destroy
-    @photo_album = PhotoAlbum.find(params[:id])
+    @photo_album = authorize PhotoAlbum.find(params[:id])
     @photo_album.destroy
     redirect_to action: 'index', notice: 'Photo Album has been deleted.'
   end

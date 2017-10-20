@@ -21,4 +21,9 @@ class Menu < ActiveRecord::Base
   def cache_key
     "menu:#{domain_id}:#{key}"
   end
+  
+  # PUNDIT
+  def self.policy_class
+    ApplicationPolicy
+  end
 end

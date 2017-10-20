@@ -1,7 +1,8 @@
 class Admin::Cms::CommentsController < Admin::BaseController
 
   def index
-    @comments = Comment.order("created_at DESC")
+    authorize Comment
+    @comments = Comment.order(created_at: :desc)
     
     respond_to do |format|
       format.html  { @comments = @comments.paginate(page: params[:page], per_page: @per_page) }
@@ -10,12 +11,12 @@ class Admin::Cms::CommentsController < Admin::BaseController
   end
 
   def new
-    @comment = Menu.new
+    @comment = authorize Menu.new
     render 'edit'
   end
 
   def create
-    @comment = Comment.new(comment_params)
+    @comment = authorize Comment.new(comment_params)
     @comment.assign_attributes(
       ip_address: request.ip,
       user_agent: request.user_agent,
@@ -49,11 +50,11 @@ class Admin::Cms::CommentsController < Admin::BaseController
 
 
   def edit
-    @comment = Comment.find(params[:id])
+    @comment = authorize Comment.find(params[:id])
   end
 
   def update
-    @comment = Comment.find(params[:id])
+    @comment = authorize Comment.find(params[:id])
     
     if @comment.update(comment_params)
       redirect_to action: 'index'
@@ -63,7 +64,7 @@ class Admin::Cms::CommentsController < Admin::BaseController
   end
 
   def destroy
-    @comment = Menu.find(params[:id])
+    @comment = authorize Comment.find(params[:id])
     @comment.destroy
     
     redirect_to :back, notice: 'Comment has been deleted.'

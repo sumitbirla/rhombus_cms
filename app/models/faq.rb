@@ -22,4 +22,9 @@ class Faq < ActiveRecord::Base
   def cache_key
     "faq:#{domain_id}"
   end
+  
+  # PUNDIT
+  def self.policy_class
+    ApplicationPolicy
+  end
 end

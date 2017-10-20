@@ -31,4 +31,8 @@ class PhotoAlbum < ActiveRecord::Base
     title
   end
   
+  # PUNDIT
+  def self.policy_class
+    ApplicationPolicy
+  end
 end

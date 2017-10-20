@@ -70,4 +70,9 @@ class Location < ActiveRecord::Base
   def cache_key
     "location:#{slug}"
   end
+  
+  # PUNDIT
+  def self.policy_class
+    ApplicationPolicy
+  end
 end

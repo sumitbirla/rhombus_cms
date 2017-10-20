@@ -1,6 +1,7 @@
 class Admin::Cms::PagesController < Admin::BaseController
   
   def index
+    authorize Page
     @pages = Page.where(domain_id: cookies[:domain_id]).order(:title)
     
     respond_to do |format|
@@ -10,12 +11,12 @@ class Admin::Cms::PagesController < Admin::BaseController
   end
 
   def new
-    @page = Page.new title: 'New page'
+    @page = authorize Page.new(title: 'New page')
     render 'edit'
   end
 
   def create
-    @page = Page.new(page_params)
+    @page = authorize Page.new(page_params)
     @page.domain_id = cookies[:domain_id]
     
     if @page.save
@@ -26,15 +27,15 @@ class Admin::Cms::PagesController < Admin::BaseController
   end
 
   def show
-    @page = Page.find(params[:id])
+    @page = authorize Page.find(params[:id])
   end
 
   def edit
-    @page = Page.find(params[:id])
+    @page = authorize Page.find(params[:id])
   end
 
   def update
-    @page = Page.find(params[:id])
+    @page = authorize Page.find(params[:id])
     
     if @page.update(page_params)
       Rails.cache.delete @page
@@ -45,7 +46,7 @@ class Admin::Cms::PagesController < Admin::BaseController
   end
 
   def destroy
-    @page = Page.find(params[:id])
+    @page = authorize Page.find(params[:id])
     @page.destroy
     
     Rails.cache.delete @page

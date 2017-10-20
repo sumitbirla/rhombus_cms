@@ -1,6 +1,7 @@
 class Admin::Cms::ArticlesController < Admin::BaseController
   
   def index
+    authorize Article
     @articles = Article.where(domain_id: cookies[:domain_id]).order(published_at: :desc)
     @articles = @articles.where("title LIKE '%#{params[:q]}%'") unless params[:q].nil?
     
@@ -11,12 +12,12 @@ class Admin::Cms::ArticlesController < Admin::BaseController
   end
 
   def new
-    @article = Article.new title: 'New article', status: "draft"
+    @article = authorize Article.new(title: 'New article', status: "draft")
     render 'edit'
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = authorize Article.new(article_params)
     @article.domain_id = cookies[:domain_id]
     
     if @article.save
@@ -28,15 +29,15 @@ class Admin::Cms::ArticlesController < Admin::BaseController
   end
 
   def show
-    @article = Article.find(params[:id])
+    @article = authorize Article.find(params[:id])
   end
 
   def edit
-    @article = Article.find(params[:id])
+    @article = authorize Article.find(params[:id])
   end
 
   def update
-    @article = Article.find(params[:id])
+    @article = authorize Article.find(params[:id])
     
     if @article.update(article_params)
       @article.save_tags(params[:tags].split(",").map { |x| x.strip.downcase })
@@ -49,7 +50,7 @@ class Admin::Cms::ArticlesController < Admin::BaseController
   end
 
   def destroy
-    @article = Article.find(params[:id])
+    @article = authorize Article.find(params[:id])
     @article.destroy
     
     Rails.cache.delete @article
@@ -59,14 +60,18 @@ class Admin::Cms::ArticlesController < Admin::BaseController
   
   def pictures
     @article = Article.find(params[:id])
+    authorize @article, :show?
     Rails.cache.delete @article
   end
   
   def categories
     @article = Article.includes(:categories).find(params[:id])
+    authorize @article, :show?
   end
   
   def create_categories
+    authorize Article, :update?
+    
     ArticleCategory.delete_all article_id: params[:id]
     category_ids = params[:category_ids]
     

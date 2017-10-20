@@ -24,4 +24,9 @@ class ContentBlock < ActiveRecord::Base
   def cache_key
     "content-block:#{domain_id}:#{key}"
   end
+  
+  # PUNDIT
+  def self.policy_class
+    ApplicationPolicy
+  end
 end
