@@ -1,7 +1,7 @@
 class Admin::Cms::PagesController < Admin::BaseController
   
   def index
-    authorize Page
+    authorize Page.new
     @pages = Page.where(domain_id: cookies[:domain_id]).order(:title)
     
     respond_to do |format|

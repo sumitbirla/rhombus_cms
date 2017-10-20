@@ -1,7 +1,7 @@
 class Admin::Cms::PhotoAlbumsController < Admin::BaseController
   
   def index
-    authorize PhotoAlbum
+    authorize PhotoAlbum.new
     @photo_albums = PhotoAlbum.order(:title)
     
     respond_to do |format|

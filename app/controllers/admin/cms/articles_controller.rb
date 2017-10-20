@@ -1,7 +1,8 @@
 class Admin::Cms::ArticlesController < Admin::BaseController
   
   def index
-    authorize Article
+    authorize Article.new
+    
     @articles = Article.where(domain_id: cookies[:domain_id]).order(published_at: :desc)
     @articles = @articles.where("title LIKE '%#{params[:q]}%'") unless params[:q].nil?
     

@@ -1,7 +1,7 @@
 class Admin::Cms::ContentBlocksController < Admin::BaseController
   
   def index
-    authorize ContentBlock
+    authorize ContentBlock.new
     @content_blocks = ContentBlock.where(domain_id: cookies[:domain_id]).order(:key)
     
     respond_to do |format|

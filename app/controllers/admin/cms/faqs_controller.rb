@@ -1,7 +1,7 @@
 class Admin::Cms::FaqsController < Admin::BaseController
   
   def index
-    authorize Faq
+    authorize Faq.new
     @faqs = Faq.where(domain_id: cookies[:domain_id]).order(:sort)
     
     respond_to do |format|

@@ -1,7 +1,7 @@
 class Admin::Cms::PicturesController < Admin::BaseController
   
   def index
-    authorize Picture
+    authorize Picture.new
     @pictures = Picture.order(created_at: :desc)
     
     if params[:imageable_type] && params[:imageable_id]  

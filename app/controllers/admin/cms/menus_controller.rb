@@ -1,7 +1,7 @@
 class Admin::Cms::MenusController < Admin::BaseController
   
   def index
-    authorize Menu
+    authorize Menu.new
     @menus = Menu.where(domain_id: cookies[:domain_id]).all
   end
 

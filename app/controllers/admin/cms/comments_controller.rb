@@ -1,7 +1,7 @@
 class Admin::Cms::CommentsController < Admin::BaseController
 
   def index
-    authorize Comment
+    authorize Comment.new
     @comments = Comment.order(created_at: :desc)
     
     respond_to do |format|

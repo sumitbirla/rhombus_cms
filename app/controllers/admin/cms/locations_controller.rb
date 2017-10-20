@@ -1,7 +1,7 @@
 class Admin::Cms::LocationsController < Admin::BaseController
   
   def index
-    authorize Location
+    authorize Location.new
     
     @locations = Location.order('name')
     @locations = @locations.where("name LIKE '%#{params[:q]}%'") unless params[:q].nil?
