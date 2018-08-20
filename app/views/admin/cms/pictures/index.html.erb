@@ -1,6 +1,6 @@
 <%= link_to "new photo", new_admin_cms_picture_path(imageable_id: params[:imageable_id], imageable_type: params[:imageable_type]), class: 'btn btn-sm btn-default pull-right' %>
 
-<h2><i class="fa fa-picture-o"></i>&nbsp; <%= @parent || "All Pictures" %></h2>
+<h2><i class="fa fa-images"></i>&nbsp; <%= @parent || "All Pictures" %></h2>
 
 <%= will_paginate @pictures %>
 <div class="row">
