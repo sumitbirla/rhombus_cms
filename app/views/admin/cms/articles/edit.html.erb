@@ -17,7 +17,7 @@
 	
   <div class="row">
     
-    <div class="col-md-8">
+    <div class="col-md-7">
       <%= f.input :slug %>
     	<%= f.input :author %>
     	<%= f.association :user %>
@@ -29,18 +29,24 @@
         </div>
       </div>
     </div>
-    
-    <div class="col-md-4 well">
-      <b>Status: </b> &nbsp;
-      <%= f.input_field :status, collection: ["draft", "pending", "published", "removed"] %><br><br>
+
+    <div class="col-md-5">
+      <div class="panel panel-default options-panel">
+        <div class="panel-heading">Options</div>
+        <div class="panel-body">
+          <b>Status: </b> &nbsp;
+          <%= f.input_field :status, collection: ["draft", "pending", "published", "removed"] %><br><br>
       
-      <b>Publish date:</b><br>
-      <%= f.input_field :published_at, as: :string, class: "form-control date-field" %>
-        <br><br>
-    	<%= f.input_field :allow_comments %> Allow comments <br>
-      <%= f.input_field :allow_pings %> Allow pings <br><br>
+          <b>Publish date:</b>
+          <%= f.input_field :published_at, as: :string, class: "form-control date-field" %>
+            <br><br>
+        	<%= f.input_field :allow_comments %> Allow comments <br>
+          <%= f.input_field :allow_pings %> Allow pings <br><br>
+        </div>
+      </div>
     </div>
   </div>
+  
   <hr/>
   <b>Title:</b>
   <%= f.input_field :title, as: :text, rows: 1, class: "form-control" %>
@@ -73,7 +79,6 @@
 <% content_for :head do %>
   <link rel="stylesheet" href="//cdn5.io/rhombus/bootstrap-tagsinput/bootstrap-tagsinput.css">
   <script src="//cdn5.io/rhombus/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
-  <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
 <% end %>
 
 

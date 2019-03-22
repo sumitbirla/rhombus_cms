@@ -56,7 +56,15 @@
   
   <%= f.association :user %>
   <%= f.input :caption %>
-  <%= f.input :description, input_html: { rows: 5 } %>
+  <%= f.input :description %>
+  <script>
+        ClassicEditor
+            .create( document.querySelector( '#picture_description' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+  </script>
+              
   <%= f.input :data1 %>
   <%= f.input :data2 %>
   <%= f.input :votes %>
@@ -83,7 +91,6 @@
 
 <% content_for :head do %>
   <% static_url = Cache.setting(Rails.configuration.domain_id, :system, "Static Files Url") %>
-	<script type="text/javascript" src="/ckfinder/ckfinder.js"></script>
 	<script>
 	function BrowseServer()
 	{
