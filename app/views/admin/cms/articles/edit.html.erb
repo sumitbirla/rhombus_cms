@@ -16,16 +16,20 @@
 	<%= render 'admin/shared/error_messages', object: f.object %>
 	
   <div class="row">
+    
     <div class="col-md-8">
       <%= f.input :slug %>
     	<%= f.input :author %>
     	<%= f.association :user %>
       <%= f.input :keywords %>
-      <div class="form-group string optional">
-        <label class="string optional control-label">Tags</label>
-        <input class="string optional form-control" type="text" value="<%= @article.tags.collect { |x| x.name }.join(", ") %>" name="tags" data-role="tagsinput">
+      <div class="form-group select optional article_tags">
+        <label class="col-sm-3 control-label select optional" for="article_tags">Tags</label>
+        <div class="col-sm-9">
+          <input class="string optional form-control" type="text" value="<%= @article.tags.collect { |x| x.name }.join(", ") %>" name="tags" data-role="tagsinput">
+        </div>
       </div>
     </div>
+    
     <div class="col-md-4 well">
       <b>Status: </b> &nbsp;
       <%= f.input_field :status, collection: ["draft", "pending", "published", "removed"] %><br><br>
@@ -39,16 +43,23 @@
   </div>
   <hr/>
   <b>Title:</b>
-  <%= f.input_field :title, as: :text, rows: 2, class: "form-control" %>
+  <%= f.input_field :title, as: :text, rows: 1, class: "form-control" %>
   <br>
   
   <b>Excerpt:</b>
-	<%= f.input_field :excerpt, as: :text, rows: 4, class: "form-control" %>
+	<%= f.input_field :excerpt, as: :text, rows: 2, class: "form-control" %>
 	<br>
   
   <b>Body:</b>
-  <%= f.input_field :body, as: :text, rows: 20, class: "form-control" %>
-	
+  <%= f.input_field :body, as: :text, class: "form-control" %>
+  <script>
+        ClassicEditor
+            .create( document.querySelector( '#article_body' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+  </script>
+  <br>
 	<%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
 
 <% end %>
@@ -60,8 +71,9 @@
 <% end %>
 
 <% content_for :head do %>
-  <link rel="stylesheet" href="/rhombus_core/bootstrap-tagsinput/bootstrap-tagsinput.css">
-  <script src="/rhombus_core/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+  <link rel="stylesheet" href="//cdn5.io/rhombus/bootstrap-tagsinput/bootstrap-tagsinput.css">
+  <script src="//cdn5.io/rhombus/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
 <% end %>
 
 
