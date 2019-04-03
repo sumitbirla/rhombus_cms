@@ -7,7 +7,7 @@
 		
     	<div>
           <input type="text" name="picture[file_path]" placeholder="select a picture" id="imageFile" class="col-md-6"> &nbsp;
-          <input type="button" value="Browse Server" class="btn btn-sm btn-primary" onclick="javascript:BrowseServer();">
+          <input type="button" value="Browse Server" class="btn btn-sm btn-primary" onclick="filePopup('imageFile');">
         </div>
         <div style="margin-top: 6px;">
             <input type="text" name="picture[caption]" placeholder="Caption for picture (optional)" class="col-md-5">  &nbsp;
@@ -56,25 +56,3 @@
 		<td><%= link_to "delete", { action: "destroy", controller: "cms/pictures", id: pic.id }, method: :delete %></td>
 	<% end %>
 </table>
-
-
-
-<% content_for :head do %>
-  <% static_url = Cache.setting(Rails.configuration.domain_id, :system, 'Static Files Url') %>
-	<script>
-	function BrowseServer()
-	{
-		// You can use the "CKFinder" class to render CKFinder in a page:
-		var finder = new CKFinder( { connectorPath : '<%= static_url  %>/ckfinder/core/connector/php/connector.php' });
-		//finder.basePath = '../';	// The path for the installation of CKFinder (default = "/ckfinder/").
-		finder.selectActionFunction = SetFileField;
-		finder.popup();
-	}
-
-	// This is a sample function which is called when a file is selected in CKFinder.
-	function SetFileField( fileUrl )
-	{
-		document.getElementById( 'imageFile' ).value = fileUrl.substring(<%= static_url.length +  5 %>);
-	}
-	</script>
-<% end %>
