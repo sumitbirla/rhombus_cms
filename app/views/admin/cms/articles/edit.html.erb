@@ -14,13 +14,15 @@
 <%= simple_form_for [:admin, :cms, @article] do |f| %>
 
 	<%= render 'admin/shared/error_messages', object: f.object %>
-	
+
   <div class="row">
     
-    <div class="col-md-7">
-      <%= f.input :slug %>
+    <div class="col-md-8">
+      <%= f.input :title %>
     	<%= f.input :author %>
     	<%= f.association :user %>
+      <%= f.input :published_at, as: :datepicker %>
+      <%= f.input :slug %>
       <%= f.input :keywords %>
       <div class="form-group select optional article_tags">
         <label class="col-sm-3 control-label select optional" for="article_tags">Tags</label>
@@ -28,18 +30,17 @@
           <input class="string optional form-control" type="text" value="<%= @article.tags.collect { |x| x.name }.join(", ") %>" name="tags" data-role="tagsinput">
         </div>
       </div>
+      <%= f.input :excerpt %>
     </div>
 
-    <div class="col-md-5">
+    <div class="col-md-4">
       <div class="panel panel-default options-panel">
         <div class="panel-heading">Options</div>
         <div class="panel-body">
           <b>Status: </b> &nbsp;
           <%= f.input_field :status, collection: ["draft", "pending", "published", "removed"] %><br><br>
       
-          <b>Publish date:</b>
-          <%= f.input_field :published_at, as: :string, class: "form-control date-field" %>
-            <br><br>
+
         	<%= f.input_field :allow_comments %> Allow comments <br>
           <%= f.input_field :allow_pings %> Allow pings <br><br>
         </div>
@@ -48,24 +49,10 @@
   </div>
   
   <hr/>
-  <b>Title:</b>
-  <%= f.input_field :title, as: :text, rows: 1, class: "form-control" %>
-  <br>
+
+  <b>Body</b><br>
+  <%= ckeditor_input_field(@article, "body") %>
   
-  <b>Excerpt:</b>
-	<%= f.input_field :excerpt, as: :text, rows: 2, class: "form-control" %>
-	<br>
-  
-  <b>Body:</b>
-  <%= f.input_field :body, as: :text, class: "form-control" %>
-  <script>
-        ClassicEditor
-            .create( document.querySelector( '#article_body' ) )
-            .catch( error => {
-                console.error( error );
-            } );
-  </script>
-  <br>
 	<%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
 
 <% end %>

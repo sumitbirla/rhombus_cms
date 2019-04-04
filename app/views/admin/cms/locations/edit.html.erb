@@ -40,14 +40,7 @@
   </div>
 	
 	<%= f.input :summary, as: :text, input_html: { rows: 3 } %>
-	<%= f.input :description, as: :text %>
-  <script>
-          ClassicEditor
-              .create( document.querySelector( '#location_description' ) )
-              .catch( error => {
-                  console.error( error );
-              } );
-  </script>
+	<%= ckeditor_input(@location, "description") %>
 	
 	<%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
 	

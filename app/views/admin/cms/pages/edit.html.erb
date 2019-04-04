@@ -4,13 +4,12 @@
 
 <%= simple_form_for [:admin, :cms, @page] do |f| %>
 	
-	
 	<%= f.input :title, input_html: { class: 'span6' } %>
 	<%= f.input :slug, input_html: { class: 'span6' } %>
 	<%= f.input :published %>
 	<%= f.input :header_content, input_html: { class: 'span10', rows: 4 }  %>
-	<%= f.input :body, input_html: { class: 'span10', rows: 20 }  %>
-    <%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
+	<%= ckeditor_input(@page, "body") %>
+  <%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
 
 <% end %>
 

@@ -1,3 +1,7 @@
+<style>
+  .rendered-html img { max-width: 100%; }
+</style>
+
 <div class="pull-right">
   <a href="/articles/<%= @article.slug %>" class="btn btn-sm btn-default">view</a>
   <%= link_to "edit", edit_admin_cms_article_path(@article), class: "btn btn-sm btn-default" %>
@@ -14,8 +18,9 @@
     <blockquote><%= @article.excerpt %></blockquote>
 
     <h4>Body</h4>
-    <%= @article.body.gsub("\n", "<br/>").html_safe %>
-
+    <div class="rendered-html">
+      <%= @article.body.html_safe %>
+    </div>
   </div>
 
 

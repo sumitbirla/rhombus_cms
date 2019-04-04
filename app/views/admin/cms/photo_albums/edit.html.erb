@@ -11,7 +11,7 @@
   <%= f.input :public %>
   <%= f.input :allow_upload %>
   <%= f.input :voting_enabled %>
-  <%= f.input :description, input_html: { rows: 5 } %>
+  <%= ckeditor_input(@photo_album, "description") %>
   
   <%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
 
