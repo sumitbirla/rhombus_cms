@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'faq' => 'faqs#index'
   get 'pages/:slug' => 'pages#show'
   get 'categories/:slug' => 'categories#show'
+	get 'articles/search' => 'articles#search'
   get 'articles/:slug' => 'articles#show'
   get 'articles' => 'articles#index'
   get 'photo_albums/:slug' => 'photo_albums#show'

@@ -19,6 +19,12 @@ module CmsCache
       Article.includes(:pictures).where(status: "published").order(published_at: :desc)
     end
   end
+	
+  def self.recent_articles
+    Rails.cache.fetch("recent-articles", expires_in: 1.hour) do 
+      Article.includes(:pictures).where(status: "published").order(published_at: :desc).limit(3)
+    end
+  end
   
   def self.content_block(key) 
     Rails.cache.fetch("content-block:#{Rails.configuration.domain_id}:#{key}") do 

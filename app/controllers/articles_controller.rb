@@ -3,6 +3,14 @@ class ArticlesController < ApplicationController
   def index
     @articles = CmsCache.article_list
   end
+	
+	def search
+		q = params[:q]
+		@articles = Article.where(status: :published)
+											 .where("body like '%#{q}%' OR keywords LIKE '%#{q}%' OR title LIKE '%#{q}%'")
+											 .order(published_at: :desc)
+											 .limit(8)
+	end
   
   
   def show
