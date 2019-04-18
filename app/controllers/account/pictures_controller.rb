@@ -1,5 +1,5 @@
 class Account::PicturesController < Account::BaseController
-  skip_before_filter :verify_authenticity_token, only: :upload
+  skip_before_action :verify_authenticity_token, only: :upload
   
   def index
     @pictures = Picture.where(user_id: session[:user_id]).order(created_at: :desc).paginate(page: params[:page], per_page: @per_page)
