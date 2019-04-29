@@ -66,8 +66,9 @@ class Admin::Cms::CommentsController < Admin::BaseController
   def destroy
     @comment = authorize Comment.find(params[:id])
     @comment.destroy
-    
-    redirect_back(fallback_location: admin_root_path), notice: 'Comment has been deleted.'
+   
+    flash[:notice] = 'Comment has been deleted.' 
+    redirect_back(fallback_location: admin_root_path)
   end
   
   
