@@ -46,7 +46,7 @@ class Admin::Cms::FaqsController < Admin::BaseController
     @faq.destroy
     
     Rails.cache.delete @faq
-    redirect_to :back, notice: 'Faq has been deleted.'
+    redirect_back(fallback_location: admin_root_path), notice: 'Faq has been deleted.'
   end
   
   

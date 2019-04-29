@@ -25,7 +25,7 @@ class Account::PicturesController < Account::BaseController
   
   def destroy
     Picture.find_by(id: params[:id], user_id: session[:user_id]).destroy
-    redirect_to :back
+    redirect_back(fallback_location: account_root_path)
   end
   
   

@@ -45,7 +45,7 @@ class Admin::Cms::MenusController < Admin::BaseController
     @menu.destroy
     
     Rails.cache.delete @menu
-    redirect_to :back, notice: 'Menu has been deleted.'
+    redirect_back(fallback_location: admin_root_path), notice: 'Menu has been deleted.'
   end
   
   

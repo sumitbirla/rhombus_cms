@@ -15,7 +15,7 @@ class VotesController < ApplicationController
       flash[:popup] = vote.errors.messages.join(". ")
     end
     
-    redirect_to :back
+    return redirect_back(fallback_location: root_path)
   end
   
   private

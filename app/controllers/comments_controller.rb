@@ -35,7 +35,7 @@ class CommentsController < ApplicationController
     end
     
     @comment.save
-    redirect_to :back
+    return redirect_back(fallback_location: root_path)
   end
   
   private

@@ -50,7 +50,7 @@ class Admin::Cms::ContentBlocksController < Admin::BaseController
     @content_block.destroy
     
     Rails.cache.delete @content_block
-    redirect_to :back, notice: 'Content Block has been deleted.'
+    redirect_back(fallback_location: admin_root_path), notice: 'Content Block has been deleted.'
   end
   
   

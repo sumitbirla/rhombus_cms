@@ -71,7 +71,7 @@ class Admin::Cms::PicturesController < Admin::BaseController
   def destroy
     @picture = authorize Picture.find(params[:id])
     @picture.destroy
-    redirect_to :back
+    redirect_back(fallback_location: admin_root_path)
   end
   
   
@@ -88,7 +88,7 @@ class Admin::Cms::PicturesController < Admin::BaseController
     pic1.save
     pic2.save
   
-    redirect_to :back
+    redirect_back(fallback_location: admin_root_path)
     
   end
   
@@ -106,7 +106,7 @@ class Admin::Cms::PicturesController < Admin::BaseController
     pic1.save
     pic2.save
   
-    redirect_to :back
+    redirect_back(fallback_location: admin_root_path)
     
   end
   

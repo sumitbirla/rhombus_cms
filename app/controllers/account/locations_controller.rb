@@ -49,7 +49,7 @@ class Account::LocationsController < Account::BaseController
     Location.where(user_id: session[:user_id]).update_all(default: false)
     Location.where(user_id: session[:user_id], id: params[:id]).update_all(default: true)
 
-    redirect_to :back
+    return redirect_back(fallback_location: account_root_path)
   end
 
 

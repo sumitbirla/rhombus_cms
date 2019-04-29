@@ -50,7 +50,7 @@ class Admin::Cms::PagesController < Admin::BaseController
     @page.destroy
     
     Rails.cache.delete @page
-    redirect_to :back, notice: 'Page has been deleted.'
+    redirect_back(fallback_location: admin_root_path), notice: 'Page has been deleted.'
   end
   
   
