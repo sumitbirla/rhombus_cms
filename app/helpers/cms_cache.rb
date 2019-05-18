@@ -22,7 +22,7 @@ module CmsCache
 	
   def self.recent_articles
     Rails.cache.fetch("recent-articles", expires_in: 1.hour) do 
-      Article.includes(:pictures).where(status: "published").order(published_at: :desc).limit(3)
+      Article.includes(:pictures).where(status: "published").order(published_at: :desc).limit(3).load
     end
   end
   
