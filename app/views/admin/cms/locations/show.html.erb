@@ -1,8 +1,13 @@
 <%= link_to "edit", edit_admin_cms_location_path(@location), class: "btn btn-sm btn-default pull-right" %>
 
-<h2><i class="fa fa-map-marker"></i>&nbsp; <%= @location.name %></h2>
+<h2><i class="fa fa-location-arrow"></i>&nbsp; <%= @location.name %></h2>
 
-<div id="map_canvas" style="width: 100%; height: 240px; margin-bottom: 20px;"></div>
+<iframe
+  width="100%"
+  height="240"
+  frameborder="0" style="border:0; background: #f1f1f1;"
+  src="https://www.google.com/maps/embed/v1/place?key=<%= Cache.setting(Rails.configuration.domain_id, "CMS", "Google Maps API Key") %>&zoom=5&q=<%= @location.to_map %>" allowfullscreen>
+</iframe>
 
 <div class="row-fluid">
 <div class="col-md-8">
@@ -78,45 +83,5 @@
 	<li><a href="#">Web Content</a></li>
 	<li><%= link_to "Locations", admin_cms_locations_path %></li>
 	<li class="active"><%= @location.name %></li>
-<% end %>
-
-
-<% content_for :head do %>
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script>
-        var geocoder;
-        var map;
-        function initialize() {
-            geocoder = new google.maps.Geocoder();
-            var latlng = new google.maps.LatLng(-34.397, 150.644);
-            var mapOptions = {
-                zoom: 14,
-                //center: latlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            }
-            map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-        }
-
-        function codeAddress() {
-            initialize();
-            var address = '<%= @location.to_map %>';
-            geocoder.geocode({ 'address': address }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    map.setCenter(results[0].geometry.location);
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location
-                    });
-                } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
-                }
-            });
-        }
-		
-		$(document).ready(function () {
-			initialize();
-		    codeAddress();
-		});
-    </script>
 <% end %>
 

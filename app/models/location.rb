@@ -50,6 +50,7 @@ class Location < ActiveRecord::Base
     address += ', ' + state unless state.blank?
     address += ', ' + zip unless zip.blank?
     address += ', ' + country unless country.blank?
+		address
   end
   
   def to_text(opts = {})

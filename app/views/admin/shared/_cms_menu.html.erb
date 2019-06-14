@@ -1,6 +1,6 @@
 
 <li class="<%= 'active' if request.original_url.include? 'admin/cms' %>">
-  <a href="#"><i class="fa fa-files-o fa-fw"></i> CMS  <span class="fa arrow"></span></a>
+  <a href="#"><i class="fa fa-globe-africa fa-fw"></i> CMS  <span class="fa arrow"></span></a>
   <ul class="nav nav-second-level">
     <% if current_user.has_permission?('Article', 'index')%>
       <li><%= link_to "Articles", admin_cms_articles_path %></li>
