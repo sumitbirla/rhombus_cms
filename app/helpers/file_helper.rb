@@ -1,6 +1,6 @@
 module FileHelper
 
-    def icon_for_mimetype(mime) 
+    def icon_for_mimetype(mime, extra_classes = "") 
       mimes = {
         'image': 'fa-file-image',
         'audio': 'fa-file-audio',
@@ -32,7 +32,7 @@ module FileHelper
 
       m ||= 'fa-file'
 
-      "<i class='far text-muted fa-4x #{m}'></i>".html_safe
+      "<i class='far #{extra_classes} #{m}'></i>".html_safe
     end
 
 end
