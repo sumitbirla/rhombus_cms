@@ -8,7 +8,9 @@ class Attachment < ApplicationRecord
   validates_presence_of :file_path, :content_type
   
   def set_md5
-    dir = Setting.get(Rails.configuration.domain_id, :system, "Static Files Path")
-    self.md5 = Digest::MD5.hexdigest(File.read(dir + file_path))
+    unless file_path.start_with?("http:")
+      dir = Setting.get(Rails.configuration.domain_id, :system, "Static Files Path")
+      self.md5 = Digest::MD5.hexdigest(File.read(dir + file_path))
+    end
   end
 end
