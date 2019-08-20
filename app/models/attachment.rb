@@ -10,7 +10,11 @@ class Attachment < ApplicationRecord
   def set_md5
     unless file_path.start_with?("http:")
       dir = Setting.get(Rails.configuration.domain_id, :system, "Static Files Path")
-      self.md5 = Digest::MD5.hexdigest(File.read(dir + file_path))
+      begin
+        self.md5 = Digest::MD5.hexdigest(File.read(dir + file_path))
+      rescue => e
+        Rails.logger.error e.message
+      end
     end
   end
 end
