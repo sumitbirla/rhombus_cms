@@ -1,0 +1,12 @@
+<tr>
+  <td nowrap><%= link_to_user_or_affiliate(list) %></td>
+  <td nowrap><%= list.name %></td>
+	<td><%= render list.items %></td>
+	<td nowrap class="text-right actions">
+    <%= link_to :edit, edit_admin_cms_list_path(list) %> &nbsp; 
+		<%= link_to :delete, 
+					  { action: "destroy", id: list.id }, 
+					  method: :delete, 
+					  data: { confirm: "Are you sure? All items items in this list will be deleted." } %>
+	</td>
+</tr>

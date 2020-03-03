@@ -1,0 +1,5 @@
+<% if list_item.value.length > 20 %>
+  <p><%= list_item.value %></p><hr>
+<% else %>
+  <label class="label" style="background-color: <%= list_item.background_color %>; color: <%= list_item.foreground_color %>; margin: 5px;"><%= list_item.value %></label>
+<% end %>

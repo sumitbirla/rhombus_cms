@@ -17,6 +17,9 @@
     <% if current_user.has_permission?('FileManager', 'index')%>
 	    <li><%= link_to "File manager", admin_cms_filemanager_index_path %></li>
     <% end %>
+    <% if current_user.has_permission?('List', 'index')%>
+	    <li><%= link_to "Lists", admin_cms_lists_path %></li>
+    <% end %>
     <% if current_user.has_permission?('Location', 'index')%>
 	    <li><%= link_to "Locations", admin_cms_locations_path %></li>
     <% end %>

@@ -38,6 +38,7 @@ Rails.application.routes.draw do
         end
       end
       resources :pages
+      resources :lists
       resources :content_blocks
       resources :menus
       resources :menu_items
