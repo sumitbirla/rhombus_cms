@@ -8,6 +8,10 @@ class List < ApplicationRecord
   
   validates_presence_of :name
   
+  def to_s
+    name
+  end
+  
   # PUNDIT
   def self.policy_class
     ApplicationPolicy
