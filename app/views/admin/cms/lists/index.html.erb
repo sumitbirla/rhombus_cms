@@ -8,13 +8,13 @@
 
 <%= will_paginate @lists %>
 <table class="table table-striped table-condensed">
-	<tr>
+  <tr>
     <th>Owner</th>
-		<th>Name</th>
+    <th>Name</th>
     <th>Values</th>
     <th></th>
-	</tr>
-	<%= render @lists %>
+  </tr>
+  <%= render @lists %>
 </table>
 
 
@@ -25,6 +25,6 @@
 
 
 <% content_for :breadcrumbs do %>
-	<li><a href="#">CMS</a></li>
-	<li class="active">Lists</li>
+  <li><a href="#">CMS</a></li>
+  <li class="active">Lists</li>
 <% end %>

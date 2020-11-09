@@ -1,5 +1,7 @@
 <style>
-  .rendered-html img { max-width: 100%; }
+    .rendered-html img {
+        max-width: 100%;
+    }
 </style>
 
 <div class="pull-right">
@@ -28,13 +30,13 @@
     <table class="table summary table-condensed">
       <tr>
         <td>Status</td>
-        <td><%= article_status(@article)%></td>
+        <td><%= article_status(@article) %></td>
       </tr>
       <% unless @article.published_at.nil? %>
-      <tr>
-        <td>Published</td>
-        <td><%= sysdate @article.published_at %></td>
-      </tr>
+        <tr>
+          <td>Published</td>
+          <td><%= sysdate @article.published_at %></td>
+        </tr>
       <% end %>
       <tr>
         <td>Author</td>
@@ -49,48 +51,48 @@
         <td><%= @article.allow_pings ? "yes" : "no" %></td>
       </tr>
       <% unless @article.keywords.blank? %>
-      <tr>
-        <td>Keywords</td>
-        <td><%= @article.keywords %></td>
-      </tr>
+        <tr>
+          <td>Keywords</td>
+          <td><%= @article.keywords %></td>
+        </tr>
       <% end %>
       <% unless @article.tags.length == 0 %>
-      <tr>
-        <td>Tags</td>
-        <td>
-          <% @article.tags.each do |tag| %>
-            <span class="label label-default"><%= tag.name %></span> 
-          <% end %>
-        </td>
-      </tr>
+        <tr>
+          <td>Tags</td>
+          <td>
+            <% @article.tags.each do |tag| %>
+              <span class="label label-default"><%= tag.name %></span>
+            <% end %>
+          </td>
+        </tr>
       <% end %>
     </table>
-      
-  	<h4>Pictures</h4>
+
+    <h4>Pictures</h4>
     <% if @article.pictures.length > 0 %>
       <a href="<%= cdn_image_url @article.pictures[0], 800, 700, 0 %>" data-lightbox="image-1">
         <img src="<%= cdn_image_url @article.pictures[0], 400, 300, 2 %>" class="img-responsive" title="<%= @article.pictures[0].caption %>"/>
       </a>
     <% end %>
-    
+
     <% if @article.pictures.length > 1 %>
       <br/>
       <% @article.pictures[1..-1].each do |pic| %>
-        <a href="<%= cdn_image_url pic, 700, 600, 0 %>"  data-lightbox="image-1">
+        <a href="<%= cdn_image_url pic, 700, 600, 0 %>" data-lightbox="image-1">
           <img src="<%= cdn_image_url pic, 60, 60, 2 %>" class="img-thumbnail" style="margin: 4px" title="<%= pic.caption %>"/>
         </a>
       <% end %>
     <% end %>
-    
-  	<hr/>
-	
-  	<h4>Categories</h4>
-  	<ul>
-  		<% @article.categories.each do |cat| %>
-  		<li><%= cat.name %></li>
-  		<% end %>
-  	</ul>
-  	<hr/>
+
+    <hr/>
+
+    <h4>Categories</h4>
+    <ul>
+      <% @article.categories.each do |cat| %>
+        <li><%= cat.name %></li>
+      <% end %>
+    </ul>
+    <hr/>
 
   </div>
 
@@ -99,12 +101,12 @@
 
 
 <% content_for :title do %>
-    Articles: <%= @article.title %>
+  Articles: <%= @article.title %>
 <% end %>
 
 
 <% content_for :breadcrumbs do %>
-	<li><a href="#">Web Content</a></li>
-	<li><%= link_to "Articles", admin_cms_articles_path %></li>
-	<li class="active"><%= @article.title %></li>
+  <li><a href="#">Web Content</a></li>
+  <li><%= link_to "Articles", admin_cms_articles_path %></li>
+  <li class="active"><%= @article.title %></li>
 <% end %>

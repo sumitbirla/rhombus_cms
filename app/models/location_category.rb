@@ -9,7 +9,7 @@
 
 class LocationCategory < ActiveRecord::Base
   self.table_name = 'cms_location_categories'
-  
+
   belongs_to :location
   belongs_to :category
 end

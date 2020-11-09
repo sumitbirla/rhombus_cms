@@ -2,13 +2,13 @@
 
 
 <% content_for :head do %>
-<script>
-  $(document).ready(function() {
-    CKFinder.widget( 'ckfinder1', {
-                 connectorPath: 'https://cdn5.io/ckfinder/core/connector/php/connector.php'
-             } );
-  });
-</script>
+  <script>
+      $(document).ready(function () {
+          CKFinder.widget('ckfinder1', {
+              connectorPath: 'https://cdn5.io/ckfinder/core/connector/php/connector.php'
+          });
+      });
+  </script>
 <% end %>
 
 <% content_for :title, "File Manager" %>

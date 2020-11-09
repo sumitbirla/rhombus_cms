@@ -10,78 +10,77 @@
 </iframe>
 
 <div class="row-fluid">
-<div class="col-md-8">
+  <div class="col-md-8">
 
-<h4>Summary</h4>
-<table class="table table-condensed table-bordered summary">
-  <%= obj_property(@location, :user) { |x| link_to x.name, admin_system_user_path(x)} %>
-  <%= obj_property(@location, :affiliate) { |x| link_to x.name, admin_system_affiliate_path(x)} %>
-	<%= obj_property @location, :slug %>
-	<%= obj_property @location, :contact_person %>
-	<%= obj_property @location, :email %>
-	<%= obj_property @location, :phone %>
-	<%= obj_property @location, :fax %>
-	<%= obj_property @location, :website %>
-  <%= obj_property(@location, :to_text, label: "Address") { |x| x.gsub("\n", "<br>") } %>
-</table>
+    <h4>Summary</h4>
+    <table class="table table-condensed table-bordered summary">
+      <%= obj_property(@location, :user) { |x| link_to x.name, admin_system_user_path(x) } %>
+      <%= obj_property(@location, :affiliate) { |x| link_to x.name, admin_system_affiliate_path(x) } %>
+      <%= obj_property @location, :slug %>
+      <%= obj_property @location, :contact_person %>
+      <%= obj_property @location, :email %>
+      <%= obj_property @location, :phone %>
+      <%= obj_property @location, :fax %>
+      <%= obj_property @location, :website %>
+      <%= obj_property(@location, :to_text, label: "Address") { |x| x.gsub("\n", "<br>") } %>
+    </table>
 
-<%= render partial: 'admin/shared/extra_properties', locals: { object: @location }%>
-
-
-<% unless @location.summary.blank? %>
-  <h4>Summary</h4>
-  <%= @location.summary %>
-  <hr/>
-<% end %>
-
-<% unless @location.description.blank? %>
-  <h4>Description</h4>
-  <%= @location.description.gsub("\n", "<br/>").html_safe %>
-<% end %>
-
-</div>
+    <%= render partial: 'admin/shared/extra_properties', locals: {object: @location} %>
 
 
-<div class="col-md-4">
-	<h4>Pictures</h4>
-	<% @location.pictures.each do |pic| %>
-	<a href="<%= cdn_image_url pic, 700, 600, 0 %>" data-lightbox="image-1">
-		<img src="<%= cdn_image_url pic, 60, 60, 2 %>" class="img-thumbnail" style="margin: 4px" title="<%= pic.caption %>"/>
-	</a>
-	<% end %>
-	<hr/>
-	
-	<h4>Categories</h4>
-	<ul>
-		<% @location.categories.each do |cat| %>
-		<li><%= cat.name %></li>
-		<% end %>
-	</ul>
-	<hr/>
-  
+    <% unless @location.summary.blank? %>
+      <h4>Summary</h4>
+      <%= @location.summary %>
+      <hr/>
+    <% end %>
 
-  
-  <h4>Flags</h4>
-  <% if @location.hidden %>
-    <span class="label label-warning">hidden</span> &nbsp; 
-  <% else %>
-    <span class="label label-success">visible</span> &nbsp; 
-  <% end %>
+    <% unless @location.description.blank? %>
+      <h4>Description</h4>
+      <%= @location.description.gsub("\n", "<br/>").html_safe %>
+    <% end %>
 
-</div>
+  </div>
+
+
+  <div class="col-md-4">
+    <h4>Pictures</h4>
+    <% @location.pictures.each do |pic| %>
+      <a href="<%= cdn_image_url pic, 700, 600, 0 %>" data-lightbox="image-1">
+        <img src="<%= cdn_image_url pic, 60, 60, 2 %>" class="img-thumbnail" style="margin: 4px" title="<%= pic.caption %>"/>
+      </a>
+    <% end %>
+    <hr/>
+
+    <h4>Categories</h4>
+    <ul>
+      <% @location.categories.each do |cat| %>
+        <li><%= cat.name %></li>
+      <% end %>
+    </ul>
+    <hr/>
+
+
+    <h4>Flags</h4>
+    <% if @location.hidden %>
+      <span class="label label-warning">hidden</span> &nbsp;
+    <% else %>
+      <span class="label label-success">visible</span> &nbsp;
+    <% end %>
+
+  </div>
 
 </div> <!-- row-fluid -->
 
 
 
 <% content_for :title do %>
-    Locations: <%= @location.name%>
+  Locations: <%= @location.name %>
 <% end %>
 
 
 <% content_for :breadcrumbs do %>
-	<li><a href="#">Web Content</a></li>
-	<li><%= link_to "Locations", admin_cms_locations_path %></li>
-	<li class="active"><%= @location.name %></li>
+  <li><a href="#">Web Content</a></li>
+  <li><%= link_to "Locations", admin_cms_locations_path %></li>
+  <li class="active"><%= @location.name %></li>
 <% end %>
 

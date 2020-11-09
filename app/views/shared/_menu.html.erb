@@ -1,18 +1,18 @@
 <ul id="<%= menu.key %>" class="<%= menu.css_class %>">
-	<% 
-	odd = false
-	menu.items.each do |item| 
-		next if !item.enabled
-		odd = !odd
-		css_class = '' 
-		css_class = 'active' if request.fullpath.include? item.link_url 
-		css_class = 'active' if request.fullpath == '/' && item.link_url == '/' 
-		if odd
-			css_class += ' odd'
-		else
-			css_class += ' even'
-		end %>
-	<li class="<%= css_class %>"><a href="<%= item.link_url %>"><%= item.title %></a></li>
-	<% end %>
+  <%
+    odd = false
+    menu.items.each do |item|
+      next if !item.enabled
+      odd = !odd
+      css_class = ''
+      css_class = 'active' if request.fullpath.include? item.link_url
+      css_class = 'active' if request.fullpath == '/' && item.link_url == '/'
+      if odd
+        css_class += ' odd'
+      else
+        css_class += ' even'
+      end %>
+    <li class="<%= css_class %>"><a href="<%= item.link_url %>"><%= item.title %></a></li>
+  <% end %>
 </ul>
 	

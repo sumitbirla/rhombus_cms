@@ -1,103 +1,101 @@
 <h2><i class="fa fa-image"></i>&nbsp; <%= "Picture ##{@picture.id}" %></h2>
 
 <% unless @picture.id.nil? %>
-<div class="row">
-	<div class="col-md-4">
-		<a href="<%= cdn_image_url @picture, 700, 600, 0 %>" data-lightbox="image-1">
-			<img class="img-thumbnail" style="width: 100%" src="<%= cdn_image_url @picture, 350, 350, 0 %>" alt="<%= @picture.caption %>"/>
-		</a>
-	</div>
-	<div class="col-md-8">
-		<table class="table table-bordered table-condensed summary"> 
-      <tr>
-        <td>File size</td>
-        <td><%= number_to_human_size @picture.file_size %></td>
-      </tr>
-      <tr>
-        <td>Dimensions</td>
-        <td><%= @picture.width %> pixels x <%= @picture.height %> pixels</td>
-      </tr>
-      <tr>
-        <td>Type</td>
-        <td><%= @picture.format %> <%= @picture.compression_mode %></td>
-      </tr>
-      <tr>
-        <td>Bits per pixel</td>
-        <td><%= @picture.bits_per_pixel || "- unknown -" %></td>
-      </tr>
-      <tr>
-        <td>Chroma Subsampling</td>
-        <td><%= @picture.chroma_subsampling.blank? ? "- n/a -" : @picture.chroma_subsampling %></td>
-      </tr>
-      <tr>
-        <td>Uploaded</td>
-        <td><%= systime @picture.created_at %></td>
-      </tr>
-    </table>
-	</div>
-</div>
+  <div class="row">
+    <div class="col-md-4">
+      <a href="<%= cdn_image_url @picture, 700, 600, 0 %>" data-lightbox="image-1">
+        <img class="img-thumbnail" style="width: 100%" src="<%= cdn_image_url @picture, 350, 350, 0 %>" alt="<%= @picture.caption %>"/>
+      </a>
+    </div>
+    <div class="col-md-8">
+      <table class="table table-bordered table-condensed summary">
+        <tr>
+          <td>File size</td>
+          <td><%= number_to_human_size @picture.file_size %></td>
+        </tr>
+        <tr>
+          <td>Dimensions</td>
+          <td><%= @picture.width %> pixels x <%= @picture.height %> pixels</td>
+        </tr>
+        <tr>
+          <td>Type</td>
+          <td><%= @picture.format %> <%= @picture.compression_mode %></td>
+        </tr>
+        <tr>
+          <td>Bits per pixel</td>
+          <td><%= @picture.bits_per_pixel || "- unknown -" %></td>
+        </tr>
+        <tr>
+          <td>Chroma Subsampling</td>
+          <td><%= @picture.chroma_subsampling.blank? ? "- n/a -" : @picture.chroma_subsampling %></td>
+        </tr>
+        <tr>
+          <td>Uploaded</td>
+          <td><%= systime @picture.created_at %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
 <% end %>
 
 
-<%= simple_form_for [:admin, :cms, @picture], html: { class: 'form-horizontal', style: "margin-top: 20px;" }, wrapper: :horizontal_form do |f| %>
+<%= simple_form_for [:admin, :cms, @picture], html: {class: 'form-horizontal', style: "margin-top: 20px;"}, wrapper: :horizontal_form do |f| %>
 
   <%= render 'admin/shared/error_messages', object: f.object %>
 
-  <%= f.input :imageable_type, as: :hidden  %>
+  <%= f.input :imageable_type, as: :hidden %>
   <%= f.input :imageable_id, as: :hidden %>
-  
+
   <div class="form-group string optional password">
-  	<label class="string control-label col-sm-3" for="file_path">File Path</label>
-  	<div class="col-sm-9">
+    <label class="string control-label col-sm-3" for="file_path">File Path</label>
+    <div class="col-sm-9">
       <input type="text" id="file_path" name="picture[file_path]" value="<%= @picture.file_path %>" class="string form-control"/>
-  	  <input type="button" value="Browse Server" class="btn btn-default btn-sm" onclick="javascript:BrowseServer();">
+      <input type="button" value="Browse Server" class="btn btn-default btn-sm" onclick="javascript:BrowseServer();">
     </div>
   </div>
-  
+
   <%= f.association :user %>
   <%= f.input :caption %>
   <%= ckeditor_input(@picture, "description") %>
-              
+
   <%= f.input :data1 %>
   <%= f.input :data2 %>
   <%= f.input :votes %>
   <%= f.input :sort %>
   <%= f.input :approved %>
-  
-  <%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
-  
+
+  <%= button_tag "Save changes", :class => "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..."} %>
+
 <% end %>
 
 
 
 <% content_for :title do %>
-    <%= @picture.caption %>
+  <%= @picture.caption %>
 <% end %>
 
 
 <% content_for :breadcrumbs do %>
-	<li><a href="#">Web Content</a></li>
-	<li><%= link_to 'Pictures', admin_cms_pictures_path(imageable_id: @picture.imageable_id, imageable_type: @picture.imageable_type) %></li>
-	<li class="active">edit</li>
+  <li><a href="#">Web Content</a></li>
+  <li><%= link_to 'Pictures', admin_cms_pictures_path(imageable_id: @picture.imageable_id, imageable_type: @picture.imageable_type) %></li>
+  <li class="active">edit</li>
 <% end %>
 
 
 <% content_for :head do %>
   <% static_url = Cache.setting(Rails.configuration.domain_id, :system, "Static Files Url") %>
-	<script>
-	function BrowseServer()
-	{
-		// You can use the "CKFinder" class to render CKFinder in a page:
-		var finder = new CKFinder( { connectorPath : '<%= static_url %>/ckfinder/core/connector/php/connector.php' });
-		//finder.basePath = '../';	// The path for the installation of CKFinder (default = "/ckfinder/").
-		finder.selectActionFunction = SetFileField;
-		finder.popup();
-	}
+  <script>
+      function BrowseServer() {
+          // You can use the "CKFinder" class to render CKFinder in a page:
+          var finder = new CKFinder({connectorPath: '<%= static_url %>/ckfinder/core/connector/php/connector.php'});
+          //finder.basePath = '../';	// The path for the installation of CKFinder (default = "/ckfinder/").
+          finder.selectActionFunction = SetFileField;
+          finder.popup();
+      }
 
-	// This is a sample function which is called when a file is selected in CKFinder.
-	function SetFileField( fileUrl )
-	{
-		document.getElementById('file_path').value = fileUrl.substring(<%= static_url.length + 6 %>);
-	}
-	</script>
+      // This is a sample function which is called when a file is selected in CKFinder.
+      function SetFileField(fileUrl) {
+          document.getElementById('file_path').value = fileUrl.substring(<%= static_url.length + 6 %>);
+      }
+  </script>
 <% end %>

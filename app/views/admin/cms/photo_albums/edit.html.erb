@@ -12,20 +12,20 @@
   <%= f.input :allow_upload %>
   <%= f.input :voting_enabled %>
   <%= ckeditor_input(@photo_album, "description") %>
-  
-  <%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
+
+  <%= button_tag "Save changes", :class => "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..."} %>
 
 <% end %>
 
 
 
 <% content_for :title do %>
-	Photo Albums: <%= @photo_album.title %>
+  Photo Albums: <%= @photo_album.title %>
 <% end %>
 
 
 <% content_for :breadcrumbs do %>
-	<li><a href="#">Web Content</a></li>
-	<li><%= link_to "Photo Albums", admin_cms_photo_albums_path %></li>
-	<li class="active"><%= @photo_album.title %></li>
+  <li><a href="#">Web Content</a></li>
+  <li><%= link_to "Photo Albums", admin_cms_photo_albums_path %></li>
+  <li class="active"><%= @photo_album.title %></li>
 <% end %>

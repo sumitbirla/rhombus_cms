@@ -1,15 +1,17 @@
 <style>
-    .form-horizontal .control-label { width: 120px; }
+    .form-horizontal .control-label {
+        width: 120px;
+    }
 </style>
 
 <h2>Comment</h2>
 
 <table class="table table-condensed table-bordered summary">
   <% unless @comment.user_id.nil? %>
-  <tr>
-    <td>User</td>
-    <td><%= link_to @comment.user.name, admin_system_user_path(@comment.user) %></td>
-  </tr>
+    <tr>
+      <td>User</td>
+      <td><%= link_to @comment.user.name, admin_system_user_path(@comment.user) %></td>
+    </tr>
   <% end %>
   <tr>
     <td>Submitted</td>
@@ -24,31 +26,31 @@
     <td><%= @comment.user_agent %></td>
   </tr>
 </table>
-  
+
 <hr>
 
 <%= simple_form_for [:admin, :cms, @comment] do |f| %>
 
   <%= f.association :user %>
-	<%= f.input :author %>
+  <%= f.input :author %>
   <%= f.input :email %>
   <%= f.input :url %>
   <%= f.input :rating %>
-  <%= f.input :content, input_html: { rows: 5 } %>
+  <%= f.input :content, input_html: {rows: 5} %>
   <%= f.input :spam %>
   <%= f.input :approved %>
-	<%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
+  <%= button_tag "Save changes", :class => "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..."} %>
 
 <% end %>
 
 
 <% content_for :title do %>
-	Comment
+  Comment
 <% end %>
 
 
 <% content_for :breadcrumbs do %>
-	<li><a href="#">Web Content</a></li>
-	<li><%= link_to "Comments", admin_cms_comments_path %></li>
-	<li class="active">edit</li>
+  <li><a href="#">Web Content</a></li>
+  <li><%= link_to "Comments", admin_cms_comments_path %></li>
+  <li class="active">edit</li>
 <% end %>

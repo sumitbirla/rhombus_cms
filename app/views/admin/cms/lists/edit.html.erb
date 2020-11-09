@@ -4,7 +4,7 @@
 <%= simple_form_for [:admin, :cms, @list] do |f| %>
   <input type="hidden" name="add_more_items" value=""/>
 
-	<%= render 'admin/shared/error_messages', object: f.object %>
+  <%= render 'admin/shared/error_messages', object: f.object %>
 
   <div class="row">
     <div class="col-md-6">
@@ -15,7 +15,7 @@
   </div>
 
 
-	 <div class="panel panel-info">
+  <div class="panel panel-info">
     <div class="panel-heading">
       <%= link_to '+ add more items', '#', class: 'add-more-items pull-right' %>
       Items
@@ -27,62 +27,76 @@
           <th>Properties</th>
           <th></th>
         </tr>
-      <%= f.simple_fields_for :items do |itemf| %>
-         <% 
-           item = @list.items[itemf.index] 
-         %>
-        <tr>
-          <td><%= itemf.input_field :value, rows: 4, cols: 80  %></td>
-          <td>
-            <table class="summary">
-              <tr><td>Priority: &nbsp;</td><td><%= itemf.input_field :priority %></td></tr>
-              <tr><td>BG Color: &nbsp;</td><td><%= itemf.input_field :background_color, as: :color %></td></tr>
-              <tr><td>FG Color: &nbsp;</td><td><%= itemf.input_field :foreground_color, as: :color %></td></tr>
-            </table>
-          </td>
-          <td>
-            <i class="fa fa-times"></i>
-            <%= itemf.hidden_field :_destroy, class: 'destroy' %>
-          </td>
-        </tr>
-      <% end %>
+        <%= f.simple_fields_for :items do |itemf| %>
+          <%
+            item = @list.items[itemf.index]
+          %>
+          <tr>
+            <td><%= itemf.input_field :value, rows: 4, cols: 80 %></td>
+            <td>
+              <table class="summary">
+                <tr>
+                  <td>Priority: &nbsp;</td>
+                  <td><%= itemf.input_field :priority %></td>
+                </tr>
+                <tr>
+                  <td>BG Color: &nbsp;</td>
+                  <td><%= itemf.input_field :background_color, as: :color %></td>
+                </tr>
+                <tr>
+                  <td>FG Color: &nbsp;</td>
+                  <td><%= itemf.input_field :foreground_color, as: :color %></td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              <i class="fa fa-times"></i>
+              <%= itemf.hidden_field :_destroy, class: 'destroy' %>
+            </td>
+          </tr>
+        <% end %>
       </table>
     </div>
   </div>
-	
-	<div class="form-actions">
-		<%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
-	</div>
+
+  <div class="form-actions">
+    <%= button_tag "Save changes", :class => "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..."} %>
+  </div>
 
 <% end %>
 
 
 <%= content_for :title do %>
-	List: <%= @list.name %>
+  List: <%= @list.name %>
 <% end %>
 
 <% content_for :head do %>
-    <style>
-        .form-inline .form-group { margin: 10px 0; }
-        .fa-times { cursor: pointer; }
-    </style>
-    
-    <script>
-    $(document).ready(function() {
-      
-      $(".fa-times").click(function () {
-        $(this).parent().parent().hide("slow");
-        $(this).siblings(".destroy").val("true");
-        return false;
-      });
-      
-      $(".add-more-items").click(function() {
-        $("input[name='add_more_items']").val(<%= @list.items.length %>);
-        $("form.form-horizontal").submit();
-      });
+  <style>
+      .form-inline .form-group {
+          margin: 10px 0;
+      }
 
-    });
-    </script>
+      .fa-times {
+          cursor: pointer;
+      }
+  </style>
+
+  <script>
+      $(document).ready(function () {
+
+          $(".fa-times").click(function () {
+              $(this).parent().parent().hide("slow");
+              $(this).siblings(".destroy").val("true");
+              return false;
+          });
+
+          $(".add-more-items").click(function () {
+              $("input[name='add_more_items']").val(<%= @list.items.length %>);
+              $("form.form-horizontal").submit();
+          });
+
+      });
+  </script>
 <% end %>
 
 
@@ -90,6 +104,6 @@
 
 <% content_for :breadcrumbs do %>
   <li><a href="#">CMS</a></li>
-	<li><%= link_to "Lists", admin_cms_lists_path %></li>
-	<li class="active">edit</li>
+  <li><%= link_to "Lists", admin_cms_lists_path %></li>
+  <li class="active">edit</li>
 <% end %>

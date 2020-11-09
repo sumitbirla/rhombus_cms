@@ -23,13 +23,13 @@
 class Comment < ActiveRecord::Base
   include Exportable
   self.table_name = 'cms_comments'
-  
+
   belongs_to :commentable, polymorphic: true
   belongs_to :user
-  
+
   has_many :replies, class_name: "Comment", foreign_key: "parent_id"
   belongs_to :parent, class_name: "Comment"
-  
+
   # PUNDIT
   def self.policy_class
     ApplicationPolicy

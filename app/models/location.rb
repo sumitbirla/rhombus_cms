@@ -32,17 +32,17 @@
 class Location < ActiveRecord::Base
   include Exportable
   self.table_name = 'cms_locations'
-  
+
   belongs_to :user
   belongs_to :affiliate
   has_many :pictures, as: :imageable
   has_many :extra_properties, -> { order "sort, name" }, as: :extra_property
   has_many :location_categories
   has_many :categories, through: :location_categories
-  
+
   validates_presence_of :name, :slug
   validates_uniqueness_of :slug
-  
+
   def to_map
     address = street1
     address += ', ' + street2 unless street2.blank?
@@ -50,12 +50,12 @@ class Location < ActiveRecord::Base
     address += ', ' + state unless state.blank?
     address += ', ' + zip unless zip.blank?
     address += ', ' + country unless country.blank?
-		address
+    address
   end
-  
+
   def to_text(opts = {})
     newline = opts[:new_line] || "\n"
-    
+
     address = street1
     address += newline + street2 unless street2.blank?
     address += newline + city unless city.blank?
@@ -64,14 +64,14 @@ class Location < ActiveRecord::Base
     unless opts[:skip_country]
       address += newline + Country[country].to_s unless country.blank?
     end
-    
+
     address.html_safe
   end
-  
+
   def cache_key
     "location:#{slug}"
   end
-  
+
   # PUNDIT
   def self.policy_class
     ApplicationPolicy

@@ -1,11 +1,11 @@
 class Admin::Cms::FaqsController < Admin::BaseController
-  
+
   def index
     authorize Faq.new
     @faqs = Faq.where(domain_id: cookies[:domain_id]).order(:sort)
-    
+
     respond_to do |format|
-      format.html  { @faqs = @faqs.paginate(page: params[:page], per_page: @per_page) }
+      format.html { @faqs = @faqs.paginate(page: params[:page], per_page: @per_page) }
       format.csv { send_data Faq.to_csv(@faqs) }
     end
   end
@@ -18,7 +18,7 @@ class Admin::Cms::FaqsController < Admin::BaseController
   def create
     @faq = authorize Faq.new(faq_params)
     @faq.domain_id = cookies[:domain_id]
-    
+
     if @faq.save
       redirect_to action: 'index', notice: 'Faq was successfully created.'
     else
@@ -32,7 +32,7 @@ class Admin::Cms::FaqsController < Admin::BaseController
 
   def update
     @faq = authorize Faq.find(params[:id])
-    
+
     if @faq.update(faq_params)
       Rails.cache.delete @faq
       redirect_to action: 'index', notice: 'Faq was successfully updated.'
@@ -44,17 +44,17 @@ class Admin::Cms::FaqsController < Admin::BaseController
   def destroy
     @faq = authorize Faq.find(params[:id])
     @faq.destroy
-    
+
     Rails.cache.delete @faq
     flash[:notice] = 'Faq has been deleted.'
     redirect_back(fallback_location: admin_root_path)
   end
-  
-  
+
+
   private
-  
-    def faq_params
-      params.require(:faq).permit!
-    end
-  
+
+  def faq_params
+    params.require(:faq).permit!
+  end
+
 end

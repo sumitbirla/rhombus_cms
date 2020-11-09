@@ -7,7 +7,7 @@ class Admin::Cms::MenuItemsController < Admin::BaseController
 
   def create
     @menu_item = MenuItem.new(menu_item_params)
-    
+
     if @menu_item.save
       Rails.cache.delete @menu_item.menu
       redirect_to admin_cms_menus_path
@@ -22,7 +22,7 @@ class Admin::Cms::MenuItemsController < Admin::BaseController
 
   def update
     @menu_item = MenuItem.find(params[:id])
-    
+
     if @menu_item.update(menu_item_params)
       Rails.cache.delete @menu_item.menu
       redirect_to admin_cms_menus_path
@@ -33,17 +33,17 @@ class Admin::Cms::MenuItemsController < Admin::BaseController
 
   def destroy
     @menu_item = MenuItem.find(params[:id])
-    
+
     Rails.cache.delete @menu_item.menu
     @menu_item.destroy
-    
+
     redirect_to admin_cms_menus_path
   end
-  
-  
+
+
   private
-  
-    def menu_item_params
-      params.require(:menu_item).permit(:menu_id, :title, :link_url, :sort, :enabled)
-    end
+
+  def menu_item_params
+    params.require(:menu_item).permit(:menu_id, :title, :link_url, :sort, :enabled)
+  end
 end

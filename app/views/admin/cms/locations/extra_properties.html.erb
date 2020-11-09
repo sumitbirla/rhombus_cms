@@ -13,14 +13,14 @@
 
 
 <% content_for :title do %>
-    Locations: <%= @location.name%>
+  Locations: <%= @location.name %>
 <% end %>
 
 
 <% content_for :breadcrumbs do %>
-	<li><a href="#">Web Content</a></li>
-	<li><%= link_to "Locations", admin_cms_locations_path %></li>
-	<li><%= link_to @location.name, admin_cms_location_path(@location)%> </li>
-	<li class="active">edit</li>
+  <li><a href="#">Web Content</a></li>
+  <li><%= link_to "Locations", admin_cms_locations_path %></li>
+  <li><%= link_to @location.name, admin_cms_location_path(@location) %> </li>
+  <li class="active">edit</li>
 <% end %>
 

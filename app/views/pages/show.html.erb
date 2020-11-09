@@ -3,7 +3,7 @@
 <%= content_for :title, @page.title %>
 
 <% content_for :head do %>
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="<%= @page.title %>" />
-	<%= raw @page.header_content %>
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content="<%= @page.title %>"/>
+  <%= raw @page.header_content %>
 <% end %>

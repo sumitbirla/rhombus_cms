@@ -3,25 +3,25 @@
 
 
 <%= simple_form_for [:admin, :cms, @page] do |f| %>
-	
-	<%= f.input :title, input_html: { class: 'span6' } %>
-	<%= f.input :slug, input_html: { class: 'span6' } %>
-	<%= f.input :published %>
-	<%= f.input :header_content, input_html: { class: 'span10', rows: 4 }  %>
-	<%= ckeditor_input(@page, "body") %>
-  <%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
+
+  <%= f.input :title, input_html: {class: 'span6'} %>
+  <%= f.input :slug, input_html: {class: 'span6'} %>
+  <%= f.input :published %>
+  <%= f.input :header_content, input_html: {class: 'span10', rows: 4} %>
+  <%= ckeditor_input(@page, "body") %>
+  <%= button_tag "Save changes", :class => "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..."} %>
 
 <% end %>
 
 
 <%= content_for :title do %>
-	Pages: <%= @page.title %>
+  Pages: <%= @page.title %>
 <% end %>
 
 
 
 <% content_for :breadcrumbs do %>
-	<li><a href="#">Web Content</a></li>
-	<li><%= link_to "Pages", admin_cms_pages_path %></li>
-	<li class="active"><%= @page.title %></li>
+  <li><a href="#">Web Content</a></li>
+  <li><%= link_to "Pages", admin_cms_pages_path %></li>
+  <li class="active"><%= @page.title %></li>
 <% end %>

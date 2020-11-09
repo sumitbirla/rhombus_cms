@@ -13,29 +13,29 @@
     <th></th>
   </tr>
   <% @comments.each do |c| %>
-      <tr>
-        <td><%= systime c.created_at %></td>
-        <td>
-          <% unless c.user_id.nil? %>
-              <%= link_to c.author, admin_system_user_path(c.user_id) %>
-          <% end %>
-        </td>
-        <td><%= c.commentable_type %> <%= c.commentable_id%></td>
-        <td>
-          <% c.rating.times do  %>
-              &#9733;
-          <% end %>
-        </td>
-        <td><%= truncate(c.content, length: 40) %></td>
-        <td><%= tick c.approved %></td>
-        <td><%= tick c.spam %></td>
-        <td>
-          <%= link_to "edit", edit_admin_cms_comment_path(c) %> &nbsp;
-          <%= link_to "delete",
-                      { action: "destroy", id: c.id },
-                      method: :delete,
-                      data: { confirm: "Are you sure?" } %></td>
-      </tr>
+    <tr>
+      <td><%= systime c.created_at %></td>
+      <td>
+        <% unless c.user_id.nil? %>
+          <%= link_to c.author, admin_system_user_path(c.user_id) %>
+        <% end %>
+      </td>
+      <td><%= c.commentable_type %> <%= c.commentable_id %></td>
+      <td>
+        <% c.rating.times do %>
+          &#9733;
+        <% end %>
+      </td>
+      <td><%= truncate(c.content, length: 40) %></td>
+      <td><%= tick c.approved %></td>
+      <td><%= tick c.spam %></td>
+      <td>
+        <%= link_to "edit", edit_admin_cms_comment_path(c) %> &nbsp;
+        <%= link_to "delete",
+                    {action: "destroy", id: c.id},
+                    method: :delete,
+                    data: {confirm: "Are you sure?"} %></td>
+    </tr>
   <% end %>
 </table>
 
@@ -43,11 +43,11 @@
 
 
 <% content_for :title do %>
-    Comments
+  Comments
 <% end %>
 
 
 <% content_for :breadcrumbs do %>
-    <li><a href="#">CMS</a></li>
-    <li class="active">Comments</li>
+  <li><a href="#">CMS</a></li>
+  <li class="active">Comments</li>
 <% end %>

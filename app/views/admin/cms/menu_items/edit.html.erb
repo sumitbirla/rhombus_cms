@@ -1,24 +1,24 @@
-<h2><%= @menu_item.menu.title%></h2>
+<h2><%= @menu_item.menu.title %></h2>
 <hr/>
 
 <%= simple_form_for [:admin, :cms, @menu_item] do |f| %>
 
-	<%= render 'admin/shared/error_messages', object: f.object %>
-	
-	<%= f.input :menu_id, as: :hidden %>
-	
-	<%= f.input :title %>
-	<%= f.input :sort %>
-	<%= f.input :enabled %>
-	<%= f.input :link_url %>
+  <%= render 'admin/shared/error_messages', object: f.object %>
 
-	<%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
+  <%= f.input :menu_id, as: :hidden %>
+
+  <%= f.input :title %>
+  <%= f.input :sort %>
+  <%= f.input :enabled %>
+  <%= f.input :link_url %>
+
+  <%= button_tag "Save changes", :class => "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..."} %>
 
 <% end %>
 
 
 <% content_for :breadcrumbs do %>
-	<li><a href="#">Web Content</a></li>
-	<li><%= link_to "Menus", admin_cms_menus_path %></li>
-	<li class="active"><%= @menu_item.menu.title %></li>
+  <li><a href="#">Web Content</a></li>
+  <li><%= link_to "Menus", admin_cms_menus_path %></li>
+  <li class="active"><%= @menu_item.menu.title %></li>
 <% end %>

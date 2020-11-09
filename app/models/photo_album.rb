@@ -16,21 +16,21 @@
 
 class PhotoAlbum < ActiveRecord::Base
   include Exportable
-  
+
   self.table_name = 'cms_photo_albums'
-  
+
   has_many :pictures, as: :imageable
   belongs_to :user
   validates_uniqueness_of :slug
-  
+
   def cache_key
     "photo-album:#{slug}"
   end
-  
+
   def to_s
     title
   end
-  
+
   # PUNDIT
   def self.policy_class
     ApplicationPolicy

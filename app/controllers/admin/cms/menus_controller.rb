@@ -1,5 +1,5 @@
 class Admin::Cms::MenusController < Admin::BaseController
-  
+
   def index
     authorize Menu.new
     @menus = Menu.where(domain_id: cookies[:domain_id]).all
@@ -13,7 +13,7 @@ class Admin::Cms::MenusController < Admin::BaseController
   def create
     @menu = authorize Menu.new(menu_params)
     @menu.domain_id = cookies[:domain_id]
-    
+
     if @menu.save
       redirect_to action: 'index', notice: 'Menu was successfully created.'
     else
@@ -31,7 +31,7 @@ class Admin::Cms::MenusController < Admin::BaseController
 
   def update
     @menu = authorize Menu.find(params[:id])
-    
+
     if @menu.update(menu_params)
       Rails.cache.delete @menu
       redirect_to action: 'index', notice: 'Menu was successfully updated.'
@@ -43,17 +43,17 @@ class Admin::Cms::MenusController < Admin::BaseController
   def destroy
     @menu = authorize Menu.find(params[:id])
     @menu.destroy
-    
+
     Rails.cache.delete @menu
     flash[:notice] = "Menu has been deleted."
     redirect_back(fallback_location: admin_root_path)
   end
-  
-  
+
+
   private
-  
-    def menu_params
-      params.require(:menu).permit(:title, :key, :css_class, :notes)
-    end
-  
+
+  def menu_params
+    params.require(:menu).permit(:title, :key, :css_class, :notes)
+  end
+
 end

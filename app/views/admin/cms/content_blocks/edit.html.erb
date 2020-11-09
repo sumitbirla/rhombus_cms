@@ -1,22 +1,22 @@
 <h2><%= @content_block.key %></h2>
-<hr/>	
+<hr/>
 
 <%= simple_form_for [:admin, :cms, @content_block] do |f| %>
 
-	<%= f.input :key %>
-	<%= f.input :content, input_html: { rows: 20 }  %>
-	<%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
+  <%= f.input :key %>
+  <%= f.input :content, input_html: {rows: 20} %>
+  <%= button_tag "Save changes", :class => "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..."} %>
 
 <% end %>
 
 
 <% content_for :title do %>
-	Content Blocks: <%= @content_block.key %>
+  Content Blocks: <%= @content_block.key %>
 <% end %>
 
 
 <% content_for :breadcrumbs do %>
-	<li><a href="#">Web Content</a></li>
-	<li><%= link_to "Content Blocks", admin_cms_content_blocks_path %></li>
-	<li class="active"><%= @content_block.key %></li>
+  <li><a href="#">Web Content</a></li>
+  <li><%= link_to "Content Blocks", admin_cms_content_blocks_path %></li>
+  <li class="active"><%= @content_block.key %></li>
 <% end %>

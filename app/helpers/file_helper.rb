@@ -1,7 +1,7 @@
 module FileHelper
 
-    def icon_for_mimetype(mime, extra_classes = "") 
-      mimes = {
+  def icon_for_mimetype(mime, extra_classes = "")
+    mimes = {
         'image': 'fa-file-image',
         'audio': 'fa-file-audio',
         'video': 'fa-file-video',
@@ -23,16 +23,16 @@ module FileHelper
         # Archives
         'application/gzip': 'fa-file-archive',
         'application/zip': 'fa-file-archive',
-      }.with_indifferent_access
+    }.with_indifferent_access
 
-      if mime
-        m = mimes[mime.split('/').first]
-        m ||= mimes[mime]
-      end
-
-      m ||= 'fa-file'
-
-      "<i class='far #{extra_classes} #{m}'></i>".html_safe
+    if mime
+      m = mimes[mime.split('/').first]
+      m ||= mimes[mime]
     end
+
+    m ||= 'fa-file'
+
+    "<i class='far #{extra_classes} #{m}'></i>".html_safe
+  end
 
 end

@@ -16,14 +16,14 @@
 class Page < ActiveRecord::Base
   include Exportable
   self.table_name = 'cms_pages'
-  
+
   validates_presence_of :title, :slug, :published, :body
   validates_uniqueness_of :slug, scope: :domain_id
-  
+
   def cache_key
     "page:#{domain_id}:#{slug}"
   end
-  
+
   # PUNDIT
   def self.policy_class
     ApplicationPolicy

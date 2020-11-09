@@ -13,18 +13,18 @@
 class ContentBlock < ActiveRecord::Base
   include Exportable
   self.table_name = 'cms_content_blocks'
-  
+
   validates_presence_of :key
   validates_uniqueness_of :key, scope: :domain_id
-  
+
   def to_s
     content
   end
-  
+
   def cache_key
     "content-block:#{domain_id}:#{key}"
   end
-  
+
   # PUNDIT
   def self.policy_class
     ApplicationPolicy

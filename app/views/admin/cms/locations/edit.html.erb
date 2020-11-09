@@ -1,64 +1,64 @@
-<h2><i class="fa fa-map-marker"></i>&nbsp; <%= @location.name%></h2>
+<h2><i class="fa fa-map-marker"></i>&nbsp; <%= @location.name %></h2>
 
 <% unless @location.id.nil? %>
-<ul class="nav nav-tabs" style="margin-bottom: 20px;">
-  <li class="active"><a href="#">Summary</a></li>
-  <li><%= link_to "Pictures", pictures_admin_cms_location_path(@location) %></a></li>
-  <li><%= link_to "Categories", categories_admin_cms_location_path(@location) %></li>
-  <li><%= link_to "Extra Properties", extra_properties_admin_cms_location_path(@location) %></li>
-</ul>
+  <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+    <li class="active"><a href="#">Summary</a></li>
+    <li><%= link_to "Pictures", pictures_admin_cms_location_path(@location) %></a></li>
+    <li><%= link_to "Categories", categories_admin_cms_location_path(@location) %></li>
+    <li><%= link_to "Extra Properties", extra_properties_admin_cms_location_path(@location) %></li>
+  </ul>
 <% end %>
 
 <%= simple_form_for [:admin, :cms, @location], class: "my-form" do |f| %>
 
-	<%= render 'admin/shared/error_messages', object: f.object %>
-	
-	<%= f.input :name%>
-  
+  <%= render 'admin/shared/error_messages', object: f.object %>
+
+  <%= f.input :name %>
+
   <div class="row">
     <div class="col-md-6">
-    	<%= f.input :contact_person %>
-    	<%= f.input :street1 %>
-    	<%= f.input :street2 %>
-    	<%= f.input :city %>
-    	<%= f.input :state %>
-    	<%= f.input :zip %>
-    	<%= f.input :country %>
-    	<%= f.input :phone %>	
-    	<%= f.input :fax %>
+      <%= f.input :contact_person %>
+      <%= f.input :street1 %>
+      <%= f.input :street2 %>
+      <%= f.input :city %>
+      <%= f.input :state %>
+      <%= f.input :zip %>
+      <%= f.input :country %>
+      <%= f.input :phone %>
+      <%= f.input :fax %>
     </div>
     <div class="col-md-6">
-    	<%= f.association :user %>
-    	<%= f.association :affiliate %>
+      <%= f.association :user %>
+      <%= f.association :affiliate %>
       <%= f.input :email %>
       <%= f.input :website %>
-    	<%= f.input :slug %>
-    	<%= f.input :hidden %>
-    	<%= f.input :latitude %>
-    	<%= f.input :longitude %>
+      <%= f.input :slug %>
+      <%= f.input :hidden %>
+      <%= f.input :latitude %>
+      <%= f.input :longitude %>
     </div>
   </div>
-	
-	<%= f.input :summary, as: :text, input_html: { rows: 3 } %>
-	<%= ckeditor_input(@location, "description") %>
-	
-	<%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
-	
+
+  <%= f.input :summary, as: :text, input_html: {rows: 3} %>
+  <%= ckeditor_input(@location, "description") %>
+
+  <%= button_tag "Save changes", :class => "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..."} %>
+
 <% end %>
 
 
 
 <% content_for :title do %>
-    Locations: <%= @location.name%>
+  Locations: <%= @location.name %>
 <% end %>
 
 
 <% content_for :breadcrumbs do %>
-	<li><a href="#">Web Content</a></li>
-	<li><%= link_to "Locations", admin_cms_locations_path %></li>
+  <li><a href="#">Web Content</a></li>
+  <li><%= link_to "Locations", admin_cms_locations_path %></li>
   <% if @location.persisted? %>
-	  <li><%= link_to @location.name, admin_cms_location_path(@location) %></li>
-	  <li class="active">edit</li>
+    <li><%= link_to @location.name, admin_cms_location_path(@location) %></li>
+    <li class="active">edit</li>
   <% else %>
     <li><%= @location.name %>
   <% end %>

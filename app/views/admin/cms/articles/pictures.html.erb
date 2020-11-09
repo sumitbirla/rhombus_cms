@@ -8,17 +8,17 @@
 </ul>
 
 
-<%= render partial: 'admin/shared/image_list', locals: { object: @article } %>
+<%= render partial: 'admin/shared/image_list', locals: {object: @article} %>
 
 
 <% content_for :title do %>
-    Articles: <%= @article.title %>
+  Articles: <%= @article.title %>
 <% end %>
 
 
 <% content_for :breadcrumbs do %>
-	<li><a href="#">Web Content</a></li>
-	<li><%= link_to "Articles", admin_cms_articles_path %></li>
-	<li><%= link_to @article.title, admin_cms_article_path(@article)%> </li>
-	<li class="active">edit</li>
+  <li><a href="#">Web Content</a></li>
+  <li><%= link_to "Articles", admin_cms_articles_path %></li>
+  <li><%= link_to @article.title, admin_cms_article_path(@article) %> </li>
+  <li class="active">edit</li>
 <% end %>

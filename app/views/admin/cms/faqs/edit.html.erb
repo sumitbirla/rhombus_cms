@@ -1,24 +1,24 @@
 <h2>FAQ</h2>
-<hr/>	
+<hr/>
 
 <%= simple_form_for [:admin, :cms, @faq] do |f| %>
 
   <%= f.input :category_id, collection: Category.where(entity_type: :faq).order(:sort) %>
-	<%= f.input :sort %>
-	<%= f.input :question, input_html: { rows: 2 }  %>
+  <%= f.input :sort %>
+  <%= f.input :question, input_html: {rows: 2} %>
   <%= ckeditor_input(@faq, "answer") %>
-	<%= button_tag "Save changes", :class => "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..." } %>
+  <%= button_tag "Save changes", :class => "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Please wait ..."} %>
 
 <% end %>
 
 
 <% content_for :title do %>
-	FAQ
+  FAQ
 <% end %>
 
 
 <% content_for :breadcrumbs do %>
-	<li><a href="#">Web Content</a></li>
-	<li><%= link_to "FAQs", admin_cms_faqs_path %></li>
-	<li class="active">edit</li>
+  <li><a href="#">Web Content</a></li>
+  <li><%= link_to "FAQs", admin_cms_faqs_path %></li>
+  <li class="active">edit</li>
 <% end %>

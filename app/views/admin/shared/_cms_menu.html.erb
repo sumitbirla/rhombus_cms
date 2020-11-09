@@ -1,42 +1,41 @@
-
 <li class="<%= 'active' if request.original_url.include? 'admin/cms' %>">
-  <a href="#"><i class="fa fa-globe-africa fa-fw"></i> CMS  <span class="fa arrow"></span></a>
+  <a href="#"><i class="fa fa-globe-africa fa-fw"></i> CMS <span class="fa arrow"></span></a>
   <ul class="nav nav-second-level">
-    <% if current_user.has_permission?('Article', 'index')%>
+    <% if current_user.has_permission?('Article', 'index') %>
       <li><%= link_to "Articles", admin_cms_articles_path %></li>
     <% end %>
-    <% if current_user.has_permission?('Comment', 'index')%>
+    <% if current_user.has_permission?('Comment', 'index') %>
       <li><%= link_to "Comments", admin_cms_comments_path %></li>
     <% end %>
-    <% if current_user.has_permission?('ContentBlock', 'index')%>
+    <% if current_user.has_permission?('ContentBlock', 'index') %>
       <li><%= link_to "Content Blocks", admin_cms_content_blocks_path %></li>
     <% end %>
-    <% if current_user.has_permission?('Faq', 'index')%>
+    <% if current_user.has_permission?('Faq', 'index') %>
       <li><%= link_to "FAQ", admin_cms_faqs_path %></li>
     <% end %>
-    <% if current_user.has_permission?('FileManager', 'index')%>
-	    <li><%= link_to "File manager", admin_cms_filemanager_index_path %></li>
+    <% if current_user.has_permission?('FileManager', 'index') %>
+      <li><%= link_to "File manager", admin_cms_filemanager_index_path %></li>
     <% end %>
-    <% if current_user.has_permission?('List', 'index')%>
-	    <li><%= link_to "Lists", admin_cms_lists_path %></li>
+    <% if current_user.has_permission?('List', 'index') %>
+      <li><%= link_to "Lists", admin_cms_lists_path %></li>
     <% end %>
-    <% if current_user.has_permission?('Location', 'index')%>
-	    <li><%= link_to "Locations", admin_cms_locations_path %></li>
+    <% if current_user.has_permission?('Location', 'index') %>
+      <li><%= link_to "Locations", admin_cms_locations_path %></li>
     <% end %>
-    <% if current_user.has_permission?('Menu', 'index')%>
+    <% if current_user.has_permission?('Menu', 'index') %>
       <li><%= link_to "Menus", admin_cms_menus_path %></li>
     <% end %>
-    <% if current_user.has_permission?('Page', 'index')%>
-	    <li><%= link_to "Pages", admin_cms_pages_path %></li>
+    <% if current_user.has_permission?('Page', 'index') %>
+      <li><%= link_to "Pages", admin_cms_pages_path %></li>
     <% end %>
-    <% if current_user.has_permission?('PhotoAlbum', 'index')%>
+    <% if current_user.has_permission?('PhotoAlbum', 'index') %>
       <li><%= link_to "Photo Albums", admin_cms_photo_albums_path %></li>
     <% end %>
-    <% if current_user.has_permission?('Picture', 'index')%>
-	    <li><%= link_to "Pictures", admin_cms_pictures_path %></li>
+    <% if current_user.has_permission?('Picture', 'index') %>
+      <li><%= link_to "Pictures", admin_cms_pictures_path %></li>
     <% end %>
-    <% if current_user.has_permission?('Vote', 'index')%>
+    <% if current_user.has_permission?('Vote', 'index') %>
       <li><%= link_to "Votes", admin_cms_votes_path %></li>
-    <% end %>  
+    <% end %>
   </ul>
 </li>

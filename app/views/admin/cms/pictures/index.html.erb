@@ -5,11 +5,11 @@
 <%= will_paginate @pictures %>
 <div class="row">
   <% @pictures.each do |pic| %>
-  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-		<a href="<%= edit_admin_cms_picture_path(pic) %>">
-			<img class="img-thumbnail img-responsive" src="<%= cdn_image_url pic.file_path, 200, 200, 2 %>" style="width: 100%; margin-top: 8px;">
-		</a>
-  </div>
+    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+      <a href="<%= edit_admin_cms_picture_path(pic) %>">
+        <img class="img-thumbnail img-responsive" src="<%= cdn_image_url pic.file_path, 200, 200, 2 %>" style="width: 100%; margin-top: 8px;">
+      </a>
+    </div>
   <% end %>
 </div>
 
@@ -19,11 +19,11 @@
 
 
 <% content_for :title do %>
-	Pictures
+  Pictures
 <% end %>
 
 
 <% content_for :breadcrumbs do %>
-	<li><a href="#">Web Content</a></li>
-	<li class="active">Pictures</li>
+  <li><a href="#">Web Content</a></li>
+  <li class="active">Pictures</li>
 <% end %>
