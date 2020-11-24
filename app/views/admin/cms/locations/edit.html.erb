@@ -4,7 +4,6 @@
   <ul class="nav nav-tabs" style="margin-bottom: 20px;">
     <li class="active"><a href="#">Summary</a></li>
     <li><%= link_to "Pictures", pictures_admin_cms_location_path(@location) %></a></li>
-    <li><%= link_to "Categories", categories_admin_cms_location_path(@location) %></li>
     <li><%= link_to "Extra Properties", extra_properties_admin_cms_location_path(@location) %></li>
   </ul>
 <% end %>
@@ -39,6 +38,7 @@
     </div>
   </div>
 
+  <%= f.input :tag_list, as: :tags %>
   <%= f.input :summary, as: :text, input_html: {rows: 3} %>
   <%= ckeditor_input(@location, "description") %>
 

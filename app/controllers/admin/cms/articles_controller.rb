@@ -22,7 +22,6 @@ class Admin::Cms::ArticlesController < Admin::BaseController
     @article.domain_id = cookies[:domain_id]
 
     if @article.save
-      @article.save_tags(params[:tags].split(",").map { |x| x.strip.downcase })
       redirect_to action: 'show', id: @article.id, notice: 'Article was successfully created.'
     else
       render 'edit'
@@ -41,8 +40,6 @@ class Admin::Cms::ArticlesController < Admin::BaseController
     @article = authorize Article.find(params[:id])
 
     if @article.update(article_params)
-      @article.save_tags(params[:tags].split(",").map { |x| x.strip.downcase })
-
       Rails.cache.delete @article
       redirect_to action: 'show', id: @article.id, notice: 'Article was successfully updated.'
     else

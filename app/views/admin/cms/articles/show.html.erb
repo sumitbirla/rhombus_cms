@@ -11,6 +11,7 @@
 
 
 <h2><i class="fa fa-edit"></i>&nbsp; <%= @article.title %></h2>
+<%= tag_list @article %>
 <hr>
 
 <div class="row-fluid">
@@ -56,16 +57,6 @@
           <td><%= @article.keywords %></td>
         </tr>
       <% end %>
-      <% unless @article.tags.length == 0 %>
-        <tr>
-          <td>Tags</td>
-          <td>
-            <% @article.tags.each do |tag| %>
-              <span class="label label-default"><%= tag.name %></span>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
     </table>
 
     <h4>Pictures</h4>
@@ -85,15 +76,6 @@
     <% end %>
 
     <hr/>
-
-    <h4>Categories</h4>
-    <ul>
-      <% @article.categories.each do |cat| %>
-        <li><%= cat.name %></li>
-      <% end %>
-    </ul>
-    <hr/>
-
   </div>
 
 </div> <!-- row-fluid -->

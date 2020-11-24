@@ -1,6 +1,8 @@
 <%= link_to "edit", edit_admin_cms_location_path(@location), class: "btn btn-sm btn-default pull-right" %>
 
 <h2><i class="fa fa-location-arrow"></i>&nbsp; <%= @location.name %></h2>
+<%= tag_list @location %>
+<hr>
 
 <iframe
   width="100%"
@@ -50,15 +52,6 @@
       </a>
     <% end %>
     <hr/>
-
-    <h4>Categories</h4>
-    <ul>
-      <% @location.categories.each do |cat| %>
-        <li><%= cat.name %></li>
-      <% end %>
-    </ul>
-    <hr/>
-
 
     <h4>Flags</h4>
     <% if @location.hidden %>
