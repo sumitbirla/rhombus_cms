@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: cms_attachments
+#
+#  id              :bigint           not null, primary key
+#  attachable_type :string(255)
+#  content_type    :string(255)      not null
+#  file_name       :string(255)
+#  file_path       :string(255)      not null
+#  file_size       :integer
+#  md5             :string(255)
+#  metadata        :text(65535)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  attachable_id   :bigint
+#
+# Indexes
+#
+#  index_cms_attachments_on_attachable_type_and_attachable_id  (attachable_type,attachable_id)
+#
 require "digest/md5"
 
 class Attachment < ApplicationRecord

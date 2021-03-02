@@ -3,8 +3,13 @@
 # Table name: cms_location_categories
 #
 #  id          :integer          not null, primary key
-#  location_id :integer          not null
 #  category_id :integer          not null
+#  location_id :integer          not null
+#
+# Indexes
+#
+#  index_location_categories_on_category_id  (category_id)
+#  index_location_categories_on_location_id  (location_id)
 #
 
 class LocationCategory < ActiveRecord::Base

@@ -3,26 +3,33 @@
 # Table name: cms_pictures
 #
 #  id                 :integer          not null, primary key
-#  imageable_id       :integer
-#  imageable_type     :string(255)
-#  user_id            :integer
-#  sort               :integer
-#  votes              :integer
-#  file_path          :string(255)
-#  width              :integer
-#  height             :integer
-#  file_size          :integer
-#  format             :string(255)
+#  approved           :boolean          default(TRUE), not null
 #  bits_per_pixel     :integer
+#  caption            :text(65535)
 #  chroma_subsampling :string(255)
 #  compression_mode   :string(255)
-#  caption            :text(65535)
-#  description        :text(65535)
-#  created_at         :datetime
-#  updated_at         :datetime
-#  approved           :boolean          default("1"), not null
 #  data1              :string(255)
 #  data2              :string(255)
+#  description        :text(65535)
+#  file_path          :string(255)
+#  file_size          :integer
+#  format             :string(255)
+#  height             :integer
+#  imageable_type     :string(255)
+#  purpose            :string(255)      default("web"), not null
+#  sort               :integer
+#  votes              :integer
+#  width              :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#  imageable_id       :integer
+#  user_id            :integer
+#
+# Indexes
+#
+#  imageable_id               (imageable_id)
+#  imageable_type             (imageable_type)
+#  index_pictures_on_user_id  (user_id)
 #
 
 class Picture < ActiveRecord::Base

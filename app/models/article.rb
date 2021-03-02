@@ -3,20 +3,25 @@
 # Table name: cms_articles
 #
 #  id             :integer          not null, primary key
-#  domain_id      :integer          not null
-#  user_id        :integer
-#  status         :string(255)      not null
-#  slug           :string(255)      not null
-#  published_at   :date
-#  allow_pings    :boolean          default("0"), not null
-#  allow_comments :boolean          default("0"), not null
-#  title          :string(255)      not null
+#  allow_comments :boolean          default(FALSE), not null
+#  allow_pings    :boolean          default(FALSE), not null
 #  author         :string(255)      not null
 #  body           :text(65535)      not null
-#  excerpt        :text(65535)      not null
+#  excerpt        :text(65535)
 #  keywords       :string(255)
+#  published_at   :date
+#  slug           :string(255)      not null
+#  status         :string(255)      not null
+#  title          :string(255)      not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  domain_id      :integer          not null
+#  user_id        :integer
+#
+# Indexes
+#
+#  index_cms_articles_on_domain_id  (domain_id)
+#  index_cms_articles_on_user_id    (user_id)
 #
 
 class Article < ActiveRecord::Base

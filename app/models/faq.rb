@@ -3,13 +3,17 @@
 # Table name: cms_faqs
 #
 #  id          :integer          not null, primary key
-#  domain_id   :integer
-#  sort        :integer          not null
-#  question    :string(255)      not null
 #  answer      :text(65535)      not null
-#  category_id :integer
+#  question    :string(255)      not null
+#  sort        :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  category_id :integer
+#  domain_id   :integer
+#
+# Indexes
+#
+#  index_cms_faqs_on_category_id  (category_id)
 #
 
 class Faq < ActiveRecord::Base

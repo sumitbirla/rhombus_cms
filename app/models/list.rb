@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: cms_lists
+#
+#  id           :bigint           not null, primary key
+#  name         :string(255)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  affiliate_id :integer
+#  user_id      :integer
+#
 class List < ApplicationRecord
   self.table_name = "cms_lists"
 

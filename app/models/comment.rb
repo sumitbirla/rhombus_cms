@@ -3,21 +3,21 @@
 # Table name: cms_comments
 #
 #  id               :integer          not null, primary key
-#  commentable_id   :integer          not null
-#  commentable_type :string(255)      not null
-#  parent_id        :integer
-#  user_id          :integer
-#  author           :string(255)
-#  email            :string(255)
-#  url              :string(255)
-#  content          :text(65535)      not null
-#  rating           :integer          default("0"), not null
 #  approved         :boolean          not null
-#  spam             :boolean          not null
+#  author           :string(255)
+#  commentable_type :string(255)      not null
+#  content          :text(65535)      not null
+#  email            :string(255)
 #  ip_address       :string(255)      not null
+#  rating           :integer          default(0), not null
+#  spam             :boolean          not null
+#  url              :string(255)
 #  user_agent       :string(255)      not null
 #  created_at       :datetime
 #  updated_at       :datetime
+#  commentable_id   :integer          not null
+#  parent_id        :integer
+#  user_id          :integer
 #
 
 class Comment < ActiveRecord::Base
