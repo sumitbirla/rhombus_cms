@@ -15,8 +15,8 @@ class CommentsController < ApplicationController
     end
 
     # check whether this is spam
-    Akismet.api_key = Cache.setting(Rails.configuration.domain_id, :cms, "Akismet API Key")
-    Akismet.app_url = Cache.setting(Rails.configuration.domain_id, :system, "Website URL")
+    #Akismet.api_key = Cache.setting(Rails.configuration.domain_id, :cms, "Akismet API Key")
+    #Akismet.app_url = Cache.setting(Rails.configuration.domain_id, :system, "Website URL")
 
     params = {
         type: 'comment',
@@ -28,11 +28,11 @@ class CommentsController < ApplicationController
         referrer: request.referrer
     }
 
-    @comment.spam = Akismet.spam?(request.ip, request.user_agent, params)
-    if @comment.spam
-      flash[:notice] = "Your comment will be posted after it is approved."
-      @comment.approved = false
-    end
+    #@comment.spam = Akismet.spam?(request.ip, request.user_agent, params)
+    #if @comment.spam
+    #  flash[:notice] = "Your comment will be posted after it is approved."
+    #  @comment.approved = false
+    #end
 
     @comment.save
     return redirect_back(fallback_location: root_path)
