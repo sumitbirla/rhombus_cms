@@ -31,6 +31,7 @@
 #  imageable_type             (imageable_type)
 #  index_pictures_on_user_id  (user_id)
 #
+require 'digest/md5'
 
 class Picture < ActiveRecord::Base
   include Exportable
@@ -53,6 +54,7 @@ class Picture < ActiveRecord::Base
     result = false
 
     begin
+      self.md5_hash = Digest::MD5.hexdigest(File.read(base_path + self.file_path))
       output = `mediainfo --Inform="Image;%Format%|%Width%|%Height%|%BitDepth%|%ChromaSubsampling%|%Compression_Mode%\n" "#{base_path + self.file_path}"`; result = $?.success?
       self.format, self.width, self.height, self.bits_per_pixel, self.chroma_subsampling, self.compression_mode = output.split('|') if result
       self.file_size = File.new(base_path + self.file_path).size
